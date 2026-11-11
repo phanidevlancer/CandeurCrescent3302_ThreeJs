@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Model preview</title>
+<style>html,body{margin:0;background:#ddd;overflow:hidden}#l{position:fixed;left:0;right:0;top:4px;font:12px sans-serif;display:flex;justify-content:space-around}</style></head>
+<body><div id="l"></div>
+<script type="importmap">{"imports":{"three":"../vendor/build/three.module.js","three/addons/":"../vendor/jsm/"}}</script>
+<script type="module">
+// Lines up every model in assets/abo/manifest.json, viewed from +Z (so a model whose front faces +Z shows its front).
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(innerWidth, innerHeight); document.body.appendChild(r.domElement);
+const s = new THREE.Scene(); s.background = new THREE.Color(0xdddddd);
+s.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
+const man = await (await fetch('../assets/abo/manifest.json')).json();
+const keys = Object.keys(man); let x = 0; const labels = [];
+for (const k of keys) {
+  const g = (await new GLTFLoader().loadAsync('../assets/abo/' + k + '.glb')).scene;
+  const b = new THREE.Box3().setFromObject(g), sz = b.getSize(new THREE.Vector3());
+  g.position.set(x - b.min.x, -b.min.y, -(b.min.z + b.max.z) / 2); s.add(g);
+  labels.push(`${man[k].role} ${sz.x.toFixed(2)}×${sz.z.toFixed(2)}×${sz.y.toFixed(2)}`); x += sz.x + 0.4;
+}
+document.getElementById('l').textContent = labels.join('  |  ');
+const cam = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, 0.1, 100); cam.position.set(x / 2, 1.6, x * 0.95); cam.lookAt(x / 2, 0.4, 0);
+r.render(s, cam); window.__done = true;
+</script></body></html>

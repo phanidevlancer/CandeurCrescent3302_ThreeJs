@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Candeur Crescent 3302 – Walkthrough</title>
+<style>
+  :root{--bg:#14161a;--panel:#1d2026;--line:#2c313a;--fg:#e8e6e1;--mute:#9aa0aa;--acc:#e0a24a}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:13px/1.4 -apple-system,system-ui,sans-serif;overflow:hidden}
+  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
+  #side{position:fixed;left:0;top:0;bottom:0;width:250px;background:var(--panel);border-right:1px solid var(--line);padding:12px;overflow:auto;z-index:5}
+  #side h1{font-size:14px;margin:0 0 2px}
+  #side small{color:var(--mute)}
+  .sec{margin:14px 0 6px;color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+  button,select,input[type=color]{font:inherit;color:var(--fg);background:#262a32;border:1px solid var(--line);border-radius:6px;padding:6px 8px;cursor:pointer}
+  button:hover{border-color:var(--acc)}
+  button.on{background:var(--acc);color:#111;border-color:var(--acc)}
+  .row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+  .rooms button{width:100%;text-align:left;display:flex;justify-content:space-between;margin-bottom:4px}
+  .rooms span{color:var(--mute)} .rooms button.on span{color:#333}
+  #hud{position:fixed;right:12px;top:12px;background:rgba(29,32,38,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:290px;z-index:5}
+  #hud b{color:var(--acc)}
+  #msg{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(29,32,38,.92);border:1px solid var(--line);border-radius:8px;padding:8px 14px;z-index:5;color:var(--mute);text-align:center;max-width:70vw}
+  #load{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:20;gap:10px}
+  #bar{width:260px;height:6px;background:#2a2e36;border-radius:3px;overflow:hidden}#bar i{display:block;height:100%;width:0;background:var(--acc)}
+  .lbl{position:fixed;pointer-events:none;transform:translate(-50%,-50%);background:rgba(15,17,20,.82);color:#fff;padding:2px 6px;border-radius:4px;font-size:12px;white-space:nowrap;z-index:4;border:1px solid #444}
+  .lbl.clr{background:#e0a24a;color:#111;border-color:#e0a24a;font-weight:600}
+  .lbl.clr.tight{background:#d9534f;border-color:#d9534f;color:#fff}
+  .lbl.room{font-size:11px;border-color:var(--acc);white-space:pre;text-align:center;padding:1px 5px}
+  #cross{position:fixed;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:#fff8;display:none;z-index:4}
+  #hint{position:fixed;left:50%;top:calc(50% + 22px);transform:translateX(-50%);background:rgba(15,17,20,.8);color:#fff;padding:4px 10px;border-radius:6px;font-size:13px;display:none;z-index:4;pointer-events:none}
+  #layoutBox select{width:100%;margin-bottom:6px}
+  #layoutBox .opts{display:flex;flex-direction:column;gap:4px;margin-bottom:6px}
+  #layoutBox .opts button{text-align:left}
+  #layoutBox .sum{color:var(--mute);margin:4px 0 6px;font-size:12px}
+  #layoutBox table.facts{width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:6px}
+  #layoutBox table.facts td{border-top:1px solid var(--line);padding:3px 2px;vertical-align:top}
+  #layoutBox table.facts td:first-child{color:var(--mute);width:42%}
+  #side{width:300px}
+  #projSwitch{position:fixed;right:12px;bottom:150px;z-index:6;display:none;align-items:center;gap:10px;padding:8px 12px;border-radius:22px;border:1px solid var(--line);background:rgba(29,32,38,.95);color:var(--fg);font:600 13px system-ui,sans-serif;cursor:pointer;box-shadow:0 4px 14px #0006}
+  #projSwitch .tg{width:38px;height:20px;border-radius:10px;background:#555b66;position:relative;transition:background .2s}
+  #projSwitch .tg::after{content:'';position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s}
+  #projSwitch.on .tg{background:#e0a24a} #projSwitch.on .tg::after{left:20px}
+  #designBar{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:7;display:none;background:rgba(22,24,29,.94);border:1px solid var(--line);border-radius:12px;padding:8px 10px;box-shadow:0 6px 20px #0007;min-width:min(560px,90vw);max-width:92vw;font:13px system-ui,sans-serif;color:var(--fg)}
+  #designBar .dtabs{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px} #designBar .droomlbl{font:700 13px system-ui;color:var(--acc);margin-right:4px} #designBar .ddone{margin-left:auto;font:600 12px system-ui;border:1px solid var(--line);background:#262a32;color:#f0e6d8;border-radius:14px;padding:3px 10px;cursor:pointer} #designBar .ddone:hover{border-color:var(--acc);color:var(--acc)}
+  #designBar .droom{font:700 12px system-ui;color:var(--acc);background:#262a32;border:1px solid var(--line);border-radius:14px;padding:3px 6px;margin-right:4px;max-width:46vw}
+  #designBar .dtab{font:600 12px system-ui;border:1px solid var(--line);background:transparent;color:#cfd3d8;border-radius:14px;padding:3px 10px;cursor:pointer} #designBar .dtab.on{background:var(--acc);border-color:var(--acc);color:#111}
+  #designBar .dsel{display:flex;align-items:center;gap:10px} #designBar .darr{font-size:18px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#262a32;color:var(--fg);cursor:pointer;flex:none} #designBar .darr:hover{border-color:var(--acc);color:var(--acc)}
+  .dref{display:inline-block;margin:4px 4px 0;font:600 12px system-ui;color:#111;background:var(--acc);border-radius:12px;padding:2px 10px;text-decoration:none} .dref:hover{filter:brightness(1.1)}
+  #designBar .dname{flex:1;min-width:0;text-align:center} #designBar .dname b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} #designBar .dname small{color:#9aa0a8;font-size:11px}
+  #compass{position:fixed;right:12px;bottom:12px;width:96px;z-index:5;pointer-events:none;text-align:center;font-size:12px;color:var(--fg)}
+  #compass svg{width:96px;height:96px;display:block;filter:drop-shadow(0 2px 6px #0007)}
+  #compass .face{white-space:nowrap;background:rgba(29,32,38,.92);border:1px solid var(--line);border-radius:6px;padding:2px 6px;margin-top:2px;display:inline-block}
+  .refs{margin:8px 0;border:1px solid var(--line);border-radius:8px;padding:6px 8px} .refs summary{cursor:pointer;font-weight:600;font-size:13px}
+  .refs small{display:block;margin:6px 0 3px;color:#9aa0a8} .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chipw{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:#262a32;overflow:hidden}
+  .chip{font-size:12px;padding:3px 6px 3px 8px;color:inherit;text-decoration:none} .chip:hover{color:var(--acc)}
+  .cpy{font-size:11px;border:0;border-left:1px solid var(--line);background:transparent;color:#9aa0a8;padding:0 7px;cursor:pointer;min-width:24px} .cpy:hover{color:var(--acc)}
+  .refhead{display:flex;justify-content:space-between;align-items:center;margin:6px 0 3px} .refhead small{margin:0!important}
+  .cpyall{font-size:11px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);background:transparent;color:#cfd3d8;cursor:pointer} .cpyall:hover{border-color:var(--acc);color:var(--acc)}
+  #dragTip{position:fixed;background:rgba(15,17,20,.9);color:#fff;border:1px solid #4caf50;padding:6px 10px;border-radius:6px;font-size:13px;display:none;z-index:6;pointer-events:none;line-height:1.45}
+  #dragTip.tight{border-color:#e53935}
+  #pickTip{position:fixed;background:rgba(15,17,20,.88);color:#fff;border:1px solid #ff9a1f;padding:5px 10px;border-radius:6px;font-size:13px;display:none;z-index:5;pointer-events:none;max-width:340px}
+  #cBox{display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(460px,90vw);background:var(--panel);border:1px solid var(--acc);border-radius:10px;padding:14px;z-index:30;box-shadow:0 10px 40px #0008}
+  #cBox .ttl{margin-bottom:8px;font-weight:600} #cBox textarea{width:100%;font:inherit;color:var(--fg);background:#262a32;border:1px solid var(--line);border-radius:6px;padding:8px;margin-bottom:8px;resize:vertical}
+  #cList .c{border-top:1px solid var(--line);padding:6px 0;font-size:12px} #cList .c b{color:var(--acc)} #cList .c.done{opacity:.55}
+  #cList .c .rep{margin-top:3px;padding:4px 6px;background:#262a32;border-left:2px solid var(--acc);border-radius:4px}
+  #cList .c .row{margin:4px 0 0} #cList .c button{padding:2px 6px;font-size:11px}
+  kbd{background:#2a2e36;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="compass" title="Compass (floor-plan north)"><svg viewBox="-50 -50 100 100">
+  <circle r="47" fill="rgba(29,32,38,.92)" stroke="#3a3f48" stroke-width="1.5"/>
+  <g id="cRose">
+    <g stroke="#8a8f99" stroke-width="1.2">
+      <line y1="-44" y2="-37"/><line y1="44" y2="37"/><line x1="-44" x2="-37"/><line x1="44" x2="37"/>
+      <line x1="-31" y1="-31" x2="-27" y2="-27"/><line x1="31" y1="-31" x2="27" y2="-27"/><line x1="-31" y1="31" x2="-27" y2="27"/><line x1="31" y1="31" x2="27" y2="27"/>
+    </g>
+    <path d="M0,-30 L6,0 L0,4 L-6,0 Z" fill="#e5484d"/><path d="M0,30 L6,0 L0,-4 L-6,0 Z" fill="#c9ccd1"/>
+    <g font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle" dominant-baseline="central">
+      <text id="cN" y="-30" x="0" fill="#e5484d" transform="translate(0,-0)">N</text><text y="30" fill="#e6e8eb">S</text><text x="31" fill="#e6e8eb">E</text><text x="-31" fill="#e6e8eb">W</text>
+    </g>
+  </g>
+  <path d="M0,-49 L5,-41 L-5,-41 Z" fill="#e0a24a"/>
+</svg><div class="face" id="cFace">Facing N</div></div>
+<div id="designBar"></div>
+<button id="projSwitch" title="Projector on / off (P)"><span>Projector</span><span class="tg"></span></button>
+<div id="cross"></div><div id="hint"></div><div id="pickTip"></div><div id="dragTip"></div>
+<div id="side">
+  <h1>Candeur Crescent 3302</h1><small>Phanindra &amp; Mounika · interior design viewer</small>
+  <div class="sec">Mode</div>
+  <div class="row">
+    <button id="mWalk">Walk</button><button id="mPlan">Whole home</button><button id="mRoom">Room</button><button id="mFront" title="Start in the corridor outside the main door">Front door</button>
+  </div>
+  <div class="sec">Rooms (plan dimensions)</div>
+  <div class="rooms" id="rooms"></div>
+  <div class="sec">Comments for the designer</div>
+  <div class="row"><button id="cAdd">Add comment</button><button id="cPins" class="on">Pins</button><button id="cShowDone">Show done</button></div>
+  <small><b>Add comment</b> (or <kbd>M</kbd>), then point at the item — it turns orange with its name — and click it. Click empty space for the whole room. Walk: aim the centre dot, click or <kbd>M</kbd>. <kbd>Esc</kbd> cancels.</small>
+  <div id="cList"></div>
+  <div class="sec">Layout options</div>
+  <div id="layoutBox"></div>
+  <div class="sec">Show</div>
+  <div class="row">
+    <button id="tFurn" class="on" title="Off = interior design only (no loose furniture, appliances or decor)">Furniture &amp; appliances</button><button id="tCut" class="on">Cutaway walls</button><button id="tHide" title="Room view: click walls (or wall units) to hide them · or point and press H">Hide walls</button><button id="tShowWalls" title="Bring back every wall you hid">Show walls</button><button id="tCeil">Ceilings</button><button id="tExt">Skyline</button><button id="tDim">Dimensions &amp; clearances</button>
+  </div>
+  <div class="sec">Lighting</div>
+  <div class="row">
+    <button id="lDay" class="on">Daylight</button><button id="lEve">Evening</button><button id="tHQ" class="on">Shadows + AO</button>
+  </div>
+  <div class="sec">Doors</div>
+  <div class="row"><button id="dOpen">Open all doors</button><button id="dClose">Close all doors</button></div>
+  <small>Walk mode: look at a door, wardrobe, drawer or sliding door and press <kbd>E</kbd> or click. Look at a sofa, chair or bed and press <kbd>E</kbd> to sit. Other modes: double-click a door or wardrobe.</small>
+  <div class="sec">View</div>
+  <label>Brightness <span id="vExp"></span><br><input id="sExp" type="range" min="0.3" max="1.6" step="0.05" style="width:100%"></label>
+  <label>Field of view <span id="vFov"></span><br><input id="sFov" type="range" min="35" max="85" step="1" style="width:100%"></label>
+  <div class="sec">Edit furniture (Room / Whole home)</div>
+  <div class="row">
+    <button id="eMove" class="on">Move</button><button id="eRot">Rotate</button>
+  </div>
+  <div class="row">
+    <button id="eDup">Duplicate</button><button id="eDel">Delete</button><input type="color" id="eCol" value="#b08a5a" title="Recolour selected">
+  </div>
+  <div class="row">
+    <button id="eUndo">Undo</button><button id="eReset">Reset all</button>
+  </div>
+  <div class="row">
+    <button id="eSave">Save layout</button><button id="eLoad">Load layout</button>
+  </div>
+  <small>Edits auto-save in this browser. “Save layout” downloads a JSON file you can keep.</small>
+</div>
+<div id="hud"></div>
+<div id="cBox"><div class="ttl">Comment on <span id="cWhat"></span></div><textarea id="cText" rows="5" maxlength="4000" placeholder="What should change? e.g. make this sofa a 3-seater in beige, move it 20 cm left…"></textarea>
+  <div class="row"><button id="cSave" class="on">Save comment</button><button id="cCancel">Cancel</button></div><small>A screenshot of your current view is saved with the comment.</small></div>
+<div id="msg">Loading…</div>
+<div id="load"><div>Loading your home…</div><div id="bar"><i></i></div><small id="pct"></small></div>
+<script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/jsm/"}}</script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

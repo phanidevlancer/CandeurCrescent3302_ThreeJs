@@ -1,0 +1,440 @@
+{
+ "s19270327": {
+  "name": "LANDSKRONA 3-seat sofa, Gunnared light green/wood",
+  "url": "https://www.ikea.com/in/en/p/landskrona-3-seat-sofa-gunnared-light-green-wood-s19270327/",
+  "rooms": [
+   "Drawing hall"
+  ],
+  "w_mm": 2040,
+  "d_mm": 890,
+  "h_mm": 780,
+  "glb": "assets/ikea/s19270327.glb",
+  "bytes": 850908,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/39270326/PS01_S01_NV_01/simple/glb_draco/9c7a141069134013aa79a3b8f7d8254e-G-39270326-25ce6bfad05bf0916f4dfbf15532460e55871532-simple.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "70533491": {
+  "name": "EKEN\u00c4SET armchair, Kilanda light beige",
+  "url": "https://www.ikea.com/in/en/p/ekenaeset-armchair-kilanda-light-beige-70533491/",
+  "rooms": [
+   "Drawing hall",
+   "Living + dining"
+  ],
+  "w_mm": 640,
+  "d_mm": 780,
+  "h_mm": 760,
+  "glb": "assets/ikea/70533491.glb",
+  "bytes": 265812,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/70533491/PS01_S01_NV01/simple/glb_draco/G-70533491-a9ba4b1b38a70f55a97c95d3905f6fdc404c93f2_c671b0d7e5744337958603735a91b1e7.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "30651392": {
+  "name": "KRAGSTA coffee table, brown/mango wood, 90 cm",
+  "url": "https://www.ikea.com/in/en/p/kragsta-coffee-table-brown-mango-wood-30651392/",
+  "rooms": [
+   "Drawing hall",
+   "Living + dining"
+  ],
+  "w_mm": 900,
+  "d_mm": 900,
+  "h_mm": 480,
+  "glb": null
+ },
+ "60619881": {
+  "name": "BORGEBY side table, birch veneer, 46 cm",
+  "url": "https://www.ikea.com/in/en/p/borgeby-side-table-birch-veneer-60619881/",
+  "rooms": [
+   "Drawing hall"
+  ],
+  "w_mm": 460,
+  "d_mm": 460,
+  "h_mm": 550,
+  "glb": "assets/ikea/60619881.glb",
+  "bytes": 73224,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/60619881/PS01_S01_NV_01/simple/glb_draco/d5e5a43f98b0f3359ad6b8412e3dc8c7-G-60619881-c98e8ad55c95ff71b57375cacc07c195fc66398a-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "20593760": {
+  "name": "STOCKHOLM 2025 rug, flatwoven, green/white/black handwoven, 170x240",
+  "url": "https://www.ikea.com/in/en/p/stockholm-2025-rug-flatwoven-green-white-black-handwoven-20593760/",
+  "rooms": [
+   "Drawing hall"
+  ],
+  "w_mm": 2400,
+  "d_mm": 1700,
+  "h_mm": 5,
+  "glb": null
+ },
+ "20321321": {
+  "name": "\u00c5RSTID floor lamp, brass/white",
+  "url": "https://www.ikea.com/in/en/p/arstid-floor-lamp-brass-white-20321321/",
+  "rooms": [
+   "Drawing hall"
+  ],
+  "w_mm": 360,
+  "d_mm": 360,
+  "h_mm": 1550,
+  "glb": "assets/ikea/20321321.glb",
+  "bytes": 864732,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/00321317/PS01_S01_NV01/simple/glb_draco/G-00321317-2b0cd8a4a0ea7b9c45c9b9a16700251b38fdf2f9_d68d569ec47d47b5bf420c5febe6500c.glb?cn=pip",
+  "all_glbs": 2
+ },
+ "40464069": {
+  "name": "SOLKLINT wall lamp, wired-in, brass/grey clear glass (sofa wall pair)",
+  "url": "https://www.ikea.com/in/en/p/solklint-wall-lamp-wired-in-installation-brass-grey-clear-glass-40464069/",
+  "rooms": [
+   "Drawing hall",
+   "Master bedroom",
+   "Bedroom 1"
+  ],
+  "w_mm": 160,
+  "d_mm": 170,
+  "h_mm": 160,
+  "glb": null
+ },
+ "00267607": {
+  "name": "BRUSALI shoe cabinet with 3 compartments, brown",
+  "url": "https://www.ikea.com/in/en/p/brusali-shoe-cabinet-with-3-compartments-brown-00267607/",
+  "rooms": [
+   "Drawing hall"
+  ],
+  "w_mm": 610,
+  "d_mm": 300,
+  "h_mm": 1300,
+  "glb": "assets/ikea/00267607.glb",
+  "bytes": 1345748,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/70267604/PS01_S01_NV01/simple/glb_draco/G-70267604-3e35abb4ff0e6bffbff3a2801aeb0ca10038b93c_0091ea76a5784c0ab9a9e738775b2b8f.glb?cn=pip",
+  "all_glbs": 3
+ },
+ "s89635263": {
+  "name": "VIMLE 4-seat sofa, Johanneshov brown-beige",
+  "url": "https://www.ikea.com/in/en/p/vimle-4-seat-sofa-johanneshov-brown-beige-s89635263/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 3120,
+  "d_mm": 980,
+  "h_mm": 830,
+  "glb": null
+ },
+ "70385315": {
+  "name": "SANDARED pouffe, beige, 45 cm (child seat)",
+  "url": "https://www.ikea.com/in/en/p/sandared-pouffe-beige-70385315/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 450,
+  "d_mm": 450,
+  "h_mm": 330,
+  "glb": "assets/ikea/70385315.glb",
+  "bytes": 225396,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/00385314/PS01_S01_NV_01/simple/glb_draco/fa83447374203750d8ecbf89b08f84ce-G-00385314-d7c2f63f2405c314ccac5d14aa913846f731c8c0-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "80277396": {
+  "name": "LOHALS rug, flatwoven, natural, 200x300 (jute)",
+  "url": "https://www.ikea.com/in/en/p/lohals-rug-flatwoven-natural-80277396/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 3000,
+  "d_mm": 2000,
+  "h_mm": 13,
+  "glb": null
+ },
+ "50600764": {
+  "name": "\u00c5LHULT table, beige/brown, 170x80 (seats 6)",
+  "url": "https://www.ikea.com/in/en/p/alhult-table-beige-brown-50600764/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 800,
+  "d_mm": 1700,
+  "h_mm": 750,
+  "glb": null
+ },
+ "20587504": {
+  "name": "N\u00c4SINGE chair, dark brown stained/Kilanda light beige",
+  "url": "https://www.ikea.com/in/en/p/naesinge-chair-dark-brown-stained-kilanda-light-beige-20587504/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 420,
+  "d_mm": 540,
+  "h_mm": 900,
+  "glb": null
+ },
+ "s99598646": {
+  "name": "R\u00c5DMANS\u00d6 bed frame, brown walnut effect/Lur\u00f6y, 180x200 (king)",
+  "url": "https://www.ikea.com/in/en/p/radmansoe-bed-frame-brown-walnut-effect-luroey-s99598646/",
+  "rooms": [
+   "Master bedroom"
+  ],
+  "w_mm": 1880,
+  "d_mm": 2200,
+  "h_mm": 1030,
+  "glb": null
+ },
+ "90367443": {
+  "name": "SONGESAND bedside table, brown",
+  "url": "https://www.ikea.com/in/en/p/songesand-bedside-table-brown-90367443/",
+  "rooms": [
+   "Master bedroom",
+   "Bedroom 1",
+   "Bedroom 2"
+  ],
+  "w_mm": 420,
+  "d_mm": 400,
+  "h_mm": 550,
+  "glb": "assets/ikea/90367443.glb",
+  "bytes": 402376,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/70367444/PS01_S01_NV01/simple/glb_draco/G-70367444-f897dc07556d1bc13f28028acb4467072f39bb33_142f340e54464284a5df591f156a5aaf.glb?cn=pip",
+  "all_glbs": 9
+ },
+ "00328229": {
+  "name": "HALVED rug, flatwoven, handmade multicolour, 170x240",
+  "url": "https://www.ikea.com/in/en/p/halved-rug-flatwoven-handmade-multicolour-00328229/",
+  "rooms": [
+   "Master bedroom"
+  ],
+  "w_mm": 2400,
+  "d_mm": 1700,
+  "h_mm": 6,
+  "glb": null
+ },
+ "40597960": {
+  "name": "LINDBYN mirror, gold-colour, 60x170",
+  "url": "https://www.ikea.com/in/en/p/lindbyn-mirror-gold-colour-40597960/",
+  "rooms": [
+   "Dress (walk-in)"
+  ],
+  "w_mm": 600,
+  "d_mm": 30,
+  "h_mm": 1700,
+  "glb": null
+ },
+ "80458896": {
+  "name": "IDAN\u00c4S bed frame, dark brown stained, 160x200 (queen)",
+  "url": "https://www.ikea.com/in/en/p/idanaes-bed-frame-dark-brown-stained-80458896/",
+  "rooms": [
+   "Bedroom 1"
+  ],
+  "w_mm": 1710,
+  "d_mm": 2070,
+  "h_mm": 1120,
+  "glb": "assets/ikea/80458896.glb",
+  "bytes": 614748,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/00458895/PS01_S01_NV01/simple/glb_draco/G-00458895-a1dc77130e52867f5cd2616f41520dad4abc7156_2f150934986a4488b003a768cfceb6b1.glb?cn=pip",
+  "all_glbs": 5
+ },
+ "50511287": {
+  "name": "LOHALS rug, flatwoven, natural, 133x195",
+  "url": "https://www.ikea.com/in/en/p/lohals-rug-flatwoven-natural-50511287/",
+  "rooms": [
+   "Bedroom 1",
+   "Bedroom 2"
+  ],
+  "w_mm": 1950,
+  "d_mm": 1330,
+  "h_mm": 14,
+  "glb": null
+ },
+ "s59420283": {
+  "name": "NODELAND bed frame with 2 storage boxes, medium brown/Lur\u00f6y, 160x200",
+  "url": "https://www.ikea.com/in/en/p/nodeland-bed-frame-with-2-storage-boxes-medium-brown-luroey-s59420283/",
+  "rooms": [
+   "Bedroom 2"
+  ],
+  "w_mm": 1650,
+  "d_mm": 2050,
+  "h_mm": null,
+  "glb": "assets/ikea/s59420283.glb",
+  "bytes": 193608,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/59420283/PS01_S01_NV_01/simple/glb/cbeb985de88544a9569467a62b933938-G-59420283-c09dee10ac56cb3ca8e86164e3635ff63864a50e-simple.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "50261151": {
+  "name": "MARKUS office chair, Vissle dark grey",
+  "url": "https://www.ikea.com/in/en/p/markus-office-chair-vissle-dark-grey-50261151/",
+  "rooms": [
+   "Bedroom 2"
+  ],
+  "w_mm": 620,
+  "d_mm": 600,
+  "h_mm": 1290,
+  "glb": "assets/ikea/50261151.glb",
+  "bytes": 1051592,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/70261150/PS01_S01_NV_01/simple/glb_draco/9c1d7e947b734a64a6c5790655851822-G-70261150-34ede91f82f176690a6c96029f8ba0714749adc8-simple.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "70472039": {
+  "name": "SOLKLINT ceiling lamp, brass/grey clear glass, 27 cm",
+  "url": "https://www.ikea.com/in/en/p/solklint-ceiling-lamp-brass-grey-clear-glass-70472039/",
+  "rooms": [
+   "Kitchen",
+   "Passage + vestibule"
+  ],
+  "w_mm": 270,
+  "d_mm": 270,
+  "h_mm": 200,
+  "glb": null
+ },
+ "10446897": {
+  "name": "STOCKHOLM mirror, walnut veneer, 60 cm",
+  "url": "https://www.ikea.com/in/en/p/stockholm-mirror-walnut-veneer-10446897/",
+  "rooms": [
+   "Master toilet",
+   "Bedroom-2 toilet",
+   "Bedroom-1 toilet"
+  ],
+  "w_mm": 600,
+  "d_mm": 100,
+  "h_mm": 600,
+  "glb": "assets/ikea/10446897.glb",
+  "bytes": 260096,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/30446896/PS01_S01_NV_01/simple/glb_draco/494c94ba0a8342e7a2a1681846235de5-G-30446896-53bcba5563c8c1e25d26ade018b5b469702510aa-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "50510339": {
+  "name": "N\u00c4MMAR\u00d6 bench with backrest, outdoor, light brown stained",
+  "url": "https://www.ikea.com/in/en/p/naemmaroe-bench-with-backrest-outdoor-light-brown-stained-50510339/",
+  "rooms": [
+   "Master balcony"
+  ],
+  "w_mm": 1060,
+  "d_mm": 620,
+  "h_mm": 780,
+  "glb": null
+ },
+ "70510343": {
+  "name": "N\u00c4MMAR\u00d6 chair, outdoor, foldable, light brown stained",
+  "url": "https://www.ikea.com/in/en/p/naemmaroe-chair-outdoor-foldable-light-brown-stained-70510343/",
+  "rooms": [
+   "Master balcony",
+   "Bedroom-1 balcony"
+  ],
+  "w_mm": 490,
+  "d_mm": 500,
+  "h_mm": 810,
+  "glb": "assets/ikea/70510343.glb",
+  "bytes": 203036,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/50503353/PS01_S01_NV_01/simple/glb_draco/8a564f82630f4227a7090a438f5e3e30-G-50503353-b0b435cdeaf850733ef1fa6e6d8c16f3b3c3abc7-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "50392741": {
+  "name": "KROKHOLMEN coffee table, outdoor, beige, 73 cm",
+  "url": "https://www.ikea.com/in/en/p/krokholmen-coffee-table-outdoor-beige-50392741/",
+  "rooms": [
+   "Master balcony"
+  ],
+  "w_mm": 730,
+  "d_mm": 730,
+  "h_mm": 440,
+  "glb": "assets/ikea/50392741.glb",
+  "bytes": 411112,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/80336466/PS01_S01_NV_01/simple/glb_draco/9dad6511981f49e4924613c3d16499b5-G-80336466-6709cb805dfaaa5149df05f8b12f5684d19c5106-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "00612057": {
+  "name": "BRUNB\u00c4R plant pot with saucer, outdoor terracotta, 32 cm",
+  "url": "https://www.ikea.com/in/en/p/brunbaer-plant-pot-with-saucer-outdoor-terracotta-00612057/",
+  "rooms": [
+   "Master balcony",
+   "Family balcony",
+   "Bedroom-1 balcony",
+   "Drawing hall"
+  ],
+  "w_mm": 360,
+  "d_mm": 360,
+  "h_mm": 340,
+  "glb": null
+ },
+ "30575812": {
+  "name": "SKARP\u00d6 armchair, outdoor, beige",
+  "url": "https://www.ikea.com/in/en/p/skarpoe-armchair-outdoor-beige-30575812/",
+  "rooms": [
+   "Family balcony"
+  ],
+  "w_mm": 810,
+  "d_mm": 790,
+  "h_mm": 710,
+  "glb": "assets/ikea/30575812.glb",
+  "bytes": 61328,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/50575811/PS01_S01_NV_01/simple/glb_draco/fff64cc965d190a908ccb732acb49710-G-50575811-ce42f765100552e6ca4755c400d4f66ef7039f63-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "20532738": {
+  "name": "N\u00c4MMAR\u00d6 storage box, light brown stained, 80x40x45 (doubles as side table/seat)",
+  "url": "https://www.ikea.com/in/en/p/naemmaroe-storage-box-light-brown-stained-indoor-outdoor-20532738/",
+  "rooms": [
+   "Family balcony"
+  ],
+  "w_mm": 800,
+  "d_mm": 400,
+  "h_mm": 450,
+  "glb": "assets/ikea/20532738.glb",
+  "bytes": 486020,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/40532742/PS01_S01_NV01/simple/glb_draco/G-40532742-0aaf6566b598c8d0f447cece3e67875910c716b2_512479770a564b30bb2ed65ff78de3db.glb?cn=pip",
+  "all_glbs": 3
+ },
+ "00511204": {
+  "name": "N\u00c4MMAR\u00d6 table, outdoor, light brown stained, 75x63",
+  "url": "https://www.ikea.com/in/en/p/naemmaroe-table-outdoor-light-brown-stained-00511204/",
+  "rooms": [
+   "Bedroom-1 balcony"
+  ],
+  "w_mm": 750,
+  "d_mm": 630,
+  "h_mm": 750,
+  "glb": null
+ },
+ "10615277": {
+  "name": "FEJKA artificial potted plant, weeping fig, 21 cm pot (170 cm tall)",
+  "url": "https://www.ikea.com/in/en/p/fejka-artificial-potted-plant-in-outdoor-weeping-fig-10615277/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 210,
+  "d_mm": 210,
+  "h_mm": 1700,
+  "glb": "assets/ikea/10615277.glb",
+  "bytes": 183692,
+  "source_glb": "https://web-api.ikea.com/dimma/assets/geomagical/10615277/PS01_S01_NV_01/simple/glb_draco/ca6165fd6fcd9f6c7fbcee6ee0c4d649-G-10615277-bfa9a8190490bd9cdca32eda3935d4bd094f423b-simple+draco.glb?cn=pip",
+  "all_glbs": 1
+ },
+ "30610085": {
+  "name": "KLOTK\u00d6RSB\u00c4R frame, oak effect/dark brown, 50x70 (botanical triptych)",
+  "url": "https://www.ikea.com/in/en/p/klotkoersbaer-frame-oak-effect-dark-brown-30610085/",
+  "rooms": [
+   "Living + dining",
+   "Drawing hall",
+   "Master bedroom"
+  ],
+  "w_mm": 530,
+  "d_mm": 20,
+  "h_mm": 730,
+  "glb": null
+ },
+ "30543005": {
+  "name": "SVARTPOPPEL cushion cover, off-white, 50x50",
+  "url": "https://www.ikea.com/in/en/p/svartpoppel-cushion-cover-off-white-30543005/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 500,
+  "d_mm": 500,
+  "h_mm": null,
+  "glb": null
+ },
+ "90570958": {
+  "name": "VALLKRASSING cushion cover, grey-green, 50x50",
+  "url": "https://www.ikea.com/in/en/p/vallkrassing-cushion-cover-grey-green-90570958/",
+  "rooms": [
+   "Living + dining"
+  ],
+  "w_mm": 500,
+  "d_mm": 500,
+  "h_mm": null,
+  "glb": null
+ }
+}

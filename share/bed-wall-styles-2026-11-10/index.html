@@ -1,0 +1,99 @@
+<title>Bed Wall Styles</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;600&display=swap">
+<style>
+/* layout: a swatch book — ten numbered styles in a grid, each with its own day/evening switch; tap to enlarge */
+:root {
+  --bg: #f6f1ea; --fg: #2b2622; --muted: #6f655c; --card: #fffaf4; --line: #e4d9cc; --accent: #a8754f;
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif; --body: 'Karla', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1b1815; --fg: #efe7dd; --muted: #b3a798; --card: #24201c; --line: #3a332c; --accent: #d39b6f; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #1b1815; --fg: #efe7dd; --muted: #b3a798; --card: #24201c; --line: #3a332c; --accent: #d39b6f; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 26px; }
+header { display: grid; gap: 8px; max-width: 70ch; }
+.eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(28px, 4.6vw, 44px); line-height: 1.1; margin: 0; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 22px; }
+.card { display: grid; gap: 8px; align-content: start; }
+.shot { all: unset; cursor: zoom-in; display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+.shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.head h2 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0; }
+.num { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 6px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; flex: none; }
+.seg button { font: 600 12px var(--body); color: var(--muted); background: transparent; border: 0; padding: 4px 10px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+.seg button:focus-visible { outline: 2px solid var(--accent); }
+.card p { margin: 0; font-size: 14px; color: var(--muted); }
+.view { position: fixed; inset: 0; background: rgba(10, 8, 6, .92); display: grid; place-items: center; z-index: 20;
+  padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.view img { max-width: 100%; max-height: 82vh; border-radius: 4px; }
+.view p { color: #efe7dd; margin: 10px 0 0; text-align: center; font-size: 15px; }
+.view .bar { display: flex; gap: 10px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.view button { font: 600 14px var(--body); color: #efe7dd; background: transparent; border: 1px solid #6b5f53; border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+.view button:focus-visible { outline: 2px solid #d39b6f; }
+footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Candeur Crescent 3302 · master bedroom · option 3</span>
+    <h1>Twenty styles for the wall behind the bed</h1>
+    <p>The balcony wall has a solid section and the sliding doors. Each style has its own cut shape over the sliding doors and its own composition on the solid section, with the same layered lighting (cove wash, LED profiles, edge light, headboard halo, under-bed glow). The doors and curtains stay fully usable in all twenty. Styles 11–20 change the form itself (beam, fringe, lattice, cubbies, fins, Mughal arch, colour blocks, carved sun, fabric canopy). Same camera for all twenty. Switch each one between evening and day, and tap to see it large.</p>
+  </header>
+  <section class="grid" id="grid"></section>
+  <footer>Rendered from the 3D model on 10 Nov 2026. In the viewer, choose master bedroom → Option 3 → "Bed wall style" to walk around any of them.</footer>
+</div>
+<div class="view" id="view" hidden>
+  <div><img id="vimg" alt=""><p id="vcap"></p><div class="bar"><button id="prev">Previous</button><button id="tog">Day / evening</button><button id="close">Close</button><button id="next">Next</button></div></div>
+</div>
+<script>
+const styles = [
+  ['walnut-moon', 'Rounded header · walnut moon', 'Flat walnut header with soft rounded corners over the sliders; walnut solid wall with a glowing clay arch niche and shelves, plus a backlit plaster moon.'],
+  ['oak-flute', 'Grand arch · oak flutes', 'One big semi-elliptical arch cut over the sliders; pale oak flutes floor to ceiling with a brass-ringed lit niche.'],
+  ['upholstered', 'Scalloped valance · upholstered', 'A row of five small scallops over the sliders; full-height oat bouclé channels under a lit walnut ledge on the solid wall.'],
+  ['limewash-arch', 'Gothic arches · limewash', 'Three pointed (gothic) arches over the sliders in sand limewash; a tall walnut pointed arch with lit oak shelves on the solid wall.'],
+  ['cane', 'Louvred header · cane lattice', 'Straight oak header with three layered louvres over the sliders; three cane panels behind an oak shoji-style lattice.'],
+  ['travertine', 'Moon-notch band · moon gate', 'Straight travertine band with a half-moon notch over the sliders; a glowing round moon-gate cut-out above a lit walnut ledge.'],
+  ['mural', 'Wave header · dusk mural', 'A soft flowing wave cut over the sliders; a painted dusk landscape inside a tall walnut-framed arch.'],
+  ['plaster-arches', 'Stepped arch · nested plaster', 'A shallow segmental arch with two stepped plaster reveals over the sliders; three nested plaster arches grazed by hidden light.'],
+  ['moody', 'Chevron cut · charcoal & onyx', 'An angular faceted chevron cut over the sliders; charcoal with diagonal brass chevrons around a glowing onyx disc.'],
+  ['library', 'Shelf bridge · arched library', 'A lit bookshelf runs over the sliders like a bridge; an arched walnut bookcase above the headboard.'],
+  ['deco-fan', 'Sunburst header · art-deco fan', 'Dark walnut header with backlit sunburst slots over the sliders; a brass art-deco fan above the headboard over quilted bouclé panels.'],
+  ['floating-beam', 'Floating beam · terrazzo slit', 'No header panel: one floating walnut beam runs the full wall at 2.26 m, washed with light up and down; terrazzo solid wall with a glowing vertical slit.'],
+  ['oak-fringe', 'Oak fringe · rib relief', 'The header ends in a stepped fringe of oak slats (longer at the ends) over the sliders; the solid wall is a 3D wave relief of oak ribs.'],
+  ['lattice-arch', 'Lattice arch · jharokha screen', 'A grand arch over the sliders with backlit diamond-lattice cut-outs in the spandrels; a tall arched lattice (jharokha) screen glowing on the solid wall.'],
+  ['cubbies', 'Box pelmet · lit cubbies', 'A deep walnut box pelmet with downlights over the sliders; a grid of lit display cubbies in clay plaster on the solid wall.'],
+  ['bronze-fins', 'Bronze fins', 'Horizontal satin-bronze fins over the sliders; vertical bronze fins with warm LED lines between them on charcoal.'],
+  ['mughal', 'Mughal multifoil arch', 'A cusped multifoil (Mughal) arch over the sliders traced in brass; a matching multifoil niche with a brass diya shelf on ivory lacquer.'],
+  ['bauhaus', 'Bauhaus colour blocks', 'A straight band with a half-circle cut over the sliders; terracotta semicircle, sage block and mustard dot framed by walnut strips.'],
+  ['sun-relief', 'Twin arches · carved sun', 'Twin arches over the sliders; greige microcement with a carved concentric sun (glowing centre) and fine horizontal grooves.'],
+  ['fabric-canopy', 'Upholstered scallops · crown canopy', 'Soft upholstered scalloped pelmet over the sliders and an upholstered solid wall, with a linen crown canopy over the bed head.'],
+];
+const file = (i, l) => `${String(i + 1).padStart(2, '0')}_${styles[i][0]}_${l}.jpg`;
+const mode = styles.map(() => 'evening');
+const grid = document.getElementById('grid');
+styles.forEach(([id, name, text], i) => {
+  const c = document.createElement('article'); c.className = 'card';
+  c.innerHTML = `<button class="shot" aria-label="View larger: ${name}"><img src="${file(i, 'evening')}" alt="${name}, evening" width="1600" height="1000" loading="lazy"></button>
+    <div class="head"><h2><span class="num">${i + 1}</span>${name}</h2><span class="seg" role="group" aria-label="Lighting for ${name}"><button aria-pressed="true" data-l="evening">Evening</button><button aria-pressed="false" data-l="day">Day</button></span></div><p>${text}</p>`;
+  const img = c.querySelector('img');
+  c.querySelectorAll('.seg button').forEach(b => b.onclick = () => { mode[i] = b.dataset.l; img.src = file(i, mode[i]); img.alt = `${name}, ${mode[i]}`; c.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
+  c.querySelector('.shot').onclick = () => open(i);
+  grid.appendChild(c);
+});
+const view = document.getElementById('view'), vimg = document.getElementById('vimg'), vcap = document.getElementById('vcap');
+let cur = 0;
+function show() { const [, name] = styles[cur]; vimg.src = file(cur, mode[cur]); vimg.alt = name; vcap.textContent = `${cur + 1}. ${name} · ${mode[cur]}`; }
+function open(i) { cur = (i + styles.length) % styles.length; show(); view.hidden = false; document.getElementById('close').focus(); }
+document.getElementById('close').onclick = () => { view.hidden = true; };
+document.getElementById('prev').onclick = () => open(cur - 1);
+document.getElementById('next').onclick = () => open(cur + 1);
+document.getElementById('tog').onclick = () => { mode[cur] = mode[cur] === 'day' ? 'evening' : 'day'; show(); };
+view.onclick = e => { if (e.target === view) view.hidden = true; };
+addEventListener('keydown', e => { if (view.hidden) return; if (e.key === 'Escape') view.hidden = true; if (e.key === 'ArrowRight') open(cur + 1); if (e.key === 'ArrowLeft') open(cur - 1); });
+</script>

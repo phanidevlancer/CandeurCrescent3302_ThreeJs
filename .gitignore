@@ -1,0 +1,17 @@
+# OS / tool noise
+.DS_Store
+.playwright-mcp/
+__pycache__/
+
+# > 100 MB (GitHub limit); regenerate with tools/record_tour.mjs
+tour/home_tour.mp4
+
+# Untouched owner downloads (large; several have licences that forbid redistribution)
+assets/models/originals/
+
+# Processed models whose licence forbids redistribution (Sketchfab Standard) or is unknown.
+# The viewer runs without them (lib.model returns null → built fallback / item skipped).
+assets/models/ikea_markus_chair.glb
+assets/models/macbook_pro_14_closed.glb
+assets/models/fridge_side_by_side_jerovdl.glb
+assets/models/chimney_hood.glb

@@ -1,0 +1,82 @@
+<title>Our Master Bedroom</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;600&display=swap">
+<style>
+/* layout: a calm photo book — short intro, then a two-column grid of renders, tap to view large */
+:root {
+  --bg: #f6f1ea; --fg: #2b2622; --muted: #6f655c; --card: #fffaf4; --line: #e4d9cc; --accent: #a8754f;
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif; --body: 'Karla', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1b1815; --fg: #efe7dd; --muted: #b3a798; --card: #24201c; --line: #3a332c; --accent: #d39b6f; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #1b1815; --fg: #efe7dd; --muted: #b3a798; --card: #24201c; --line: #3a332c; --accent: #d39b6f; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 28px; }
+header { display: grid; gap: 8px; max-width: 68ch; }
+.eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 0; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); }
+.specs { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.specs b { color: var(--fg); font-weight: 600; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+figure { margin: 0; display: grid; gap: 8px; }
+figure button { all: unset; cursor: zoom-in; border-radius: 6px; overflow: hidden; display: block; background: var(--card); border: 1px solid var(--line); }
+figure button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+figcaption { font-size: 14px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
+figcaption .tag { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 600; white-space: nowrap; }
+.view { position: fixed; inset: 0; background: rgba(10, 8, 6, .92); display: grid; place-items: center; z-index: 20;
+  padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.view img { max-width: 100%; max-height: 82vh; border-radius: 4px; }
+.view p { color: #efe7dd; margin: 10px 0 0; text-align: center; font-size: 15px; }
+.view .bar { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
+.view button { font: 600 14px var(--body); color: #efe7dd; background: transparent; border: 1px solid #6b5f53; border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+.view button:focus-visible { outline: 2px solid #d39b6f; }
+footer { font-size: 13px; color: var(--muted); max-width: 68ch; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Candeur Crescent 3302 · design preview</span>
+    <h1>Our master bedroom, with the projector on</h1>
+    <p>Thirteen views of the current master bedroom design (option 1). The 100″ screen is down and the projector has come out of the ceiling, showing photos from the home's own walkthrough. Tap any picture to see it large.</p>
+    <div class="specs"><span><b>Bed</b> 6 × 7 ft, upholstered</span><span><b>Screen</b> 100″, 2.21 × 1.24 m</span><span><b>Room</b> 3.66 × 4.87 m</span><span><b>Behind the bed</b> wave-top oak slat wall with LED</span></div>
+  </header>
+  <section class="grid" id="grid"></section>
+  <footer>Rendered from the 3D model on 10 Nov 2026. Products and finishes are design intent; final sizes are confirmed on site.</footer>
+</div>
+<div class="view" id="view" hidden>
+  <div><img id="vimg" alt=""><p id="vcap"></p><div class="bar"><button id="prev">Previous</button><button id="close">Close</button><button id="next">Next</button></div></div>
+</div>
+<script>
+const shots = [
+  ['01_bed_seated_screen.jpg', 'Evening', 'Sitting up in bed, projector on'],
+  ['02_bed_lying_screen.jpg', 'Evening', 'Lying in bed, movie view'],
+  ['13_bed_to_screen_day.jpg', 'Day', 'From the bed, sitting up'],
+  ['03_lounge_chairs_screen.jpg', 'Evening', 'From the lounge corner, over the bed'],
+  ['04_screen_side_back_to_bed_evening.jpg', 'Evening', 'Looking back at the bed and wave wall, with the projector beam'],
+  ['05_screen_side_back_to_bed_day.jpg', 'Day', 'The same view by day'],
+  ['11_wave_headboard_glow.jpg', 'Evening', 'Wave headboard wall with its LED edge'],
+  ['10_projector_closeup.jpg', 'Evening', 'Projector lowered from its ceiling lift'],
+  ['06_corner_northeast_entry.jpg', 'Evening', 'From the entry corner'],
+  ['07_corner_southeast_balcony.jpg', 'Evening', 'From the balcony corner, towards the work wall'],
+  ['12_work_wall_lounge_day.jpg', 'Day', 'Work wall and lounge chairs'],
+  ['08_overview_evening.jpg', 'Evening', 'The whole room from above'],
+  ['09_overview_day.jpg', 'Day', 'The whole room from above, by day'],
+];
+const grid = document.getElementById('grid');
+shots.forEach(([f, when, cap], i) => {
+  const fig = document.createElement('figure');
+  fig.innerHTML = `<button aria-label="View larger: ${cap}"><img src="${f}" alt="${cap} (${when.toLowerCase()})" loading="lazy" width="1920" height="1080"></button><figcaption><span class="tag">${when}</span><span>${cap}</span></figcaption>`;
+  fig.querySelector('button').onclick = () => open(i);
+  grid.appendChild(fig);
+});
+const view = document.getElementById('view'), vimg = document.getElementById('vimg'), vcap = document.getElementById('vcap');
+let cur = 0;
+function open(i) { cur = (i + shots.length) % shots.length; const [f, when, cap] = shots[cur]; vimg.src = f; vimg.alt = cap; vcap.textContent = `${cap} · ${when}`; view.hidden = false; document.getElementById('close').focus(); }
+document.getElementById('close').onclick = () => { view.hidden = true; };
+document.getElementById('prev').onclick = () => open(cur - 1);
+document.getElementById('next').onclick = () => open(cur + 1);
+view.onclick = e => { if (e.target === view) view.hidden = true; };
+addEventListener('keydown', e => { if (view.hidden) return; if (e.key === 'Escape') view.hidden = true; if (e.key === 'ArrowRight') open(cur + 1); if (e.key === 'ArrowLeft') open(cur - 1); });
+</script>

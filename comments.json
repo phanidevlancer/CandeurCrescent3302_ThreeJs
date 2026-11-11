@@ -1,0 +1,284 @@
+{
+ "comments": [
+  {
+   "text": "remove this",
+   "status": "done",
+   "reply": "This was saved as a 'whole room' comment, so I couldn't tell which item you meant. I assumed it was the same floating doors as #4/#5, which are now removed. If it was something else, click Reopen and add a new comment by pointing at the item.",
+   "room": "Master bedroom",
+   "option": "option1",
+   "mode": "room",
+   "target": {
+    "kind": "room",
+    "id": "",
+    "name": "whole room",
+    "cat": ""
+   },
+   "point": null,
+   "camera": {
+    "pos": [
+     1.8289999999999997,
+     7.205900903936795,
+     6.636351146238361
+    ],
+    "target": [
+     1.8289999999999997,
+     0.8,
+     2.6335
+    ],
+    "yaw": null,
+    "pitch": null,
+    "mode": "room"
+   },
+   "id": "c1794287170495",
+   "created": "2026-11-10 10:36:10",
+   "n": 1,
+   "image": "comments/c1794287170495.jpg"
+  },
+  {
+   "text": "looks like a extra item remove this,",
+   "status": "done",
+   "reply": "Removed. This cushion and its woven stripe were left over from the old sofa and were floating beside the new Westcott sofa (Living & dining, option 1).",
+   "room": "Living and dining",
+   "option": "option1",
+   "mode": "walk",
+   "target": {
+    "kind": "item",
+    "id": "living-and-dining/handloom-accent#0",
+    "name": "Handloom accent cushion003",
+    "cat": "furn"
+   },
+   "point": [
+    7.048,
+    0.992,
+    -3.722
+   ],
+   "camera": {
+    "pos": [
+     1.2,
+     1.6,
+     -3.4
+    ],
+    "target": null,
+    "yaw": -1.515796326794895,
+    "pitch": -0.1034,
+    "mode": "walk"
+   },
+   "id": "c1794287416004",
+   "created": "2026-11-10 10:40:16",
+   "n": 2,
+   "image": "comments/c1794287416004.jpg"
+  },
+  {
+   "text": "extra item remove",
+   "status": "done",
+   "reply": "Removed, same as #2: the leftover cushion at the other end of the sofa is gone too.",
+   "room": "Living and dining",
+   "option": "option1",
+   "mode": "walk",
+   "target": {
+    "kind": "item",
+    "id": "living-and-dining/handloom-accent#1",
+    "name": "Handloom accent cushion002",
+    "cat": "furn"
+   },
+   "point": [
+    9.649,
+    0.9,
+    -3.726
+   ],
+   "camera": {
+    "pos": [
+     3.9282226568481464,
+     1.6,
+     -3.0563213469138986
+    ],
+    "target": null,
+    "yaw": -1.4541963267948945,
+    "pitch": -0.12099999999999998,
+    "mode": "walk"
+   },
+   "id": "c1794287450559",
+   "created": "2026-11-10 10:40:50",
+   "n": 3,
+   "image": "comments/c1794287450559.jpg"
+  },
+  {
+   "text": "this is door is added unnessarylt",
+   "status": "done",
+   "reply": "Removed. These were the two doors of the old TV unit; the unit was hidden in options 1 and 2 but its doors were not. They are now hidden in both options (still there in 'original').",
+   "room": "Master bedroom",
+   "option": "option1",
+   "mode": "room",
+   "target": {
+    "kind": "surface",
+    "id": "Flush_concealed_electronics_door001",
+    "name": "furn (Smoked walnut - master feature wall)",
+    "cat": "furn"
+   },
+   "point": [
+    1.253,
+    0.62,
+    0.829
+   ],
+   "camera": {
+    "pos": [
+     1.8289999999999997,
+     7.205900903936795,
+     6.636351146238361
+    ],
+    "target": [
+     1.8289999999999997,
+     0.8,
+     2.6335
+    ],
+    "yaw": null,
+    "pitch": null,
+    "mode": "room"
+   },
+   "id": "c1794287543925",
+   "created": "2026-11-10 10:42:23",
+   "n": 4,
+   "image": "comments/c1794287543925.jpg"
+  },
+  {
+   "text": "this is door is added unnessarylt",
+   "status": "done",
+   "reply": "Removed, same fix as #4 (both doors of the old TV unit).",
+   "room": "Master bedroom",
+   "option": "option1",
+   "mode": "room",
+   "target": {
+    "kind": "surface",
+    "id": "Flush_concealed_electronics_door",
+    "name": "furn (Smoked walnut - master feature wall)",
+    "cat": "furn"
+   },
+   "point": [
+    2.326,
+    0.744,
+    0.83
+   ],
+   "camera": {
+    "pos": [
+     1.8289999999999997,
+     7.205900903936795,
+     6.636351146238361
+    ],
+    "target": [
+     1.8289999999999997,
+     0.8,
+     2.6335
+    ],
+    "yaw": null,
+    "pitch": null,
+    "mode": "room"
+   },
+   "id": "c1794287552237",
+   "created": "2026-11-10 10:42:32",
+   "n": 5,
+   "image": "comments/c1794287552237.jpg"
+  },
+  {
+   "text": "Too much of flutted on this can you please fix this entire wall",
+   "status": "done",
+   "reply": "Removed all fluting from this wall (option 1). The TV wall is now flush smoked-walnut veneer panels (about 0.6 m wide, with thin shadow gaps), with the same LED edge strips, TV and console. The light-timber fluted strip left of the walk-in is removed too, which leaves the smooth walnut veneer behind it. The whole east wall now matches the concealed walk-in door. Option 2's TV wall (on the north wall) is still fluted; say if you want it changed as well.",
+   "room": "Master bedroom",
+   "option": "option1",
+   "mode": "walk",
+   "target": {
+    "kind": "item",
+    "id": "master-bedroom/option1/tv-wall",
+    "name": "Gaming TV wall (65″)",
+    "cat": "furn"
+   },
+   "point": [
+    3.618,
+    1.924,
+    3.783
+   ],
+   "camera": {
+    "pos": [
+     0.2502263965451509,
+     1.6,
+     1.486898980262139
+    ],
+    "target": null,
+    "yaw": -8.452396326794906,
+    "pitch": 0.07920000000000049,
+    "mode": "walk"
+   },
+   "id": "c1794287749737",
+   "created": "2026-11-10 10:45:49",
+   "n": 6,
+   "image": "comments/c1794287749737.jpg"
+  },
+  {
+   "text": "Remove the object next to fridge and make it double door",
+   "status": "done",
+   "reply": "Done in a new Kitchen 'Option 1 · Double-door fridge' (now the default). I removed the small wash niche next to the fridge (cabinet, quartz top, basin and tap). The fridge is now a side-by-side double-door model, 912 × 1780 × 716 mm (≈650 L class), against the west wall next to the counter. Both doors open with E / click. Before the carpenter finalises the niche, confirm the exact model size and cap the old basin's water and drain points (or reuse the water line for the dispenser).",
+   "room": "Kitchen",
+   "option": "original",
+   "mode": "walk",
+   "target": {
+    "kind": "item",
+    "id": "kitchen/tall-refrigerator#0",
+    "name": "Tall refrigerator",
+    "cat": "furn"
+   },
+   "point": [
+    7.58,
+    1.395,
+    2.24
+   ],
+   "camera": {
+    "pos": [
+     9.40704424592801,
+     1.6,
+     2.5735988712023516
+    ],
+    "target": null,
+    "yaw": -4.892796326794902,
+    "pitch": -0.10999999999999986,
+    "mode": "walk"
+   },
+   "id": "c1794288407794",
+   "created": "2026-11-10 10:56:47",
+   "n": 7,
+   "image": "comments/c1794288407794.jpg"
+  },
+  {
+   "text": "extra element, please remove",
+   "status": "done",
+   "reply": "Removed: layout option 1 hides the old recliner control plate together with the other leftover recliner parts (seams, footrests, buttons). Checked again on 2026-11-11 with both sofa designs; nothing of the old sofa is left.",
+   "room": "Living and dining",
+   "option": "option1",
+   "mode": "walk",
+   "target": {
+    "kind": "item",
+    "id": "living-and-dining/family-discreet#0",
+    "name": "Family discreet recliner control plate",
+    "cat": "furn"
+   },
+   "point": [
+    6.857,
+    0.65,
+    -3.681
+   ],
+   "camera": {
+    "pos": [
+     5.002511832847893,
+     1.6,
+     -3.607552872829892
+    ],
+    "target": null,
+    "yaw": -1.531196326794897,
+    "pitch": -0.4729999999999995,
+    "mode": "walk"
+   },
+   "id": "c1794288869788",
+   "created": "2026-11-10 11:04:29",
+   "n": 8,
+   "image": "comments/c1794288869788.jpg"
+  }
+ ]
+}

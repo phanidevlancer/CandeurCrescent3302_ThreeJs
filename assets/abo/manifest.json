@@ -1,0 +1,431 @@
+{
+  "B07HSL882C": {
+    "role": "king bed",
+    "name": "Amazon Brand – Stone & Beam Rylee Modern Acacia Wood King Bed, 83.27\"W, Gray-Wash Acacia",
+    "brand": "Stone & Beam",
+    "color": "Beige",
+    "extent_m": [
+      2.12,
+      1.1,
+      2.17
+    ],
+    "path": "C/B07HSL882C.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B082VN4F4K": {
+    "role": "3-seat sofa",
+    "name": "Amazon Brand – Rivet Brooke Contemporary Mid-Century Modern Tufted Velvet Sofa Couch, 82\"W, Emerald",
+    "brand": "Rivet",
+    "color": "Emerald",
+    "extent_m": [
+      2.09,
+      0.79,
+      0.87
+    ],
+    "path": "K/B082VN4F4K.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B07HYY8ZGY": {
+    "role": "family sofa",
+    "name": "Amazon Brand – Stone & Beam Westcott Contemporary 93\" Sofa, Fabric, 93\"W, Haze",
+    "brand": "Stone & Beam",
+    "color": "Haze",
+    "extent_m": [
+      2.42,
+      0.87,
+      0.97
+    ],
+    "path": "Y/B07HYY8ZGY.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B075X4N3JH": {
+    "role": "accent armchair",
+    "name": "Amazon Brand – Stone & Beam Laurel Rounded Accent Chair, 29.5\"W, Sand",
+    "brand": "Stone & Beam",
+    "color": "Linen",
+    "extent_m": [
+      0.71,
+      0.77,
+      0.76
+    ],
+    "path": "H/B075X4N3JH.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B075YMXWZC": {
+    "role": "dining table",
+    "name": "Amazon Brand – Rivet Mid-Century Modern Oak Dining Table, 63\"L, Walnut Finish",
+    "brand": "Rivet",
+    "color": "Walnut",
+    "extent_m": [
+      1.61,
+      0.76,
+      0.81
+    ],
+    "path": "C/B075YMXWZC.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B07QFRSC92": {
+    "role": "dining chair",
+    "name": "Amazon Brand – Rivet Contemporary Welt-Trimmed Dining Chair, 35\"H, Juniper, Set of 2",
+    "brand": "Rivet",
+    "color": "Juniper",
+    "extent_m": [
+      0.53,
+      0.86,
+      0.54
+    ],
+    "path": "2/B07QFRSC92.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B07K7NY646": {
+    "role": "coffee table",
+    "name": "Amazon brand - Alkove - Hayes - Coffee table made of solid wood",
+    "brand": "Alkove",
+    "color": "Přírodní",
+    "extent_m": [
+      1.1,
+      0.4,
+      0.6
+    ],
+    "path": "6/B07K7NY646.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "B07QFP52NG": {
+    "role": "lounge chair",
+    "name": "Amazon Brand – Rivet Stacey Mid-Century Modern Round-Backed, Armless Living Room Chair, 27\"W, Stucco",
+    "brand": "Rivet",
+    "color": "Stucco",
+    "extent_m": [
+      0.7,
+      0.76,
+      0.66
+    ],
+    "path": "G/B07QFP52NG.glb",
+    "source": "Amazon Berkeley Objects (ABO), https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "license": "CC BY-NC 4.0 (non-commercial)",
+    "front": "+z"
+  },
+  "balaji2": {
+    "role": "puja idol (Sri Venkateswara relief)",
+    "name": "Balaji2 — Sri Venkateswara (3D sculpt)",
+    "file": "assets/models/balaji2.glb",
+    "rotX": 90,
+    "front": "+z",
+    "author": "kirubakaran320 (https://sketchfab.com/kirubakaran320)",
+    "source": "https://sketchfab.com/3d-models/balaji2-3c9db0a38545449181b75bff6373ec26",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied file (Downloads/balaji2.glb), 2026-11-11; single untextured material, 198k triangles"
+  },
+  "gas_stove_no1": {
+    "role": "kitchen gas hob",
+    "name": "Gas Stove No.1 (3D model)",
+    "file": "assets/models/gas_stove_no1.glb",
+    "front": "+z",
+    "author": "lutz_westerfeld (https://sketchfab.com/lutzwesterfeld)",
+    "source": "https://sketchfab.com/3d-models/gas-stove-no1-0a9441fbe4bd47b990e17dab99267d40",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied file (Downloads/gas_stove_no.1.glb), 2026-11-11; 38k triangles, 3 materials (2 textured)"
+  },
+  "kitchen_sink_fiesta": {
+    "role": "kitchen sink + mixer",
+    "name": "Kitchen sink FIESTA 5149 (3D model)",
+    "file": "assets/models/kitchen_sink_fiesta.glb",
+    "front": "+z",
+    "author": "yuridiz (https://sketchfab.com/yuridiz)",
+    "source": "https://sketchfab.com/3d-models/kitchen-sink-fiesta-5149-fbe874f7f96f4727981087c1a0c7262e",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied file (Downloads/kitchen_sink_fiesta_5149.glb), 2026-11-11; 233k triangles; two 4K PNG textures downsized to 1024 (geometry unchanged), 26.1 → 10.7 MB"
+  },
+  "fridge_sbs": {
+    "role": "side-by-side refrigerator",
+    "name": "Inverter side-by-side refrigerator (3D model)",
+    "file": "assets/models/fridge_side_by_side_jerovdl.glb",
+    "front": "+z",
+    "author": "jerovdl (from the zip name 'inverter-refrigerator-crafted-by-jerovdl')",
+    "license": "unknown — no licence in the file; ask the owner for the source page",
+    "note": "owner-supplied zip (Downloads/inverter-refrigerator-crafted-by-jerovdl.zip → source/side-by-side+refrigerator+3d+model.glb), 2026-11-11; Unity glTFast export, one static mesh (doors do not open), 1.8k triangles"
+  },
+  "chimney_hood": {
+    "role": "kitchen chimney hood",
+    "name": "Chimney hood (3D model)",
+    "file": "assets/models/chimney_hood.glb",
+    "front": "+x",
+    "author": "unknown",
+    "license": "unknown — no licence in the file; ask the owner for the source page",
+    "note": "owner-supplied file (Downloads/Chiminey.glb), 2026-11-11; Blender export, chimney body + separate cover, 83k triangles"
+  },
+  "haiven_microwave": {
+    "role": "countertop microwave",
+    "name": "HAIVEN Microwave (3D model)",
+    "file": "assets/models/haiven_microwave.glb",
+    "front": "+z",
+    "author": "strakacher21 (https://sketchfab.com/strakacher21)",
+    "source": "https://sketchfab.com/3d-models/haiven-microwave-1bbe4a3a4ee14e478998ba20d7fa0d93",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied file (Downloads/haiven_microwave.glb), 2026-11-11; 13.9k triangles; textures downsized to 1024 (geometry unchanged)"
+  },
+  "mixer_grinder": {
+    "role": "Indian mixer grinder",
+    "name": "Mixer grinder (3D model)",
+    "file": "assets/models/mixer_grinder.glb",
+    "front": "-x",
+    "author": "ASHISH / 3dmodelsmith (https://sketchfab.com/3dmodelsmith)",
+    "source": "https://sketchfab.com/3d-models/mixer-grinder-machine-from-india-8bc0ca023c874c619c7e497e556cfb63",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied file (Downloads/mixer_grinder_machine_from_india.glb), 2026-11-11; 9.8k triangles; motor base + 3 jars laid out in a row; textures downsized to 1024"
+  },
+  "sofa_sectional_dailyart": {
+    "role": "family sofa (sectional with chaise)",
+    "name": "Plush sectional sofa + chaise (from 'Sofa combination')",
+    "file": "assets/models/sofa_sectional_dailyart.glb",
+    "front": "-z",
+    "author": "DailyArt (https://sketchfab.com/D.art)",
+    "source": "https://sketchfab.com/3d-models/sofa-combination-55a01600dd0147e4bc43d69d30945e43",
+    "license": "CC BY-NC 4.0 — credit the author, NON-COMMERCIAL use only (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "note": "owner-supplied file (Downloads/sofa_combination.glb), 2026-11-11: the sofa extracted in Blender (tools/glb_extract_sofa_dailyart.py) = Object_9 cushions/back (minus magazines/books) + its frame, arms and legs from Object_6 (coffee table, side table, shelf, wall skirting, wall/floor, vase, books, mugs dropped); 3.48 × 1.63 × 0.83 m; 2.7 MB; full 4-module sofa (owner: keep all seats, move it towards the east wall)"
+  },
+  "coffee_table_dailyart": {
+    "front": "-z",
+    "author": "DailyArt (https://sketchfab.com/D.art)",
+    "source": "https://sketchfab.com/3d-models/sofa-combination-55a01600dd0147e4bc43d69d30945e43",
+    "license": "CC BY-NC 4.0 — credit the author, NON-COMMERCIAL use only (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "role": "coffee table",
+    "name": "Oak coffee table with drawer (from 'Sofa combination')",
+    "file": "assets/models/coffee_table_dailyart.glb",
+    "note": "extracted from Object_6 of Downloads/sofa_combination.glb with tools/glb_extract_region.py (region x -8..114, y -1..61 cm); 1.20 × 0.60 × 0.42 m; cm units"
+  },
+  "rug_dailyart": {
+    "front": "-z",
+    "author": "DailyArt (https://sketchfab.com/D.art)",
+    "source": "https://sketchfab.com/3d-models/sofa-combination-55a01600dd0147e4bc43d69d30945e43",
+    "license": "CC BY-NC 4.0 — credit the author, NON-COMMERCIAL use only (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "role": "rug",
+    "name": "Grey flat-weave rug with sawtooth border (from 'Sofa combination')",
+    "file": "assets/models/rug_dailyart.glb",
+    "note": "extracted from Object_12 of Downloads/sofa_combination.glb with tools/glb_extract_region.py; 3.82 × 1.96 m (placed at ×0.86 = 3.29 × 1.69); cm units"
+  },
+  "bed_dreamburst": {
+    "front": "+x",
+    "author": "Brian Trepanier (https://sketchfab.com/CMBC)",
+    "source": "https://sketchfab.com/3d-models/dreamburst-bed-14e4a9a378b04f5fab38674725eec651",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "role": "master bed (original coral colours)",
+    "name": "Dreamburst bed — original coral",
+    "file": "assets/models/bed_dreamburst.glb",
+    "note": "owner-supplied (Downloads/dreamburst_-_bed.glb), 2026-11-11; full 315k-triangle scan, texture 2048; squared up (the scan sat 17.3° skewed in its file); mattress ≈ 1.80 × 1.80 m → fitted to 6×7 ft in lib.dreamburstBed"
+  },
+  "bed_dreamburst_taupe": {
+    "front": "+x",
+    "author": "Brian Trepanier (https://sketchfab.com/CMBC)",
+    "source": "https://sketchfab.com/3d-models/dreamburst-bed-14e4a9a378b04f5fab38674725eec651",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "role": "master bed (taupe recolour)",
+    "name": "Dreamburst bed — mushroom taupe",
+    "file": "assets/models/bed_dreamburst_taupe.glb",
+    "note": "same model; saturated coral / red / pink texture areas recoloured to mushroom taupe with tools/glb_recolour_hues.py (owner rule: no pink bed), bedding untouched"
+  },
+  "computer_desk_draakon": {
+    "front": "+z",
+    "author": "draakon_4d (https://sketchfab.com/draakon_4d)",
+    "source": "https://sketchfab.com/3d-models/computer-desk-98c5bd86d7bb4ca98dbc26dabb5e7196",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "role": "bedroom 2 desk",
+    "name": "Computer desk — black sit/stand desk",
+    "file": "assets/models/computer_desk_draakon.glb",
+    "note": "owner-supplied (Downloads/computer_desk.glb), 2026-11-11; remote/button panel objects dropped (the kept v1 memory controller sits there), transforms baked, scaled non-uniformly to exactly 1.60 × 0.70 × 0.74 m (owners' desk size), front (control side) = +z; 27 textures → 1024 px."
+  },
+  "bed1_bed01": {
+    "front": "+z",
+    "author": "5th Dimension (https://sketchfab.com/5th-Dimension)",
+    "source": "https://sketchfab.com/3d-models/bed-01-d4f3bf907138447cbdcee83f838228d5",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "role": "bedroom 1 bed",
+    "name": "Bed 01 — platform bed, mattress + pillows + duvet",
+    "file": "assets/models/bed1_bed01.glb",
+    "note": "owner-supplied (Downloads/bed_01.glb), 2026-11-11; kept the low bed base frame (Object_2 parts in front of the headboard frame), duvet (Object_6) and mattress + pillows (Object_8); dropped the four-poster/headboard frame, tall fluted headboard (Object_7), wall sconces, floor strips. tools/glb_extract_bed01.py: transforms baked, scaled to a 1600 × 2000 mattress (IKEA IDANÄS 160×200 in bom.md; frame 1.67 × 2.03 m, frame top 0.39, mattress top 0.58, duvet 0.70, pillows 0.92 above the model's floor), foot = +z. Textures → 1024. Recoloured in layouts/bedroom-1/option1.js with the v1 bed's materials (oiled teak, ivory cotton, cream quilted cotton)."
+  },
+  "bed2_doaa": {
+    "front": "+z",
+    "author": "Doaa Sheha (https://sketchfab.com/doo7)",
+    "source": "https://sketchfab.com/3d-models/bed-a0c4e15f32954c7aba0fa4c632fc10f2",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "role": "bedroom 2 bed",
+    "name": "White storage bed with shelf headboard, white sheets, orange/pink geometric throw + pillows",
+    "file": "assets/models/bed2_doaa.glb",
+    "note": "owner-supplied (Downloads/bed (1).glb = originals/bed2_owner.glb), 2026-11-11; 410k-triangle scan, all 7 objects kept (its layers fill each other's holes — any subset shows holes), NOT decimated; tools/glb_bake_bed2_owner.py bakes the node transforms + cm → m; textures → 1024. Real size: frame 1.60 × 2.24 m (incl. headboard), overall 1.99 × 2.34 × 1.00 m (bedding overhangs ≈ 0.2 m each side). Unlit material replaced by a lit MeshStandardMaterial in layouts/bedroom-2/option1.js."
+  },
+  "lg_monitor_32": {
+    "front": "+x",
+    "author": "gazchad1 (https://sketchfab.com/gazchad1)",
+    "source": "https://sketchfab.com/3d-models/32-inch-lg-monitor-6b77ad8868034241bdb0fabab1df6237",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "role": "bedroom 2 desk monitor",
+    "name": "32-inch LG monitor on its stand",
+    "file": "assets/models/lg_monitor_32.glb",
+    "note": "owner-supplied (Downloads/32_inch_lg_monitor.glb), 2026-11-11; 398 triangles, no textures; tools/glb_bake_transforms.py baked the node transforms (real size 0.72 × 0.49 × 0.18 m, scale 1); screen faces the model +x. Screen material replaced in layouts/bedroom-2/option1.js (dark glossy glass)."
+  },
+  "logitech_keyboard": {
+    "role": "keyboard",
+    "name": "Logitech full-size keyboard (blue backlit legends)",
+    "file": "assets/models/logitech_keyboard.glb",
+    "front": "+z",
+    "author": "Vertex_Bro (https://sketchfab.com/Blend_GUY)",
+    "source": "https://sketchfab.com/3d-models/realistic-logitech-keyboard-1707f4d7e7ee446b957501a854566819",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From originals/realistic_logitech_keyboard.glb: scaled x0.06 to 445x139x19 mm; hidden membrane domes and floor plane dropped; keycaps decimated 0.3 (104.6k -> 49.9k tris); transforms baked, bottom y0, centred. Front +z = space-bar/user side."
+  },
+  "logitech_mouse": {
+    "role": "mouse",
+    "name": "Logitech wireless mouse",
+    "file": "assets/models/logitech_mouse.glb",
+    "front": "+z",
+    "author": "Vertex_Bro (https://sketchfab.com/Blend_GUY)",
+    "source": "https://sketchfab.com/3d-models/realistic-logitech-keyboard-1707f4d7e7ee446b957501a854566819",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "Mouse from the same file: scaled x0.06, 64.5x113x36 mm, 1,772 tris. Its button/wheel end is the file's -z; registered with front '+z' (palm end) so lib.model turns the palm end towards the user and the buttons point to the monitor."
+  },
+  "ps5_dualsense": {
+    "role": "game controller (DualSense)",
+    "name": "DualSense controller (Ps5 by KIARASH 3D)",
+    "file": "assets/models/ps5_dualsense.glb",
+    "front": "+z",
+    "author": "KIARASH 3D (https://sketchfab.com/kiarash8585)",
+    "source": "https://sketchfab.com/3d-models/ps5-f0b4a0131f784059b0b339d2911478f3",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied file (originals/ps5/ps5_owner.glb), 2026-11-11; the file holds ONLY the controller (no console). Lying flat, buttons up, trigger/light-bar edge towards +z, grips towards -z. Processed: transforms baked, mirrored in x (the source had the D-pad on the right), uniform scale to the real 160 mm width (160 x 54 x 101 mm), joined per material (20 meshes), shell decimated 0.3 / large parts 0.5 (223k -> 116k tris, renders identical); light-bar material VRayMtl52 uses KHR_materials_transmission -> swapped for an LED material in lib.dualSense()."
+  },
+  "ikea_markus_chair": {
+    "role": "office chair",
+    "name": "IKEA MARKUS office chair",
+    "file": "assets/models/ikea_markus_chair.glb",
+    "front": "+z",
+    "author": "Graham Rust (https://sketchfab.com/GRXR.ca)",
+    "source": "https://sketchfab.com/3d-models/ikea-markus-office-chair-cee12c29ebda4bcdb91b84a6f126a971",
+    "license": "Sketchfab Standard licence (owner download) — personal visualisation use, do not redistribute",
+    "note": "owner-supplied (Downloads/ikea_markus_office_chair.glb), 2026-11-11; cm → metres (real size 0.69 × 0.68 × 1.17 m), transforms baked (tools/glb_fit_box.py), textures ≤ 1024; backrest at −z, seat faces +z"
+  },
+  "laptop_stand_wood": {
+    "role": "laptop stand",
+    "name": "Wooden laptop riser stand",
+    "file": "assets/models/laptop_stand_wood.glb",
+    "front": "+z",
+    "author": "nurlumustafa (https://sketchfab.com/nurlumustafa)",
+    "source": "https://sketchfab.com/3d-models/wood-laptop-stand-b59d3694f91f4e71825e7d9b34d03cb6",
+    "license": "CC BY-NC 4.0 (non-commercial only; credit the author)",
+    "note": "owner-supplied (wood_laptop_stand.glb), 2026-11-11; 1.7k tris, one 'Pine' material (re-coloured to walnut in code). Inclined riser: two side brackets with a front lip + a cross dowel (not a vertical dock). Mesh units cm → real size 0.27 W × 0.254 D × 0.172 H m; transforms baked, lip/front → +z (tools/glb_laptop_stand_wood.py). Top edge: straight 22.0° incline from (depth 0.019, h 0.172) to the lip at depth ≈ 0.233, h 0.087."
+  },
+  "macbook_pro_14": {
+    "role": "laptop (closed)",
+    "name": "MacBook Pro 14-inch M5 (closed)",
+    "file": "assets/models/macbook_pro_14_closed.glb",
+    "front": "+z",
+    "author": "Apple User (https://sketchfab.com/apple-user)",
+    "source": "https://sketchfab.com/3d-models/macbook-pro-14-inch-m5-652a992f4f244122ae251f9cbb81da1e",
+    "license": "Sketchfab Standard licence (owner download) — personal visualisation use, do not redistribute",
+    "note": "owner-supplied (macbook_pro_14-inch_m5.glb), 2026-11-11; 164k tris, 28 materials, modelled OPEN at 110°. tools/glb_close_macbook_lid.py bakes transforms and rotates the 14 lid meshes 110° about the hinge (display parts measured exactly 70° from horizontal), front edge flush with the base, lid panel 0.3 mm over the base, screen facing down; closed 0.312 × 0.221 × 0.0175 m (incl. feet; real 312.6 × 221.2 × 15.5); textures → ≤ 1024; trackpad/front edge → +z."
+  },
+  "bedside_table_wood": {
+    "role": "bedroom 1 bedside tables",
+    "name": "Wooden bedside table — 3-drawer spruce nightstand",
+    "file": "assets/models/bedside_table_wood.glb",
+    "front": "+z",
+    "author": "Manuel López (https://sketchfab.com/manuelopez)",
+    "source": "https://sketchfab.com/3d-models/wooden-bedside-table-8e10ba17b07a4244b2b68c3263427917",
+    "license": "CC BY 4.0 — credit the author (http://creativecommons.org/licenses/by/4.0/)",
+    "note": "owner-supplied (originals/wooden_bedside_table.glb), 2026-11-11. The file has its 3 drawers pulled out → tools/glb_close_bedside_drawers.py slides them shut (fronts flush with the carcass), then tools/glb_fit_box.py bakes transforms and fits 0.42 × 0.395 × 0.59 m (incl. pulls; natural 0.50 × 0.50 × 0.56), textures ≤ 1024. Static (drawers not movers). Placed in layouts/bedroom-1/option1.js at both v1 nightstand boxes, scaled per table."
+  },
+  "pc_tower": {
+    "role": "pc",
+    "name": "Open-frame water-cooled gaming PC (RTX 2080 Ti, 360 rad)",
+    "file": "assets/models/pc_tower.glb",
+    "front": "+z",
+    "author": "Daniel Cardona (https://sketchfab.com/DanielCardonaArt)",
+    "source": "https://sketchfab.com/3d-models/dream-computer-setup-82f78bbaf2d34f01af854a52151dbf49",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From dream_computer_setup.glb: the whole file is the PC (open-frame showcase chassis). Scaled x0.0332 to 591 W x 650 H x 349 D mm; transforms baked, meshes joined per material, bottom y 0, centred. Glass showcase face = +z, front I/O + power on +x. 211k tris."
+  },
+  "outdoor_chair_wicker": {
+    "role": "outdoor armchair",
+    "name": "Wicker outdoor armchair with grey cushions (photogrammetry scan)",
+    "file": "assets/models/outdoor_chair_wicker.glb",
+    "front": "+z",
+    "author": "EFX (https://sketchfab.com/evan4129)",
+    "source": "https://sketchfab.com/3d-models/outdoor-chair-scan-medpoly-7e6a2bd7e4f7459c9c799f3733545b8c",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From outdoor_chair_scan_medpoly.glb ('Outdoor Chair Scan MEDPOLY'): woven resin-wicker armchair, seat + back cushions, 4 dark metal legs (2 meshes, 15.7k tris, NOT decimated). Node transforms baked, squared up 2.5 deg (tools/glb_square_up.py); textures already 1024 (re-encoded JPEG). File size 0.53 W x 0.59 D x 0.60 H m (scan is under real size: seat 0.30, arms 0.42) -> scaled uniformly per placement in code. Front (open seat) = +z (verified top-down)."
+  },
+  "balcony_bench_seat": {
+    "role": "backless outdoor bench seat (built-in banquette module)",
+    "name": "Backless timber bench with green quilted cushion",
+    "file": "assets/models/balcony_bench_seat.glb",
+    "front": "+z",
+    "author": "draakon_4d (https://sketchfab.com/draakon_4d)",
+    "source": "https://sketchfab.com/3d-models/furniture-outdoor-and-coffee-table-32d125dd9abb40b0b3a50e89931eae09",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From furniture_outdoor_and_coffee_table.glb ('Furniture outdoor and coffee table'): only the sit_bench_1_4 seat = plank base box (sit_bench_a) + top board (sit_bench_b) + quilted cushion (sit_bench_leather); backrest board (sit_bench_c), both tables, bar stool and folding chair dropped (tools/glb_extract_bench_seat.py). Transforms baked, origin = floor / back-face centre, front +z; not decimated (4.3k tris); textures already 1024. Real size 2.398 W x 0.591 D x 0.548 H (cushion top) -> repeated / scaled per run in layouts/master-balcony/option1.js."
+  },
+  "utility_sink_copper": {
+    "role": "utility wash sink (vessel basin + deck pillar tap)",
+    "name": "Square copper vessel sink with pillar tap",
+    "file": "assets/models/utility_sink_copper.glb",
+    "front": "+x",
+    "author": "Gerend (https://sketchfab.com/Gerend)",
+    "source": "https://sketchfab.com/3d-models/sink-ed16b45797d745d2bd588779a74f91ae",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From originals/utility_sink/sink_owner.glb ('Sink'): 2 meshes (basin tray Object_6 + pillar tap Object_4), 618 tris, one copper-brown 1024 texture. Unit-less file -> transforms baked at x0.0127 (tools/glb_bake_transforms.py): basin 0.551 x 0.550 m outer, 0.122 m deep, tap 0.097 m above the rim on the back rim; tap side = back, front +x. Utility option1 (layouts/utility/option1.js) sets metalness 0.5 / roughness 0.35 (copper read)."
+  },
+  "washer_tower": {
+    "role": "stacked laundry tower (front-load washer + stacking shelf + wall cupboard in a light-wood frame)",
+    "name": "Laundry tower: front-load washer, stacking shelf, white two-door cupboard, light-wood side frame",
+    "file": "assets/models/washer_tower.glb",
+    "front": "+z",
+    "author": "MrdT (https://sketchfab.com/mrdt.club)",
+    "source": "https://sketchfab.com/3d-models/front-loading-washerdryer-show-2bd20c954ba3479d853965651830bc85",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From originals/utility_laundry/front-loading_washerdryer_show.glb (a showroom of ~12 machines, people, signs; inch units): only the owner's tower section (Blender box x 256-286.5, y -177.5..-145.5 in) kept face by face; the stacked dryer (faces centred in z 35.9-70 in, except the wood frame) dropped (tools/glb_extract_washer_tower.py), then x0.0254 baked (tools/glb_bake_transforms.py). 0.678 W x 0.657 D x 2.596 H m; washer 0.595 W, stacking shelf top 0.909 m, empty slot 0.625 W x 0.88 H up to the cupboard (bottom 1.79 m). Not decimated (22.6k tris). Washer door is merged with the body by material -> static."
+  },
+  "dishwasher_compact": {
+    "role": "dishwasher (free-standing)",
+    "name": "Dishwasher (compact, scaled to 0.60 m wide)",
+    "file": "assets/models/dishwasher_compact.glb",
+    "front": "+z",
+    "author": "misha.yast71 (https://sketchfab.com/misha.yast71)",
+    "source": "https://sketchfab.com/3d-models/dishwasher-f52b015abe1c473e8fddb704b7f031b8",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From originals/utility_laundry/dishwasher.glb: 2 meshes (body + control panel), 1328 tris, 5 small textures. Unit-less -> baked x0.04107 (tools/glb_bake_transforms.py) so it is 0.600 W x 0.558 D x 0.761 H (the file's own proportions are compact; scaled to the 0.60 m standard width because the tower slot is 0.625 W x 0.88 H). Door not a separate mesh -> static. Stands in the washer tower's dryer slot (layouts/utility/option1.js)."
+  },
+  "sink_cabinet_a": {
+    "role": "bathroom vanity (floor-standing sink cabinet, integrated basin top + black tap)",
+    "name": "Sink cabinet A (IKEA-ish, 2 drawers)",
+    "file": "assets/models/sink_cabinet_a.glb",
+    "front": "+z",
+    "author": "cirno (https://sketchfab.com/cirnoB)",
+    "source": "https://sketchfab.com/3d-models/sink-cabinet-a-3d4824436000452f9d31f5a77fa43e0b",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From originals/sink_cabinet_a/sink_cabinet_a.glb (two Sketchfab animation frames: frame_0 = light grey-blue integrated top + black tap + soap dish / toothbrush cup, bottom drawer open; frame_1 = marble top + vessel, top drawer open, scaled 1e-10). Kept frame_0; bottom drawer closed with frame_1's vertex positions (same 636-vertex mesh); split into nodes carcass / drawer_top / drawer_bottom (incl. its towels) / top / props; transforms baked (x1.0526), re-origined (floor, back-face centre, front +z). Real size 0.874 W x 0.512 D x 1.002 H (tap), counter/basin rim 0.858, legs to the floor. 1039 tris, not decimated, textures <= 1024 (tools/glb_sink_cabinet_a.py + glb_repack_textures.py). Master toilet option1 every style."
+  },
+  "mirror_faceted_round": {
+    "role": "bathroom wall mirror (round, faceted black frame with copper-tone inlays)",
+    "name": "Modern round wall mirror (espejo moderno)",
+    "file": "assets/models/mirror_faceted_round.glb",
+    "front": "+z",
+    "author": "ocelotlmx (https://sketchfab.com/ocelotlmx)",
+    "source": "https://sketchfab.com/3d-models/mirror-espejo-moderno-modern-wall-mirror-dc096d3f8d58405c9d2c4512163e972d",
+    "license": "CC BY 4.0 — credit the author",
+    "note": "From originals/master_mirror/mirror_espejo_moderno_modern_wall_mirror.glb: 3 meshes (frame, glass, inlay), 12.2k tris, no backlight. Rotated so the face is +z, transforms baked (tools/glb_mirror_face_z.py + glb_repack_textures.py), re-origined (bottom, back-face centre). Real size 0.80 diameter x 0.06 deep, glass disc 0.544 diameter recessed 15 mm from the back. Glass material replaced in code by a reflective MeshPhysicalMaterial. Master toilet option1 every style."
+  }
+}

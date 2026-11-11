@@ -1,0 +1,494 @@
+{
+ "01 Warm ivory lime plaster": {
+  "tile": 1.5,
+  "col": "01_Warm_ivory_lime_plaster_col.jpg",
+  "rgh": "01_Warm_ivory_lime_plaster_rgh.jpg",
+  "rough_mean": 0.8313724994659424,
+  "nrm": "01_Warm_ivory_lime_plaster_nrm.jpg",
+  "avg": [
+   0.8353,
+   0.8079,
+   0.7451
+  ]
+ },
+ "02 Oiled teak - directional grain": {
+  "tile": 1.5,
+  "col": "02_Oiled_teak___directional_grain_col.jpg",
+  "rgh": "02_Oiled_teak___directional_grain_rgh.jpg",
+  "rough_mean": 0.43137261271476746,
+  "nrm": "02_Oiled_teak___directional_grain_nrm.jpg",
+  "avg": [
+   0.5532,
+   0.4549,
+   0.3613
+  ]
+ },
+ "03 Honed beige limestone": {
+  "tile": 1.5,
+  "col": "03_Honed_beige_limestone_col.jpg",
+  "rgh": "03_Honed_beige_limestone_rgh.jpg",
+  "rough_mean": 0.541176438331604,
+  "nrm": "03_Honed_beige_limestone_nrm.jpg",
+  "avg": [
+   0.7412,
+   0.698,
+   0.6274
+  ]
+ },
+ "04 Natural linen upholstery": {
+  "tile": 1.5,
+  "col": "04_Natural_linen_upholstery_col.jpg",
+  "rgh": "04_Natural_linen_upholstery_rgh.jpg",
+  "rough_mean": 0.9215688109397888,
+  "nrm": "04_Natural_linen_upholstery_nrm.jpg",
+  "avg": [
+   0.8274,
+   0.7804,
+   0.6941
+  ]
+ },
+ "Approved B1 cream quilted cotton": {
+  "tile": 1.5,
+  "col": "Approved_B1_cream_quilted_cotton_col.jpg",
+  "rgh": "Approved_B1_cream_quilted_cotton_rgh.jpg",
+  "rough_mean": 0.9490194916725159,
+  "nrm": "Approved_B1_cream_quilted_cotton_nrm.jpg",
+  "avg": [
+   0.8941,
+   0.8784,
+   0.8314
+  ]
+ },
+ "Approved B1 sage cotton": {
+  "tile": 1.5,
+  "col": "Approved_B1_sage_cotton_col.jpg",
+  "rgh": "Approved_B1_sage_cotton_rgh.jpg",
+  "rough_mean": 0.9215688109397888,
+  "nrm": "Approved_B1_sage_cotton_nrm.jpg",
+  "avg": [
+   0.6274,
+   0.6588,
+   0.5647
+  ]
+ },
+ "Approved dining cream boucle": {
+  "tile": 1.5,
+  "col": "Approved_dining_cream_boucle_col.jpg",
+  "rgh": "Approved_dining_cream_boucle_rgh.jpg",
+  "rough_mean": 0.9490194916725159,
+  "nrm": "Approved_dining_cream_boucle_nrm.jpg",
+  "avg": [
+   0.8902,
+   0.8588,
+   0.8079
+  ]
+ },
+ "Approved H1 beige wool rug": {
+  "tile": 1.5,
+  "col": "Approved_H1_beige_wool_rug_col.jpg",
+  "rgh": "Approved_H1_beige_wool_rug_rgh.jpg",
+  "rough_mean": 1.0,
+  "nrm": "Approved_H1_beige_wool_rug_nrm.jpg",
+  "avg": [
+   0.8039,
+   0.7529,
+   0.6784
+  ]
+ },
+ "Approved H1 cream curved field": {
+  "tile": 1.5,
+  "col": "Approved_H1_cream_curved_field_col.jpg",
+  "rgh": "Approved_H1_cream_curved_field_rgh.jpg",
+  "rough_mean": 0.8784313797950745,
+  "nrm": "Approved_H1_cream_curved_field_nrm.jpg",
+  "avg": [
+   0.898,
+   0.8706,
+   0.8079
+  ]
+ },
+ "Approved H1 cream sectional upholstery": {
+  "tile": 1.5,
+  "col": "Approved_H1_cream_sectional_upholstery_col.jpg",
+  "rgh": "Approved_H1_cream_sectional_upholstery_rgh.jpg",
+  "rough_mean": 0.9294118285179138,
+  "nrm": "Approved_H1_cream_sectional_upholstery_nrm.jpg",
+  "avg": [
+   0.898,
+   0.8667,
+   0.8157
+  ]
+ },
+ "Approved H1 pale oak veneer": {
+  "tile": 1.5,
+  "col": "Approved_H1_pale_oak_veneer_col.jpg",
+  "rgh": "Approved_H1_pale_oak_veneer_rgh.jpg",
+  "rough_mean": 0.501960813999176,
+  "nrm": "Approved_H1_pale_oak_veneer_nrm.jpg",
+  "avg": [
+   0.7122,
+   0.6062,
+   0.4894
+  ]
+ },
+ "Approved H1 warm beige wall": {
+  "tile": 1.5,
+  "col": "Approved_H1_warm_beige_wall_col.jpg",
+  "rgh": "Approved_H1_warm_beige_wall_rgh.jpg",
+  "rough_mean": 0.9019606113433838,
+  "nrm": "Approved_H1_warm_beige_wall_nrm.jpg",
+  "avg": [
+   0.8628,
+   0.8039,
+   0.7216
+  ]
+ },
+ "Approved H2 grey microcement": {
+  "tile": 1.5,
+  "col": "Approved_H2_grey_microcement_col.jpg",
+  "rgh": "Approved_H2_grey_microcement_rgh.jpg",
+  "rough_mean": 0.839215874671936,
+  "nrm": "Approved_H2_grey_microcement_nrm.jpg",
+  "avg": [
+   0.7019,
+   0.6902,
+   0.6706
+  ]
+ },
+ "Approved H2 soft cream wall": {
+  "tile": 1.5,
+  "col": "Approved_H2_soft_cream_wall_col.jpg",
+  "rgh": "Approved_H2_soft_cream_wall_rgh.jpg",
+  "rough_mean": 0.8588237166404724,
+  "nrm": "Approved_H2_soft_cream_wall_nrm.jpg",
+  "avg": [
+   0.8823,
+   0.851,
+   0.8
+  ]
+ },
+ "Approved H2 taupe linen drape": {
+  "tile": 1.5,
+  "col": "Approved_H2_taupe_linen_drape_col.jpg",
+  "rgh": "Approved_H2_taupe_linen_drape_rgh.jpg",
+  "rough_mean": 0.9490194916725159,
+  "nrm": "Approved_H2_taupe_linen_drape_nrm.jpg",
+  "avg": [
+   0.698,
+   0.6314,
+   0.553
+  ]
+ },
+ "Approved mid walnut veneer": {
+  "tile": 1.5,
+  "col": "Approved_mid_walnut_veneer_col.jpg",
+  "rgh": "Approved_mid_walnut_veneer_rgh.jpg",
+  "rough_mean": 0.419607937335968,
+  "nrm": "Approved_mid_walnut_veneer_nrm.jpg",
+  "avg": [
+   0.5285,
+   0.366,
+   0.2405
+  ]
+ },
+ "Approved natural cane weave": {
+  "tile": 1.5,
+  "col": "Approved_natural_cane_weave_col.jpg",
+  "rgh": "Approved_natural_cane_weave_rgh.jpg",
+  "rough_mean": 0.8000001311302185,
+  "nrm": "Approved_natural_cane_weave_nrm.jpg",
+  "avg": [
+   0.7568,
+   0.6588,
+   0.502
+  ]
+ },
+ "Balcony stone tone 0": {
+  "tile": 1.5,
+  "col": "Balcony_stone_tone_0_col.jpg",
+  "rgh": "Balcony_stone_tone_0_rgh.jpg",
+  "rough_mean": 0.7607842683792114,
+  "nrm": "Balcony_stone_tone_0_nrm.jpg",
+  "avg": [
+   0.5843,
+   0.553,
+   0.502
+  ]
+ },
+ "Balcony stone tone 1": {
+  "tile": 1.5,
+  "col": "Balcony_stone_tone_1_col.jpg",
+  "rgh": "Balcony_stone_tone_1_rgh.jpg",
+  "rough_mean": 0.7607842683792114,
+  "nrm": "Balcony_stone_tone_1_nrm.jpg",
+  "avg": [
+   0.6039,
+   0.5725,
+   0.5216
+  ]
+ },
+ "Balcony stone tone 2": {
+  "tile": 1.5,
+  "col": "Balcony_stone_tone_2_col.jpg",
+  "rgh": "Balcony_stone_tone_2_rgh.jpg",
+  "rough_mean": 0.7607842683792114,
+  "nrm": "Balcony_stone_tone_2_nrm.jpg",
+  "avg": [
+   0.6235,
+   0.5921,
+   0.5412
+  ]
+ },
+ "Balcony stone tone 3": {
+  "tile": 1.5,
+  "col": "Balcony_stone_tone_3_col.jpg",
+  "rgh": "Balcony_stone_tone_3_rgh.jpg",
+  "rough_mean": 0.7607842683792114,
+  "nrm": "Balcony_stone_tone_3_nrm.jpg",
+  "avg": [
+   0.6431,
+   0.6078,
+   0.549
+  ]
+ },
+ "Balcony stone tone 4": {
+  "tile": 1.5,
+  "col": "Balcony_stone_tone_4_col.jpg",
+  "rgh": "Balcony_stone_tone_4_rgh.jpg",
+  "rough_mean": 0.7607842683792114,
+  "nrm": "Balcony_stone_tone_4_nrm.jpg",
+  "avg": [
+   0.6588,
+   0.6314,
+   0.5686
+  ]
+ },
+ "Balcony stone tone 5": {
+  "tile": 1.5,
+  "col": "Balcony_stone_tone_5_col.jpg",
+  "rgh": "Balcony_stone_tone_5_rgh.jpg",
+  "rough_mean": 0.7607842683792114,
+  "nrm": "Balcony_stone_tone_5_nrm.jpg",
+  "avg": [
+   0.6745,
+   0.647,
+   0.5843
+  ]
+ },
+ "Bath warm greige stone": {
+  "tile": 1.5,
+  "col": "Bath_warm_greige_stone_col.jpg",
+  "rgh": "Bath_warm_greige_stone_rgh.jpg",
+  "rough_mean": 0.5686274170875549,
+  "nrm": "Bath_warm_greige_stone_nrm.jpg",
+  "avg": [
+   0.6549,
+   0.6314,
+   0.5843
+  ]
+ },
+ "Cream quartz with subtle mineral texture": {
+  "tile": 1.5,
+  "col": "Cream_quartz_with_subtle_mineral_texture_col.jpg",
+  "rgh": "Cream_quartz_with_subtle_mineral_texture_rgh.jpg",
+  "rough_mean": 0.27843138575553894,
+  "nrm": "Cream_quartz_with_subtle_mineral_texture_nrm.jpg",
+  "avg": [
+   0.8588,
+   0.8353,
+   0.7804
+  ]
+ },
+ "Dark walnut": {
+  "tile": 1.5,
+  "col": "Dark_walnut_col.jpg",
+  "rgh": "Dark_walnut_rgh.jpg",
+  "rough_mean": 0.43137261271476746,
+  "nrm": "Dark_walnut_nrm.jpg",
+  "avg": [
+   0.43,
+   0.3467,
+   0.2726
+  ]
+ },
+ "Handwoven jute": {
+  "tile": 1.5,
+  "col": "Handwoven_jute_col.jpg",
+  "rgh": "Handwoven_jute_rgh.jpg",
+  "rough_mean": 1.0,
+  "nrm": "Handwoven_jute_nrm.jpg",
+  "avg": [
+   0.698,
+   0.6039,
+   0.4706
+  ]
+ },
+ "Indigo cotton": {
+  "tile": 1.5,
+  "col": "Indigo_cotton_col.jpg",
+  "rgh": "Indigo_cotton_rgh.jpg",
+  "rough_mean": 0.9019606113433838,
+  "nrm": "Indigo_cotton_nrm.jpg",
+  "avg": [
+   0.2628,
+   0.3765,
+   0.447
+  ]
+ },
+ "Ivory cotton": {
+  "tile": 1.5,
+  "col": "Ivory_cotton_col.jpg",
+  "rgh": "Ivory_cotton_rgh.jpg",
+  "rough_mean": 0.8784313797950745,
+  "nrm": "Ivory_cotton_nrm.jpg",
+  "avg": [
+   0.898,
+   0.8745,
+   0.8196
+  ]
+ },
+ "Light natural timber": {
+  "tile": 1.5,
+  "col": "Light_natural_timber_col.jpg",
+  "rgh": "Light_natural_timber_rgh.jpg",
+  "rough_mean": 0.43137261271476746,
+  "nrm": "Light_natural_timber_nrm.jpg",
+  "avg": [
+   0.6696,
+   0.577,
+   0.4827
+  ]
+ },
+ "Master warm organic patterned mineral panel": {
+  "tile": 1.5,
+  "col": "Master_warm_organic_patterned_mineral_panel_col.jpg",
+  "rgh": "Master_warm_organic_patterned_mineral_panel_rgh.jpg",
+  "rough_mean": 0.7411765456199646,
+  "nrm": "Master_warm_organic_patterned_mineral_panel_nrm.jpg",
+  "avg": [
+   0.4091,
+   0.3766,
+   0.3277
+  ]
+ },
+ "Master warm split stone tone 0": {
+  "tile": 1.5,
+  "col": "Master_warm_split_stone_tone_0_col.jpg",
+  "rgh": "Master_warm_split_stone_tone_0_rgh.jpg",
+  "rough_mean": 0.7803923487663269,
+  "nrm": "Master_warm_split_stone_tone_0_nrm.jpg",
+  "avg": [
+   0.4745,
+   0.4235,
+   0.3569
+  ]
+ },
+ "Master warm split stone tone 1": {
+  "tile": 1.5,
+  "col": "Master_warm_split_stone_tone_1_col.jpg",
+  "rgh": "Master_warm_split_stone_tone_1_rgh.jpg",
+  "rough_mean": 0.7803923487663269,
+  "nrm": "Master_warm_split_stone_tone_1_nrm.jpg",
+  "avg": [
+   0.4941,
+   0.4431,
+   0.3765
+  ]
+ },
+ "Master warm split stone tone 2": {
+  "tile": 1.5,
+  "col": "Master_warm_split_stone_tone_2_col.jpg",
+  "rgh": "Master_warm_split_stone_tone_2_rgh.jpg",
+  "rough_mean": 0.7803923487663269,
+  "nrm": "Master_warm_split_stone_tone_2_nrm.jpg",
+  "avg": [
+   0.5098,
+   0.4588,
+   0.3922
+  ]
+ },
+ "Master warm split stone tone 3": {
+  "tile": 1.5,
+  "col": "Master_warm_split_stone_tone_3_col.jpg",
+  "rgh": "Master_warm_split_stone_tone_3_rgh.jpg",
+  "rough_mean": 0.7803923487663269,
+  "nrm": "Master_warm_split_stone_tone_3_nrm.jpg",
+  "avg": [
+   0.5372,
+   0.4745,
+   0.4118
+  ]
+ },
+ "Master warm split stone tone 4": {
+  "tile": 1.5,
+  "col": "Master_warm_split_stone_tone_4_col.jpg",
+  "rgh": "Master_warm_split_stone_tone_4_rgh.jpg",
+  "rough_mean": 0.7803923487663269,
+  "nrm": "Master_warm_split_stone_tone_4_nrm.jpg",
+  "avg": [
+   0.553,
+   0.4902,
+   0.4275
+  ]
+ },
+ "Muted olive green textile": {
+  "tile": 1.5,
+  "col": "Muted_olive_green_textile_col.jpg",
+  "rgh": "Muted_olive_green_textile_rgh.jpg",
+  "rough_mean": 0.9019606113433838,
+  "nrm": "Muted_olive_green_textile_nrm.jpg",
+  "avg": [
+   0.4784,
+   0.5372,
+   0.447
+  ]
+ },
+ "Muted rose textile": {
+  "tile": 1.5,
+  "col": "Muted_rose_textile_col.jpg",
+  "rgh": "Muted_rose_textile_rgh.jpg",
+  "rough_mean": 0.8705883026123047,
+  "nrm": "Muted_rose_textile_nrm.jpg",
+  "avg": [
+   0.6784,
+   0.5216,
+   0.4823
+  ]
+ },
+ "Smoked walnut - master feature wall": {
+  "tile": 1.5,
+  "col": "Smoked_walnut___master_feature_wall_col.jpg",
+  "rgh": "Smoked_walnut___master_feature_wall_rgh.jpg",
+  "rough_mean": 0.43137261271476746,
+  "nrm": "Smoked_walnut___master_feature_wall_nrm.jpg",
+  "avg": [
+   0.5037,
+   0.4072,
+   0.3177
+  ]
+ },
+ "Terracotta handloom": {
+  "tile": 1.5,
+  "col": "Terracotta_handloom_col.jpg",
+  "rgh": "Terracotta_handloom_rgh.jpg",
+  "rough_mean": 0.9411764740943909,
+  "nrm": "Terracotta_handloom_nrm.jpg",
+  "avg": [
+   0.6588,
+   0.4118,
+   0.2902
+  ]
+ },
+ "Vestibule charcoal plaster": {
+  "tile": 1.5,
+  "col": "Vestibule_charcoal_plaster_col.jpg",
+  "rgh": "Vestibule_charcoal_plaster_rgh.jpg",
+  "rough_mean": 0.9019606113433838,
+  "nrm": "Vestibule_charcoal_plaster_nrm.jpg",
+  "avg": [
+   0.2902,
+   0.3255,
+   0.3137
+  ]
+ }
+}

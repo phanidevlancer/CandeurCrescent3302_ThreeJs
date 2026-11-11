@@ -1,0 +1,145 @@
+{
+ "american_walnut_veneer": {
+  "files": {
+   "diff": "assets/polyhaven/american_walnut_veneer/diff.jpg",
+   "nor": "assets/polyhaven/american_walnut_veneer/nor.jpg",
+   "rough": "assets/polyhaven/american_walnut_veneer/rough.jpg"
+  },
+  "size_m": 1.0,
+  "avg": [
+   0.4486,
+   0.4324,
+   0.4132
+  ]
+ },
+ "teak_veneer": {
+  "files": {
+   "diff": "assets/polyhaven/teak_veneer/diff.jpg",
+   "nor": "assets/polyhaven/teak_veneer/nor.jpg",
+   "rough": "assets/polyhaven/teak_veneer/rough.jpg"
+  },
+  "size_m": 1.0,
+  "avg": [
+   0.6881,
+   0.5095,
+   0.3398
+  ]
+ },
+ "smoked_walnut_veneer": {
+  "files": {
+   "diff": "assets/polyhaven/smoked_walnut_veneer/diff.jpg",
+   "nor": "assets/polyhaven/smoked_walnut_veneer/nor.jpg",
+   "rough": "assets/polyhaven/smoked_walnut_veneer/rough.jpg"
+  },
+  "size_m": 1.0,
+  "avg": [
+   0.7311,
+   0.6026,
+   0.4933
+  ]
+ },
+ "oak_veneer_01": {
+  "files": {
+   "diff": "assets/polyhaven/oak_veneer_01/diff.jpg",
+   "nor": "assets/polyhaven/oak_veneer_01/nor.jpg",
+   "rough": "assets/polyhaven/oak_veneer_01/rough.jpg"
+  },
+  "size_m": 1.83,
+  "avg": [
+   0.6323,
+   0.4944,
+   0.3427
+  ]
+ },
+ "curly_teddy_natural": {
+  "files": {
+   "diff": "assets/polyhaven/curly_teddy_natural/diff.jpg",
+   "nor": "assets/polyhaven/curly_teddy_natural/nor.jpg",
+   "rough": "assets/polyhaven/curly_teddy_natural/rough.jpg"
+  },
+  "size_m": 0.3358,
+  "avg": [
+   0.9132,
+   0.8255,
+   0.7338
+  ]
+ },
+ "rough_linen": {
+  "files": {
+   "diff": "assets/polyhaven/rough_linen/diff.jpg",
+   "nor": "assets/polyhaven/rough_linen/nor.jpg",
+   "rough": "assets/polyhaven/rough_linen/rough.jpg"
+  },
+  "size_m": 0.2707,
+  "avg": [
+   0.5698,
+   0.6708,
+   0.8054
+  ]
+ },
+ "poly_wool_herringbone": {
+  "files": {
+   "diff": "assets/polyhaven/poly_wool_herringbone/diff.jpg",
+   "nor": "assets/polyhaven/poly_wool_herringbone/nor.jpg",
+   "rough": "assets/polyhaven/poly_wool_herringbone/rough.jpg"
+  },
+  "size_m": 0.2701,
+  "avg": [
+   0.4744,
+   0.4601,
+   0.4425
+  ]
+ },
+ "scuba_suede": {
+  "files": {
+   "diff": "assets/polyhaven/scuba_suede/diff.jpg",
+   "nor": "assets/polyhaven/scuba_suede/nor.jpg",
+   "rough": "assets/polyhaven/scuba_suede/rough.jpg"
+  },
+  "size_m": 0.2852,
+  "avg": [
+   0.0717,
+   0.3715,
+   0.4229
+  ]
+ },
+ "leather_white": {
+  "files": {
+   "diff": "assets/polyhaven/leather_white/diff.jpg",
+   "nor": "assets/polyhaven/leather_white/nor.jpg",
+   "rough": "assets/polyhaven/leather_white/rough.jpg"
+  },
+  "size_m": 0.3,
+  "avg": [
+   0.5866,
+   0.5746,
+   0.5009
+  ]
+ },
+ "hessian_230": {
+  "files": {
+   "diff": "assets/polyhaven/hessian_230/diff.jpg",
+   "nor": "assets/polyhaven/hessian_230/nor.jpg",
+   "rough": "assets/polyhaven/hessian_230/rough.jpg"
+  },
+  "size_m": 0.2688,
+  "avg": [
+   0.5499,
+   0.4707,
+   0.3497
+  ]
+ },
+ "plastered_wall": {
+  "files": {
+   "diff": "assets/polyhaven/plastered_wall/diff.jpg",
+   "nor": "assets/polyhaven/plastered_wall/nor.jpg",
+   "rough": "assets/polyhaven/plastered_wall/rough.jpg"
+  },
+  "size_m": 2.0,
+  "avg": [
+   0.691,
+   0.6589,
+   0.6134
+  ]
+ }
+}
