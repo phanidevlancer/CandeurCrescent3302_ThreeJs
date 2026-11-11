@@ -2554,6 +2554,124 @@ export function makeLib(mat, getModel = () => null) {
     }
     return { obj: root, moods };
   }
+  /* ================= Sliding wardrobe, full carcass + interior (owner 2026-11-11, references/bedroom-2/2026-11-11_sliding-wardrobe-sage-gloss.png) =================
+     style 'sage-gloss': pale-oak carcass + top, slim pale-gold top track, recessed sage plinth, two bypass sliders in high-gloss sage
+     lacquer, each split into four panels by thin oak-brass inlay lines (same heights on both doors), long oak-brass bar pulls on the
+     outer edges. Interior: left bay = two shelves of folded clothes, shirt rail, 5-drawer stack over a shoe tier; right bay = shelves +
+     long-hang rail (dresses, coats) over a shoe tier; warm LED under the first shelf of each bay.
+     Local frame: origin = floor, centre of the back face, +x along the wall, +z = front. y 0 = finished floor.
+     W, D = carcass width / depth; top = carcass top (under a bulkhead); ceil + fasZ = optional closed header from top up to the ceiling
+     over the front part (local z > fasZ) where the ceiling is higher than the bulkhead. */
+  function slidingWardrobe({ style = 'sage-gloss', W = 2.4, D = 0.69, top = 2.85, ceil = 0, fasZ = 0.24 } = {}) {
+    const root = g(), moods = { strips: [], halos: [] };
+    const P = o => new THREE.MeshPhysicalMaterial(o);
+    // pale maple / light natural oak like the reference (the photo 'pale oak' veneer rendered too brown): soft low-contrast grain
+    let gs = 7; const grnd = () => (gs = (gs * 9301 + 49297) % 233280) / 233280;
+    const mapleTex = canvasTex(256, 512, (x, w, h) => { x.fillStyle = '#dcc597'; x.fillRect(0, 0, w, h);
+      for (let k = 0; k < 120; k++) { let cx = grnd() * w; x.strokeStyle = grnd() < 0.6 ? `rgba(170,130,80,${(0.04 + grnd() * 0.1).toFixed(2)})` : `rgba(245,228,190,${(0.08 + grnd() * 0.14).toFixed(2)})`;
+        x.lineWidth = 0.6 + grnd() * 2.2; x.beginPath(); x.moveTo(cx, 0); for (let y = 0; y <= h; y += 32) { cx += (grnd() - 0.5) * 5; x.lineTo(cx, y); } x.stroke(); } });
+    const MAPLE = new THREE.MeshPhysicalMaterial({ map: mapleTex, roughness: 0.48, clearcoat: 0.25, clearcoatRoughness: 0.4, name: '__wardrobe_pale_maple' });
+    const OAKP = () => MAPLE;
+    const SAGEG = P({ color: 0x94a28e, roughness: 0.1, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.04, name: '__wardrobe_sage_gloss' });
+    const SAGEM = P({ color: 0x8a9884, roughness: 0.6, name: '__wardrobe_sage_plinth' });
+    const INLAY = P({ color: 0xd8b880, roughness: 0.32, metalness: 0.45, name: '__oak_brass_inlay' });
+    const TRACK = P({ color: 0xc8b48c, roughness: 0.35, metalness: 0.6, name: '__wardrobe_track' });
+    const GROOVE = P({ color: 0x5a4a35, roughness: 0.7, name: '__drawer_groove' });
+    const t = 0.025, Wi = W - 2 * t, zc = D - 0.085, base = 0.105, inTop = top - t, sd = zc - 0.009;
+    // ---- carcass: sides, top, back, divider, base on a recessed sage plinth
+    for (const sx of [-1, 1]) root.add(box(t, top, D, OAKP, sx * (W / 2 - t / 2), 0, 0));
+    root.add(box(W, t, D, OAKP, 0, inTop, 0));
+    root.add(box(Wi, 0.08, D - 0.05, SAGEM, 0, 0, 0));
+    root.add(box(Wi, base - 0.08, D, OAKP, 0, 0.08, 0));
+    root.add(box(Wi, inTop - base, 0.009, OAKP, 0, base, 0));
+    root.add(box(0.018, inTop - base, sd, OAKP, 0, base, 0.009));
+    if (ceil > top + 0.01) root.add(box(W, ceil - top - 0.002, D - fasZ, OAKP, 0, top, fasZ));   // closed header to the ceiling (front part)
+    // slim top track (pale gold channel) + two bottom track strips
+    root.add(box(Wi, 0.03, D - zc - 0.004, TRACK, 0, inTop - 0.03, zc));
+    // ---- two bypass sliders: front door (−x half) slides +x, rear door (+x half) slides −x; 13 mm between the door faces
+    const dw = Wi / 2 + 0.015, yb = base + 0.004, Hd = inTop - 0.03 - 0.003 - yb, run = Wi - dw;
+    const zF = D - 0.033, zR = D - 0.068;   // back faces (door thickness 22 mm → front faces D−0.011 / D−0.046)
+    for (const z of [zF, zR]) root.add(box(Wi, 0.004, 0.006, TRACK, 0, base, z + 0.008));
+    const LINES = [0.24, 0.43, 0.72];
+    for (let i = 0; i < 2; i++) {
+      const p = g(), cx = i === 0 ? -Wi / 2 + dw / 2 : Wi / 2 - dw / 2, zb = i === 0 ? zF : zR;
+      p.add(box(dw, Hd, 0.022, SAGEG, cx, yb, zb, 0.002));
+      for (const f of LINES) p.add(box(dw - 0.004, 0.008, 0.002, INLAY, cx, yb + f * Hd - 0.004, zb + 0.022));
+      for (const yy of [yb + 0.004, yb + Hd - 0.01]) p.add(box(dw - 0.004, 0.006, 0.002, INLAY, cx, yy, zb + 0.022));
+      // long oak-brass bar pull on the outer edge: the front door's stands proud (nothing passes in front of it); the rear door's
+      // is a flush bar in a dark groove (4 mm proud) so it passes behind the front door (13 mm gap)
+      const px = i === 0 ? cx - dw / 2 + 0.055 : cx + dw / 2 - 0.055, py = yb + 0.47 * Hd - 0.24;
+      if (i === 0) { p.add(box(0.02, 0.48, 0.016, INLAY, px, py, zb + 0.032, 0.004)); for (const dy of [0.04, 0.42]) p.add(box(0.01, 0.02, 0.012, INLAY, px, py + dy, zb + 0.021)); }
+      else { p.add(box(0.026, 0.5, 0.002, GROOVE, px, py - 0.01, zb + 0.0215)); p.add(box(0.016, 0.48, 0.004, INLAY, px, py, zb + 0.022, 0.0015)); }
+      tagGroup(p, { type: 'slide', slide: [i === 0 ? run : -run, 0, 0], label: 'wardrobe slider', fitted: true }); root.add(p);
+    }
+    // ---- interior helpers: folded stacks, hanging garments on wooden hangers, sneakers
+    const cloth = new Map(), CL = c => { if (!cloth.has(c)) cloth.set(c, new THREE.MeshStandardMaterial({ color: c, roughness: 0.92, name: '__cloth_' + c.toString(16) })); return cloth.get(c); };
+    let sd0 = 11; const rnd = () => (sd0 = (sd0 * 9301 + 49297) % 233280) / 233280;
+    const stack = (x, y, z, n, cols, w = 0.3, d = 0.27) => { let yy = y; for (let k = 0; k < n; k++) { const h = 0.035 + rnd() * 0.02; root.add(loose(box(w - rnd() * 0.02, h, d - rnd() * 0.02, CL(cols[k % cols.length]), x + (rnd() - 0.5) * 0.012, yy, z + (rnd() - 0.5) * 0.01, 0.012))); yy += h; } };
+    const hangerMat = OAKP;
+    const garment = (x, railY, zMid, len, col, long) => {
+      const gr = g(), sh = new THREE.Shape(), hw = long ? 0.24 : 0.225;
+      sh.moveTo(-0.065, -0.045); sh.lineTo(-hw + 0.01, -0.095); sh.lineTo(-hw, -0.13); sh.lineTo(-hw + (long ? -0.01 : 0.012), -len + 0.03);
+      sh.lineTo(-hw + 0.03, -len); sh.lineTo(hw - 0.03, -len); sh.lineTo(hw - (long ? -0.01 : 0.012), -len + 0.03); sh.lineTo(hw, -0.13); sh.lineTo(hw - 0.01, -0.095);
+      sh.lineTo(0.065, -0.045); sh.quadraticCurveTo(0, -0.085, -0.065, -0.045);
+      const m = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: long ? 0.035 : 0.022, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.006, bevelSegments: 2, curveSegments: 6 }), CL(col));
+      m.rotation.y = Math.PI / 2; m.position.set(-0.015, 0, 0); gr.add(m);
+      // collar band (shirts) / lapel tone (coats)
+      if (!long) { const c2 = new THREE.Mesh(new THREE.TorusGeometry(0.055, 0.008, 6, 16, Math.PI), CL(col)); c2.rotation.set(Math.PI / 2, Math.PI / 2, 0); c2.position.set(0, -0.05, 0); gr.add(c2); }
+      // wooden hanger: two arms + hook
+      for (const s of [-1, 1]) { const a = cyl(0.006, 0.006, 0.22, hangerMat, 0, 0, 0, 6); a.position.set(0, -0.06, s * 0.105); a.rotation.x = -s * 1.25; gr.add(a); }
+      const hk = new THREE.Mesh(new THREE.TorusGeometry(0.018, 0.0025, 6, 12, Math.PI * 1.3), TRACK); hk.rotation.y = Math.PI / 2; hk.position.set(0, 0.0, 0); gr.add(hk);
+      const st = cyl(0.0025, 0.0025, 0.03, TRACK, 0, -0.035, 0, 6); gr.add(st);
+      gr.position.set(x, railY, zMid); gr.rotation.y = (rnd() - 0.5) * 0.12; root.add(loose(gr));
+    };
+    const sneaker = (x, y, z, col) => { const s = g();
+      for (const dx of [-0.055, 0.055]) { s.add(box(0.095, 0.03, 0.27, CL(0xf3f1ec), dx, 0, 0, 0.012)); s.add(box(0.085, 0.075, 0.17, CL(col), dx, 0.025, 0.0, 0.03)); s.add(box(0.08, 0.04, 0.1, CL(col), dx, 0.025, 0.16, 0.018)); }
+      s.position.set(x, y, z); root.add(loose(s)); };
+    const rail = (x0, x1, y) => { const r = cyl(0.012, 0.012, x1 - x0 - 0.01, TRACK, 0, 0, 0, 12); r.rotation.z = Math.PI / 2; r.position.set((x0 + x1) / 2, y, 0.009 + sd / 2); root.add(r);
+      for (const x of [x0 + 0.012, x1 - 0.012]) root.add(box(0.012, 0.05, 0.04, TRACK, x, y - 0.03, 0.009 + sd / 2 - 0.02)); };
+    const shelf = (x0, x1, y) => root.add(box(x1 - x0, 0.022, sd, OAKP, (x0 + x1) / 2, y, 0.009));
+    const ledUnder = (x0, x1, y) => { const l = led(0xffc890, 2.4); moods.strips.push(l); root.add(box(x1 - x0 - 0.06, 0.006, 0.01, l, (x0 + x1) / 2, y - 0.007, zc - 0.03)); };
+    const zMid = 0.009 + sd / 2;
+    // ---- left bay (−x): shelves with folded clothes, shirt rail, 5-drawer stack over a shoe tier
+    const L0 = -Wi / 2, L1 = -0.009, R0 = 0.009, R1 = Wi / 2, S1 = 2.06, S2 = 2.42, RAIL = 1.95;
+    shelf(L0, L1, S1); shelf(L0, L1, S2); ledUnder(L0, L1, S1);
+    stack(L0 + 0.22, S1 + 0.022, 0.2, 5, [0xf2f0ea, 0xe9e6de]); stack(L0 + 0.58, S1 + 0.022, 0.2, 4, [0xd9d6cf, 0xc9c6bf]); stack(L0 + 0.94, S1 + 0.022, 0.2, 4, [0x5b7fa6, 0x4d6f96]);
+    stack(L0 + 0.22, S2 + 0.022, 0.2, 6, [0xf3f1ec]); stack(L0 + 0.6, S2 + 0.022, 0.2, 5, [0xe6dccb, 0xd9cdb8]);
+    rail(L0, L1, RAIL);
+    const shirts = [0xf4f3ef, 0xb9cde4, 0x2b3a55, 0xf4f3ef, 0x7d9cc0, 0x1f2a40, 0xd8d4cc, 0x9fb7d3, 0xeeeae2];
+    shirts.forEach((c, k) => garment(L0 + 0.1 + k * (L1 - L0 - 0.18) / (shirts.length - 1), RAIL, zMid, 0.7, c, false));
+    const dsw = 0.62, dx0 = L0, dx1 = L0 + dsw, dcx = (dx0 + dx1) / 2, dTop = 1.06, shoeY = 0.3, nD = 5, dh = (dTop - shoeY - 0.022) / nD;
+    root.add(box(0.018, dTop + 0.022 - base, sd, OAKP, dx1 + 0.009, base, 0.009));   // drawer-stack side panel
+    shelf(L0, L1, shoeY);                                                                // shoe tier across the bay
+    root.add(box(dsw, 0.022, sd, OAKP, dcx, dTop, 0.009));                               // drawer-stack top
+    stack(dcx - 0.1, dTop + 0.022, 0.24, 3, [0x3f6fa8, 0x355f93]);                       // blue knitwear on the drawer top (reference)
+    for (let k = 0; k < nD; k++) {
+      const y0 = shoeY + 0.022 + k * dh, dr = g(), fz = zc - 0.018, dd = 0.5;
+      dr.add(box(dsw - 0.006, dh - 0.006, 0.018, OAKP, dcx, y0 + 0.003, fz, 0.002));
+      dr.add(box(dsw * 0.5, 0.01, 0.003, GROOVE, dcx, y0 + dh - 0.03, fz + 0.018));       // finger-groove line (flush, 3 mm)
+      dr.add(box(dsw - 0.05, 0.012, dd, OAKP, dcx, y0 + 0.02, fz - dd));
+      for (const sx of [-1, 1]) dr.add(box(0.012, dh - 0.05, dd, OAKP, dcx + sx * (dsw / 2 - 0.031), y0 + 0.02, fz - dd));
+      dr.add(box(dsw - 0.05, dh - 0.05, 0.012, OAKP, dcx, y0 + 0.02, fz - dd));
+      dr.add(loose(box(0.24, Math.min(0.06, dh - 0.08), 0.3, CL([0xe9e6de, 0x8a8f96, 0x2b3a55, 0xd8c8b0, 0xf2f0ea][k]), dcx - 0.12, y0 + 0.032, fz - 0.42, 0.01)));
+      dr.add(loose(box(0.24, Math.min(0.05, dh - 0.08), 0.3, CL([0x9fb7d3, 0xf2f0ea, 0x6e7651, 0x4d6f96, 0xc9c6bf][k]), dcx + 0.13, y0 + 0.032, fz - 0.42, 0.01)));
+      tagGroup(dr, { type: 'slide', slide: [0, 0, 0.36], label: 'wardrobe drawer', fitted: true }); root.add(dr);
+    }
+    sneaker(dcx - 0.15, base, 0.2, 0xf3f1ec); sneaker(dcx + 0.14, base, 0.2, 0xd9cfc0);
+    sneaker(dx1 + 0.03 + (L1 - dx1) / 2 - 0.12, base, 0.2, 0x2b2d31); sneaker(dx1 + 0.03 + (L1 - dx1) / 2 + 0.12, shoeY + 0.022, 0.2, 0xf3f1ec);
+    // ---- right bay (+x): shelves with folded linen + baskets, long-hang rail, shoe tier
+    shelf(R0, R1, S1); shelf(R0, R1, S2); ledUnder(R0, R1, S1);
+    stack(R0 + 0.2, S1 + 0.022, 0.2, 5, [0xf3f1ec, 0xe9e6de]); stack(R0 + 0.56, S1 + 0.022, 0.2, 4, [0x8a8f96, 0x9a9fa6]); stack(R0 + 0.92, S1 + 0.022, 0.2, 5, [0xd8c8b0]);
+    const BASK = () => M('Handwoven jute', 0xb59a6a);
+    for (const bx of [R0 + 0.25, R0 + 0.63, R0 + 0.98]) root.add(loose(box(0.3, 0.26, 0.38, BASK, bx, S2 + 0.022, 0.08, 0.02)));
+    rail(R0, R1, RAIL);
+    const longs = [[0xc8b08a, 1.15], [0x2b2d31, 1.2], [0xf2efe8, 1.25], [0x6e7651, 1.05], [0x8a8f96, 0.95], [0x4a3428, 1.1], [0xe6dccb, 1.2]];
+    longs.forEach(([c, len], k) => garment(R0 + 0.11 + k * (R1 - R0 - 0.2) / (longs.length - 1), RAIL, zMid, len, c, true));
+    shelf(R0, R1, shoeY);
+    [0xf3f1ec, 0x6b4a32, 0x2b2d31].forEach((c, k) => sneaker(R0 + 0.2 + k * 0.38, base, 0.2, c));
+    [0xd9cfc0, 0xf3f1ec].forEach((c, k) => sneaker(R0 + 0.2 + k * 0.38, shoeY + 0.022, 0.2, c));
+    return { obj: root, moods };
+  }
   /* ================= Bedroom 2 study wall (owner 2026-11-10, references/bedroom-2/2026-11-10_dark-study-slat-wall.png) =================
      South (desk) wall, end to end, desk + chair untouched. Local frame: origin at the EAST end of the wall (door corner), +x runs WEST,
      +z into the room (placed with ry = π). Door-leaf zone: x < leafTo below leafTop → only flat (≤ 7 mm) finishes. */
@@ -3522,5 +3640,5 @@ export function makeLib(mat, getModel = () => null) {
     m.position.set(-(b.min.x + b.max.x) / 2, -b.min.y, -b.min.z);
     return { obj: holder, size: b.getSize(new THREE.Vector3()), name: src.name };
   }
-  return { mat: M, bathVanityModels, dreamburstBed, mixerGrinder, fridgeSingleDoor, larderPullout, kitchenStyled, pujaPanelShrine, venkateswaraIdol, pujaStoneShrine, facetedDoors, keralaDoors, templeDoors, pujaDoors, pipeEnclosure, modularSofa, masterBath, walkinFronts, studyWallDark, heritageEastWall, heritageWestWall, heritageBeams, dhurrieRug, brassLantern, model, entranceCorridor, foyerWall, carvedStoneWall, ledStrip, BED_WALL_STYLES, bedWallStyled, balconyWallFrame, archValance, splitAC, jaliWall, gamingWall, panelWall, softWall, headboardWallFS, ceilingCanopy, bedBench, waveWall, upholsteredBed, chevronRug, nightstand, pendant, wallSconce, vasePlant, fridgeSideBySide, tvWall, projectorScreen, projector, workWall, loungeChair, deskChair, sideTable, floorLamp, bedding, box, led };
+  return { mat: M, bathVanityModels, dreamburstBed, mixerGrinder, fridgeSingleDoor, larderPullout, kitchenStyled, pujaPanelShrine, venkateswaraIdol, pujaStoneShrine, facetedDoors, keralaDoors, templeDoors, pujaDoors, pipeEnclosure, modularSofa, masterBath, walkinFronts, slidingWardrobe, studyWallDark, heritageEastWall, heritageWestWall, heritageBeams, dhurrieRug, brassLantern, model, entranceCorridor, foyerWall, carvedStoneWall, ledStrip, BED_WALL_STYLES, bedWallStyled, balconyWallFrame, archValance, splitAC, jaliWall, gamingWall, panelWall, softWall, headboardWallFS, ceilingCanopy, bedBench, waveWall, upholsteredBed, chevronRug, nightstand, pendant, wallSconce, vasePlant, fridgeSideBySide, tvWall, projectorScreen, projector, workWall, loungeChair, deskChair, sideTable, floorLamp, bedding, box, led };
 }

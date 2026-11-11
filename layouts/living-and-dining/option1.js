@@ -1,6 +1,7 @@
 // Living + dining — real products. Room: x 3.838–10.28, z −4.303 (north) … 0 (south).
 // Dining stays centred where the original was (table centre x 5.45, z −2.10, long axis north–south).
 import { placeProduct } from '../lib/products.js';
+import { TV_WALLS, TVWALL_ANCHOR, buildTvWall } from './tvwall.js';
 const TX = 5.45, TZ = -2.10, HALF_L = 0.805, HALF_W = 0.405, CH_D = 0.54, TUCK = 0.12;
 const SOFAS = [
   { id: 'westcott', name: 'Stone & Beam Westcott (cream)', summary: 'The current family sofa: Stone & Beam Westcott contemporary sofa, haze — 2420 × 970 × 870 (visual stand-in).', search: ['cream contemporary sofa living room'] },
@@ -9,7 +10,9 @@ const SOFAS = [
 ];
 export default {
   id: 'option1',
-  slots: [{ id: 'sofa', label: 'Family sofa', default: 'westcott', anchor: [8.52, 1.25, -3.7], variants: SOFAS }],
+  slots: [{ id: 'sofa', label: 'Family sofa', default: 'westcott', anchor: [8.52, 1.25, -3.7], variants: SOFAS },
+    // owner 2026-11-11: switchable TV wall (south wall) — 'current' + five reference designs (tvwall.js)
+    { id: 'tvwall', label: 'TV wall', default: 'current', anchor: TVWALL_ANCHOR, variants: TV_WALLS }],
   name: 'Option 1 · Real products',
   summary: 'Original layout with real catalogue products: a mid-century walnut dining table with six upholstered dining chairs, and a cream contemporary sofa with a solid-wood coffee table in the family area.',
   facts: [
@@ -50,6 +53,8 @@ export default {
     else { const MOD = ctx.slot('sofa') === 'modular-cream'; placeProduct(ctx, 'B07K7NY646', 'coffee-table', 'Alkove Hayes solid-wood coffee table', MOD ? 7.95 : 8.49, MOD ? -2.3 : -2.4, 0, { loose: true });
       // the v1 book / brass tray / chai cup stand on the table: move them with it
       if (MOD) ctx.rigid(ctx.find(/^(art-book|brass-tray|chai-cup)/), { x: 8.49, z: -2.4 }, { x: 7.95, z: -2.3 }, 0); }
+    const tw = ctx.slot('tvwall');
+    if (tw && tw !== 'current' && TV_WALLS.some(v => v.id === tw)) buildTvWall(ctx, tw);
     return {};
   },
 };

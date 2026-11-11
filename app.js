@@ -236,7 +236,7 @@ async function init() {
       const ax = sz.x < sz.z ? 'x' : 'z', out = []; for (const sg of [1, -1]) { const d = new THREE.Vector3(); d[ax] = sg; lookRay.set(c.clone().addScaledVector(d, -0.002), d); lookRay.far = 0.4;
         out.push(lookRay.intersectObjects(items.filter(m => !m.userData.mov), false).slice(0, 3).map(h => [sg, +h.distance.toFixed(3), h.object.userData.cat, h.object.name.slice(0, 30), h.object.material.name])); }
       mv.t = t0; poseMover(mv); return { sz: sz.toArray(), out }; },
-    cam: () => camera, scene: () => scene, mirrors: () => mirrorProbes.map(p => ({ name: p.m.material.name, renders: p.renders || 0, cpuMs: p.ms, dirty: p.dirty })), carry: { start: ndc => startCarry(ndc), end: () => endCarry("api"), state: () => carry }, groups, movers, toggleMover, sitOn, interact, hits, setRoomLayout, setMood, store: () => store, select, delSel, dupSel, undo, exportLayout, importLayout, enterRoom, recolor, clearances: () => clr.last,
+    cam: () => camera, scene: () => scene, renderer: () => renderer, mirrors: () => mirrorProbes.map(p => ({ name: p.m.material.name, renders: p.renders || 0, cpuMs: p.ms, dirty: p.dirty, room: p.room })), carry: { start: ndc => startCarry(ndc), end: () => endCarry("api"), state: () => carry }, groups, movers, toggleMover, sitOn, interact, hits, setRoomLayout, setMood, store: () => store, select, delSel, dupSel, undo, exportLayout, importLayout, enterRoom, recolor, clearances: () => clr.last,
     perf: () => ({ pr: renderer.getPixelRatio(), stillPR: RQ.stillPR, movePR: RQ.movePR, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles,
       programs: renderer.info.programs.length, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, ao: gtao.enabled,
       frame: renderer.info.render.frame, lights: perfLights() }),
@@ -552,8 +552,9 @@ function refreshHoles() {
   let n = 0; const b = new THREE.Box3();
   for (let i = holes.length - 1; i >= 0; i--) if (!movers.has(holes[i].mv.id) || !holes[i].parent.parent && holes[i].parent !== scene) { holes[i].liner.removeFromParent(); holes.splice(i, 1); }
   for (const h of holes) {
-    const shown = isShown(h.mesh);
-    h.liner.visible = shown;
+    // a v1 mover retired with ctx.hideMovers is only 'suppressed' (still visible=true): its liner must go too
+    const shown = isShown(h.mesh) && !h.mesh.userData.suppressed;
+    h.liner.visible = shown; if (h.mv.tray) h.mv.tray.visible = shown;
     if (!shown || n >= HOLE_MAX) continue;
     h.parent.updateWorldMatrix(true, false);
     b.copy(h.local).applyMatrix4(h.parent.matrixWorld);
@@ -619,7 +620,7 @@ function buildInterior(mv) {
     const tp = (w, hgt, d, pa, py, pn) => { const m = new THREE.Mesh(new THREE.BoxGeometry(ax === 'x' ? d : w, hgt, ax === 'x' ? w : d), linerMat); m.position[across] = pa; m.position.y = py; m.position[ax] = pn; tray.add(m); };
     tp(tw, 0.01, tD, cA, ty + 0.005, nAt(tD / 2)); tp(tw, tH, 0.01, cA, ty + tH / 2, nAt(tD - 0.005));
     tp(0.01, tH, tD, cA - tw / 2 + 0.005, ty + tH / 2, nAt(tD / 2)); tp(0.01, tH, tD, cA + tw / 2 - 0.005, ty + tH / 2, nAt(tD / 2));
-    scene.add(tray); mv.pivot.attach(tray);
+    scene.add(tray); mv.pivot.attach(tray); mv.tray = tray;
   } else if (H > 1.3) {
     // wardrobe: top shelf + hanging rail when wide enough, else shelves every ~35 cm
     const shelfY = hi.y - Math.min(0.42, H * 0.22);
@@ -1769,9 +1770,23 @@ function cutawayWalls() {
    reflect the generic RoomEnvironment IBL. */
 const mirrorProbes = [];
 function addMirrorProbe(m) {
+  if (params.get('mirrors') === '0') return;   // perf/debug knob: mirrors keep the generic IBL reflection
   const rt = new THREE.WebGLCubeRenderTarget(256, { type: THREE.HalfFloatType, generateMipmaps: true, minFilter: THREE.LinearMipmapLinearFilter });
-  const cam = new THREE.CubeCamera(0.05, 30, rt); scene.add(cam);
+  // far 8 m (was 30): a washroom mirror only ever shows the room and what is seen through its door — the whole-house range made
+  // the first face render compile shaders for every material in the home (1.6 s at load, 3.8 s on the first Evening switch)
+  const cam = new THREE.CubeCamera(0.05, +(params.get("mirrorFar") || 8), rt); scene.add(cam);
   mirrorProbes.push({ m, rt, cam, dirty: true });
+}
+const mirrorFr = { f: new THREE.Frustum(), m: new THREE.Matrix4(), b: new THREE.Box3(), c: new THREE.Vector3(), e: new THREE.Vector3() };
+function mirrorWanted(p) {
+  const F = mirrorFr; F.b.setFromObject(p.m); F.b.getCenter(F.c);
+  if (p.room === undefined) p.room = roomAt(F.c.x, F.c.z) || '';
+  camera.getWorldPosition(F.e);
+  const camRoom = mode === 'room' ? curRoom : roomAt(F.e.x, F.e.z);
+  if (p.room && camRoom === p.room) return true;
+  if (F.e.distanceTo(F.c) > 6) return false;
+  camera.updateMatrixWorld(); F.m.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse); F.f.setFromProjectionMatrix(F.m);
+  return F.f.intersectsBox(F.b);
 }
 function mirrorsDirty() { mirrorProbes.forEach(p => { p.dirty = true; }); }
 function updateMirrorProbes() {
@@ -1782,6 +1797,10 @@ function updateMirrorProbes() {
     if (!p.dirty) continue;
     let vis = true; for (let o = p.m; o; o = o.parent) if (!o.visible) { vis = false; break; }
     if (!vis) continue;
+    // perf 2026-11-11: a re-render is 6 full-scene faces (0.5–1.4 s CPU) → lazy: only once the camera is in the mirror's room,
+    // or the mirror is in view within 6 m; until then it stays dirty (applyVisibility / Day-Evening anywhere = no freeze)
+    // the FIRST render happens right after load wherever the camera is (cold textures/programs ≈ 1–2.5 s, better then than in the doorway)
+    if (p.renders && !mirrorWanted(p)) continue;
     // probe 3 cm in front of the glass (the glass is the thin axis of its box; "front" = towards the room's centre)
     const b = new THREE.Box3().setFromObject(p.m), c = b.getCenter(new THREE.Vector3()), s = b.getSize(new THREE.Vector3());
     const ax = s.x < s.z ? 'x' : 'z', r = roomAt(c.x, c.z), rb = r && rooms[r];
@@ -1792,9 +1811,10 @@ function updateMirrorProbes() {
     // target WITHOUT the active cube face → that face lands on face 0 and stays empty (the mirror reflected black). Hide them.
     scene.traverse(o => { if (o.isMesh && o.visible && [].concat(o.material).some(mt => mt && mt.transmission > 0)) hid.push(o); });
     hid.forEach(o => { o.visible = false; });
-    const tm = renderer.toneMapping; renderer.toneMapping = THREE.NoToneMapping;
+    // no tone-mapping swap: three r170 already renders every render target (cube faces, composer) without tone mapping, so the
+    // cube faces reuse the main frame's shader programs
     { const c0 = performance.now(); p.cam.update(renderer, scene); p.renders = (p.renders || 0) + 1; p.ms = +(performance.now() - c0).toFixed(1); }
-    renderer.toneMapping = tm; hid.forEach(o => { o.visible = true; });
+    hid.forEach(o => { o.visible = true; });
     p.m.material.envMap = p.rt.texture; p.m.material.envMapIntensity = 1; p.m.material.needsUpdate = true;
     p.dirty = false; RQ.dirty = true;
   }
@@ -1835,7 +1855,7 @@ function setLightMode(m) {
   windowLights.forEach(L => { L.intensity = day ? 5 : 0; L.visible = day; });
   plights.forEach(p => { p.visible = !day; });   // perf: the 12 point lights are dark by day; hiding them drops them from every shader
   $('lDay').classList.toggle('on', day); $('lEve').classList.toggle('on', !day);
-  lightT = 0; rl.t = 0; applyCine(); applyVisibility();
+  lightT = 0; applyCine(); applyVisibility(); updateRectPool(true);   // proxy count for the new mode right away (one recompile, not two)
 }
 function setHQ(on) { hq = on; gtao.enabled = on; invalidate(); renderer.shadowMap.enabled = on; sun.castShadow = on; $('tHQ').classList.toggle('on', on); scene.traverse(o => { if (o.material) o.material.needsUpdate = true; }); shadowsDirty(); }
 $('lDay').onclick = () => setLightMode('day');
@@ -2536,6 +2556,7 @@ function loop() {
   animateMovers(dt);
   if (mode === 'walk') stepWalk(dt); else orbit.update();
   if (P) t0 = pt('walk', t0);
+  updateRectPool();   // before the mirror faces: same light set (and shader programs) as the main frame
   updateMirrorProbes();
   if (P) t0 = pt('mirror', t0);
   updateHint();
@@ -2551,7 +2572,7 @@ function loop() {
   const now = performance.now();
   if (clr.dirty && now - clr.t > 120) { clr.dirty = false; clr.t = now; measureClearances(); }
   if (P) t0 = pt('misc', t0);
-  cutawayWalls(); updateLights(); updateRectPool(); updateLabels(); hud(); updateCompass();
+  cutawayWalls(); updateLights(); updateLabels(); hud(); updateCompass();
   if (P) t0 = pt('lightsHud', t0);
   ensureSize();
   if (RQ.bench) return;   // __app.perfBench() is rendering

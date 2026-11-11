@@ -4,7 +4,7 @@
 __pycache__/
 
 # > 100 MB (GitHub limit); regenerate with tools/record_tour.mjs
-tour/home_tour.mp4
+tour/*.mp4
 
 # Untouched owner downloads (large; several have licences that forbid redistribution)
 assets/models/originals/

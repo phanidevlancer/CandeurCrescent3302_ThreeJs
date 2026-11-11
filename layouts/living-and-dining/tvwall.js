@@ -31,7 +31,7 @@ export const TV_WALLS = [
     summary: 'Owner reference: one 2.7 m entertainment unit on a greige wall: walnut plinth, white lacquered end cabinets with a grooved chevron front and bar pulls, a lower centre bay with an open media shelf over three grooved white drawers, a walnut-slat back frame (side columns + top band) with a white floating bridge shelf and an LED glow above it, a lit light panel behind the TV, white side shelves, a small walnut shelf and a walnut shelf above the TV with a speaker, the 65″ TV showing a streaming home screen, soundbar, plants in white pots, gold elephant and deer, books, candle holders, photo frame, clock and a trailing pothos.',
     search: ['walnut slat tv unit white cabinets', 'tv entertainment unit led back panel', 'white and walnut tv wall unit', 'modern tv unit slat frame floating shelves'] },
 ];
-export const TVWALL_HIDE = /^(approved-h2-(65-inch-x|console|corner|floating|long|niche|open|pillar|set-top|tv#0|wall#|walnut)|plant#(1|9|10)$|handmade-ceramic#[1-4]$|vase-neck#[1-4]$|dried-branch#[1-3]$)/;
+export const TVWALL_HIDE = /^(approved-h2-(console|corner|floating|long|niche|open|pillar|set-top|tv#0|wall#|walnut)|plant#(1|9|10)$|handmade-ceramic#[1-4]$|vase-neck#[1-4]$|dried-branch#[1-3]$)/;
 
 // ---------------- shared materials (cached: textures are built once) ----------------
 const C = {};
@@ -47,17 +47,18 @@ function plasterMat(name, rgb, mott = 26, bump = 2.5) {
     for (let i = 0; i < 900; i++) { const px = rnd() * W, py = rnd() * H, r = 20 + rnd() * 90, d = (rnd() - 0.5) * mott, [r0, g0, b0] = rgb.split(',').map(Number);
       const gr = x.createRadialGradient(px, py, 0, px, py, r); gr.addColorStop(0, `rgba(${r0 + d},${g0 + d * 0.8},${b0 + d * 0.6},0.35)`); gr.addColorStop(1, `rgba(${r0 + d},${g0 + d * 0.8},${b0 + d * 0.6},0)`); x.fillStyle = gr; x.beginPath(); x.arc(px, py, r, 0, 7); x.fill();
       const v = 128 + d * 2; const g2 = y.createRadialGradient(px, py, 0, px, py, r * 0.4); g2.addColorStop(0, `rgba(${v},${v},${v},0.5)`); g2.addColorStop(1, `rgba(${v},${v},${v},0)`); y.fillStyle = g2; y.beginPath(); y.arc(px, py, r * 0.4, 0, 7); y.fill(); }
-    for (let i = 0; i < 380; i++) { const px = rnd() * W, py = rnd() * H, l = 20 + rnd() * 70, a = rnd() * 6.28; x.strokeStyle = `rgba(255,255,255,${0.03 + rnd() * 0.05})`; x.lineWidth = 2 + rnd() * 5; x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + Math.cos(a) * l * 0.5 + 8, py + Math.sin(a) * l * 0.5, px + Math.cos(a) * l, py + Math.sin(a) * l); x.stroke(); }
+    // soft cloudy brush passes (limewash), blurred so no hard strokes show
+    const c2 = cnv(W, H), x2 = c2.getContext('2d'); x2.filter = 'blur(6px)'; x2.drawImage(c, 0, 0); x.drawImage(c2, 0, 0);
     return new THREE.MeshStandardMaterial({ name, color: 0xffffff, map: tex(c), bumpMap: tex(b, false), bumpScale: bump, roughness: 0.93 }); });
 }
 const OAKL = () => std('__tw_light_oak', { color: 0xffffff, roughness: 0.55, map: once('t_oak', () => { seed = 3; const c = cnv(512, 512), x = c.getContext('2d'); x.fillStyle = '#c9a77a'; x.fillRect(0, 0, 512, 512);
   for (let i = 0; i < 160; i++) { const y0 = rnd() * 512, a = 0.04 + rnd() * 0.08; x.strokeStyle = rnd() < 0.5 ? `rgba(150,110,65,${a})` : `rgba(235,210,170,${a})`; x.lineWidth = 1 + rnd() * 3; x.beginPath(); x.moveTo(0, y0); for (let k = 1; k <= 8; k++) x.lineTo(k * 64, y0 + Math.sin(k * 0.9 + y0) * 4 * rnd()); x.stroke(); }
   return tex(c); }) });
-const WAL = () => std('__tw_walnut', { color: 0xffffff, roughness: 0.5, map: once('t_wal', () => { seed = 5; const c = cnv(512, 512), x = c.getContext('2d'); x.fillStyle = '#6a4630'; x.fillRect(0, 0, 512, 512);
-  for (let i = 0; i < 170; i++) { const y0 = rnd() * 512, a = 0.06 + rnd() * 0.1; x.strokeStyle = rnd() < 0.55 ? `rgba(55,32,20,${a})` : `rgba(150,105,72,${a})`; x.lineWidth = 1 + rnd() * 3; x.beginPath(); x.moveTo(0, y0); for (let k = 1; k <= 8; k++) x.lineTo(k * 64, y0 + Math.sin(k * 0.8 + y0) * 5 * rnd()); x.stroke(); }
+const WAL = () => std('__tw_walnut', { color: 0xffffff, roughness: 0.5, map: once('t_wal', () => { seed = 5; const c = cnv(512, 512), x = c.getContext('2d'); x.fillStyle = '#4e3221'; x.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 170; i++) { const y0 = rnd() * 512, a = 0.06 + rnd() * 0.1; x.strokeStyle = rnd() < 0.55 ? `rgba(38,22,14,${a})` : `rgba(120,82,55,${a})`; x.lineWidth = 1 + rnd() * 3; x.beginPath(); x.moveTo(0, y0); for (let k = 1; k <= 8; k++) x.lineTo(k * 64, y0 + Math.sin(k * 0.8 + y0) * 5 * rnd()); x.stroke(); }
   return tex(c); }) });
 const DARKGAP = () => std('__tw_slat_gap', { color: 0x1c140f, roughness: 0.95 });
-const OLIVE = () => std('__tw_olive_paint', { color: 0x7d7c47, roughness: 0.85 });
+const OLIVE = () => std('__tw_olive_paint', { color: 0x66663a, roughness: 0.85 });
 const WHITE_LAC = () => std('__tw_white_lacquer', { color: 0xf1eee8, roughness: 0.3 });
 const BLACK = () => std('__tw_matte_black', { color: 0x18181a, roughness: 0.45 });
 const BRASS = () => std('__tw_brass', { color: 0xc49a55, metalness: 0.85, roughness: 0.32 });
@@ -122,7 +123,7 @@ const FIG_LEAF = blade(0.3, 0.2, { fold: 0.12, bend: -0.1, shape: t => Math.pow(
 function fiddleFig(root, x, z, h) {
   const top = pot(root, 'cream', x, FL, z, 0.19, 0.42), b = Bag();
   const trunk = [V(x, top, z), V(x + 0.03, top + h * 0.4, z - 0.02), V(x - 0.02, top + h * 0.75, z + 0.01), V(x + 0.01, top + h, z)]; root.add(tube(trunk, 0.018, BARK));
-  for (let k = 0; k < 34; k++) { const t = 0.35 + 0.65 * k / 34, a = k * 2.4, y = top + h * t; b.put(FIG_LEAF, k % 3 ? LEAF : LEAF2, V(x + Math.cos(a) * 0.03, y, z + Math.sin(a) * 0.03), [-(0.6 + rnd() * 0.5), a, 0], 0.8 + rnd() * 0.5 - t * 0.2); }
+  for (let k = 0; k < 34; k++) { const t = 0.35 + 0.65 * k / 34, a = k * 2.4, y = top + h * t; b.put(FIG_LEAF, k % 3 ? LEAF : LEAF2, V(x + Math.cos(a) * 0.03, y, z + Math.sin(a) * 0.03), [-(0.6 + rnd() * 0.5), -Math.PI / 2 - a, 0], 0.8 + rnd() * 0.5 - t * 0.2); }
   b.meshes().forEach(m => root.add(m));
 }
 function snakePlant(root, x, y, z, h, n, potKind = 'cream', r = 0.09, ph = 0.16) {
@@ -132,9 +133,9 @@ function snakePlant(root, x, y, z, h, n, potKind = 'cream', r = 0.09, ph = 0.16)
 }
 function birdOfParadise(root, x, z, h) {
   const top = pot(root, 'white', x, FL, z, 0.21, 0.4), b = Bag(), stems = [];
-  const PADDLE = blade(0.62, 0.26, { fold: 0.1, bend: 0.12, n: 10, shape: t => Math.pow(Math.sin(Math.PI * t), 0.7) });
-  for (let k = 0; k < 8; k++) { const a = k * 2.3 + rnd() * 0.3, tilt = 0.12 + rnd() * 0.35, sl = h * (0.45 + rnd() * 0.25), dx = Math.sin(tilt) * sl, ex = V(x + Math.cos(a) * dx, top + Math.cos(tilt) * sl, z + Math.sin(a) * dx);
-    stems.push([V(x, top, z), ex]); b.put(PADDLE, k % 2 ? LEAF : LEAF2, ex, [-tilt * 1.3, Math.PI / 2 - a, 0]); }
+  const PADDLE = blade(0.48, 0.19, { fold: 0.1, bend: 0.12, n: 10, shape: t => Math.pow(Math.sin(Math.PI * t), 0.7) });
+  for (let k = 0; k < 11; k++) { const a = 2.62 + k / 10 * 2.27 + rnd() * 0.15, tilt = 0.12 + rnd() * 0.35, sl = h * (0.45 + rnd() * 0.25), dx = Math.sin(tilt) * sl, ex = V(x + Math.cos(a) * dx, top + Math.cos(tilt) * sl, z + Math.sin(a) * dx);
+    stems.push([V(x, top, z), ex]); b.put(PADDLE, k % 2 ? LEAF : LEAF2, ex, [-tilt * 1.3 - 0.25, -Math.PI / 2 - a, 0]); }
   stems.forEach(([p, q]) => root.add(tube([p, p.clone().lerp(q, 0.5), q], 0.008, LEAF)));
   b.meshes().forEach(m => root.add(m));
 }
@@ -142,7 +143,7 @@ function bushy(root, x, y, z, h, potKind, r, ph, leafL = 0.16) {
   const top = pot(root, potKind, x, y, z, r, ph), b = Bag(), L = blade(leafL, leafL * 0.6, { fold: 0.15, bend: -0.2 });
   const n = Math.round(14 + h * 30);
   for (let k = 0; k < n; k++) { const a = k * 2.39, t = k / n, rr = r * (0.3 + 0.9 * t), y2 = top + h * (0.15 + 0.75 * Math.sqrt(t)) * (0.85 + rnd() * 0.3);
-    b.put(L, k % 3 ? LEAF2 : LEAF, V(x + Math.cos(a) * rr * 0.5, y2, z + Math.sin(a) * rr * 0.5), [-(0.9 + rnd() * 0.6), -a + Math.PI / 2, 0], 0.8 + rnd() * 0.5); }
+    b.put(L, k % 3 ? LEAF2 : LEAF, V(x + Math.cos(a) * rr * 0.5, y2, z + Math.sin(a) * rr * 0.5), [-(0.9 + rnd() * 0.6), -Math.PI / 2 - a, 0], 0.8 + rnd() * 0.5); }
   for (let k = 0; k < 5; k++) { const a = k * 1.3; root.add(tube([V(x, top, z), V(x + Math.cos(a) * r * 0.25, top + h * 0.5, z + Math.sin(a) * r * 0.25)], 0.004, LEAF)); }
   b.meshes().forEach(m => root.add(m));
 }
@@ -159,7 +160,7 @@ function pothos(root, x, y, z, { potKind = 'white', r = 0.07, ph = 0.11, vines =
 function oliveTree(root, x, z, h) {
   const top = pot(root, 'cream', x, FL, z, 0.17, 0.4), b = Bag(), L = blade(0.07, 0.014, { fold: 0.2, bend: 0.1, n: 4 });
   const trunk = [V(x, top, z), V(x + 0.02, top + h * 0.35, z), V(x - 0.03, top + h * 0.6, z + 0.02)]; root.add(tube(trunk, 0.02, BARK));
-  const br = []; for (let k = 0; k < 6; k++) { const a = k * 1.1, s = V(x - 0.03, top + h * (0.55 + k * 0.05), z + 0.02), e = V(x - 0.06 + Math.cos(a) * 0.24, top + h * (0.75 + rnd() * 0.25), z + Math.sin(a) * 0.2); br.push([s, e]); root.add(tube([s, s.clone().lerp(e, 0.5).add(V(0, 0.05, 0)), e], 0.007, BARK)); }
+  const br = []; for (let k = 0; k < 6; k++) { const a = k * 1.1, s = V(x - 0.03, top + h * (0.55 + k * 0.05), z + 0.02), e = V(x - 0.08 + Math.cos(a) * 0.18, top + h * (0.75 + rnd() * 0.25), z + Math.sin(a) * 0.2); br.push([s, e]); root.add(tube([s, s.clone().lerp(e, 0.5).add(V(0, 0.05, 0)), e], 0.007, BARK)); }
   for (const [s, e] of br) for (let k = 0; k < 70; k++) { const t = 0.3 + 0.7 * rnd(), p = s.clone().lerp(e, t).add(V((rnd() - 0.5) * 0.18, (rnd() - 0.5) * 0.16, (rnd() - 0.5) * 0.18)); b.put(L, k % 2 ? OLIVELEAF : LEAF2, p, [-(rnd() * 2.5), rnd() * 6.28, rnd() - 0.5]); }
   b.meshes().forEach(m => root.add(m));
 }
@@ -172,7 +173,7 @@ function branches(root, x, y, z, h, n = 7, mat = TWIG, leafy = false) {
 }
 function pampas(root, x, y, z, h) {
   for (let k = 0; k < 6; k++) { const a = k * 1.1, tl = 0.1 + rnd() * 0.3, e = V(x + Math.cos(a) * Math.sin(tl) * h, y + Math.cos(tl) * h, z + Math.sin(a) * Math.sin(tl) * h * 0.5);
-    root.add(tube([V(x, y, z), e], 0.002, TWIG)); const pl = new THREE.Mesh(new THREE.SphereGeometry(0.035, 10, 8), PAMPAS()); pl.scale.set(1, 3.2, 1); pl.position.copy(e).add(V(0, 0.07, 0)); pl.rotation.z = (e.x - x) * 2; root.add(pl); }
+    root.add(tube([V(x, y, z), e], 0.002, TWIG)); const pl = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 8), PAMPAS()); pl.scale.set(1, 4.2, 1); pl.position.copy(e).add(V(0, 0.07, 0)); pl.rotation.z = (e.x - x) * 2; root.add(pl); }
 }
 // decor
 const jug = (root, x, y, z, s = 1, m = TERRA) => { root.add(lathe([[0, 0], [0.045 * s, 0], [0.07 * s, 0.07 * s], [0.06 * s, 0.14 * s], [0.03 * s, 0.18 * s], [0.035 * s, 0.21 * s], [0.03 * s, 0.21 * s], [0, 0.2 * s]], m, x, y, z));
@@ -185,7 +186,7 @@ function books(root, x, y, z, n, { flat = false, w = 0.22, d = 0.16 } = {}) {
 }
 function frameArt(root, x, y, z, w, h, draw, frame = BLACK) {
   root.add(wb(x - w / 2, x + w / 2, y, y + h, z - 0.02, z, frame)); const pl = new THREE.Mesh(new THREE.PlaneGeometry(w - 0.04, h - 0.04), new THREE.MeshStandardMaterial({ map: (() => { const c = cnv(160, Math.round(160 * h / w)); draw(c.getContext('2d'), c.width, c.height); return tex(c); })(), roughness: 0.9, name: '__tw_art_' + Math.round(x * 100) }));
-  pl.rotation.y = Math.PI; pl.rotation.x = -0.18; pl.position.set(x, y + h / 2, z - 0.022); root.add(pl);
+  pl.rotation.y = Math.PI; pl.position.set(x, y + h / 2, z - 0.022); root.add(pl);
 }
 // downlights in the bulkhead + pools on the wall face (zFace)
 function downlights(root, xs, zFace, moods) {
@@ -251,13 +252,13 @@ export function buildTvWall(ctx, style) {
 
   if (style === 'terracotta-olive-arch') {
     const TVX = 8.45, AX0 = 7.10, AX1 = 8.10, SPR = 2.03, AR = (AX1 - AX0) / 2;
-    wall.add(wb(X0, X1, FL, CE, WF, 0, plasterMat('__tw_terracotta_limewash', '178,86,58', 34, 3)));
+    wall.add(wb(X0, X1, FL, CE, WF, 0, plasterMat('__tw_terracotta_limewash', '124,50,32', 36, 3)));
     // olive painted arch: 6 mm panel, floor → 2.53 m
     const sh = new T.Shape(); sh.moveTo(AX0, FL); sh.lineTo(AX1, FL); sh.lineTo(AX1, SPR); sh.absarc((AX0 + AX1) / 2, SPR, AR, 0, Math.PI, false); sh.lineTo(AX0, FL);
     const am = new T.Mesh(new T.ExtrudeGeometry(sh, { depth: 0.006, bevelEnabled: false, curveSegments: 40 }), OLIVE()); am.position.z = WF - 0.006; wall.add(am);
     // nine olive battens from inside the arch dome to the ceiling (west half + past the west edge), a full-height edge batten,
     // and a shorter group lower on the arch (between the console top and the TV's west edge)
-    slats(wall, 6.97, 7.56, SPR + 0.12, CE, WF - 0.006, { w: 0.035, gap: 0.03, d = 0.022, m: OLIVE, backer: false });
+    slats(wall, 6.97, 7.56, SPR + 0.12, CE, WF - 0.006, { w: 0.035, gap: 0.03, d: 0.022, m: OLIVE, backer: false });
     wall.add(wb(6.93, 6.965, 0.64, CE, WF - 0.028, WF, OLIVE));
     slats(wall, 7.16, 7.66, 0.64, 1.60, WF - 0.006, { w: 0.035, gap: 0.03, d: 0.022, m: OLIVE, backer: false });
     moveTV(TVX, WF - 0.03);
@@ -271,7 +272,7 @@ export function buildTvWall(ctx, style) {
     jug(shel, 9.48, 2.065, -0.17, 1.1); jug(shel, 9.64, 2.065, -0.17, 0.95);
     pothos(shel, 9.9, 2.065, -0.15, { potKind: 'terra', r: 0.065, ph: 0.1, vines: [[0.08, 0.75], [-0.02, 0.45]] });
     books(shel, 9.3, 1.695, -0.1, 7); shel.add(lathe([[0, 0], [0.04, 0], [0.05, 0.05], [0, 0.1]], STONEW(), 9.52, 1.695, -0.15)); books(shel, 9.75, 1.695, -0.08, 3, { flat: true, w: 0.2, d: 0.15 }); shel.add(cyl(0.03, 0.03, 0.07, CLEAR(), 9.9, 1.695 + 0.06, -0.15));
-    const fig = G(); fiddleFig(fig, 9.97, -0.45, 1.55); add('tw-fig', loose(fig), 'Fiddle-leaf fig in a cream planter', { loose: true });
+    const fig = G(); fiddleFig(fig, 9.9, -0.55, 1.55); add('tw-fig', loose(fig), 'Fiddle-leaf fig in a cream planter', { loose: true });
     const sn = G(); snakePlant(sn, 6.97, FL, -0.62, 0.85, 12, 'cream', 0.15, 0.32); add('tw-snake', loose(sn), 'Snake plant, cream floor pot', { loose: true });
     add('tw-wall', wall, 'TV wall · terracotta limewash, olive arch + olive battens');
   } else if (style === 'white-stone-ledge') {
@@ -288,7 +289,7 @@ export function buildTvWall(ctx, style) {
     // console 2.6 m, five flush fronts (west → east)
     const c = consoleUnit(cons, { x0: 7.25, x1: 9.85, y0: 0.24, h: 0.36, zb: SF, body: OAKL, gap: 0.004, sections: [{ w: 0.62, type: 'door', hinge: 'w' }, { w: 0.4, type: 'drawer' }, { w: 0.4, type: 'drawer' }, { w: 0.58, type: 'door', hinge: 'e' }, { w: 0.6, type: 'door', hinge: 'e' }] });
     bottleVase(deco, 9.32, c.top, -0.2, 0.9); books(deco, 9.42, c.top, -0.1, 4); books(deco, 7.62, c.top, -0.12, 2, { flat: true, w: 0.24, d: 0.17 }); deco.add(wb(7.55, 7.68, c.top + 0.04, c.top + 0.09, -0.19, -0.1, BLACK));
-    const bp = G(); birdOfParadise(bp, 10.0, -0.65, 1.45); add('tw-bird-of-paradise', loose(bp), 'Bird-of-paradise, white round pot', { loose: true });
+    const bp = G(); birdOfParadise(bp, 9.95, -0.66, 1.45); add('tw-bird-of-paradise', loose(bp), 'Bird-of-paradise, white round pot', { loose: true });
     const lf = G(); bushy(lf, 7.04, FL, -0.38, 0.9, 'dark', 0.16, 0.34, 0.24); add('tw-leafy-plant', loose(lf), 'Leafy plant, dark pot', { loose: true });
     add('tw-wall', wall, 'TV wall · white stacked ledge stone, downlights, cove glow');
   } else if (style === 'walnut-slat-warm') {
@@ -320,7 +321,7 @@ export function buildTvWall(ctx, style) {
     strip(cons, moods, cx0 + 0.15, cx1 - 0.15, cy0 - 0.004, zf + 0.06, 'floor', 0.0, 0, '__tw_core'); strip(cons, moods, cx0 + 0.1, cx1 - 0.1, FL + 0.003, WF, 'floor', 0.75, 0.6, '__tw_floor_wash');
     const top = cy0 + ch + 0.006;
     // console styling: pampas in smoky glass (east), diffuser + book, linen lamp, brass balls, dark vase with dried branches (west)
-    deco.add(lathe([[0, 0], [0.06, 0], [0.07, 0.08], [0.045, 0.16], [0.04, 0.18], [0, 0.17]], SMOKE(), 9.72, top, -0.22)); pampas(deco, 9.72, top + 0.17, -0.22, 0.35);
+    deco.add(lathe([[0, 0], [0.06, 0], [0.07, 0.08], [0.045, 0.16], [0.04, 0.18], [0, 0.17]], SMOKE(), 9.72, top, -0.22)); pampas(deco, 9.72, top + 0.17, -0.22, 0.26);
     deco.add(cyl(0.028, 0.03, 0.09, SMOKE(), 9.55, top, -0.17)); for (let k = 0; k < 6; k++) { const s = cyl(0.0018, 0.0018, 0.22, TWIG, 9.55 + (k - 2.5) * 0.006, top + 0.08, -0.17, 4); s.rotation.z = (k - 2.5) * 0.08; deco.add(s); }
     books(deco, 9.45, top, -0.08, 1, { flat: true, w: 0.22, d: 0.15 });
     deco.add(lathe([[0, 0], [0.05, 0], [0.085, 0.06], [0.07, 0.15], [0.02, 0.18], [0, 0.18]], STONEW(), 8.18, top, -0.22));
@@ -353,15 +354,15 @@ export function buildTvWall(ctx, style) {
     shel.add(wb(tx0, tx0 + t, FL, CE, tz, WF, OAKL)); shel.add(wb(tx1 - t, tx1, FL, CE, tz, WF, OAKL)); shel.add(wb(tx0 + t, tx1 - t, CE - t, CE, tz, WF, OAKL)); shel.add(wb(tx0 + t, tx1 - t, FL, CE, WF - 0.01, WF, tw)); shel.add(wb(tx0 + t, tx1 - t, FL, FL + 0.06, tz + 0.02, WF, OAKL));
     const cb = 0.82, ys = [cb, 1.33, 1.84, 2.35];
     for (const y of ys) { shel.add(wb(tx0 + t, tx1 - t, y, y + t, tz, WF, OAKL)); }
-    for (let k = 0; k < 4; k++) { const y1 = (ys[k + 1] || CE - t); strip(shel, moods, tx0 + 0.04, tx1 - 0.04, y1 - 0.006, tz + 0.04, 'down', 0.0, 0, '__tw_core'); strip(shel, moods, tx0 + 0.04, tx1 - 0.04, y1 - 0.006, WF - 0.012, 'down', 0.4, 0.5); }
+    for (let k = 0; k < 4; k++) { const y1 = (ys[k + 1] || CE - t); strip(shel, moods, tx0 + 0.04, tx1 - 0.04, y1 - 0.006, tz + 0.04, 'down', 0.0, 0, '__tw_core'); strip(shel, moods, tx0 + 0.04, tx1 - 0.04, y1 - 0.006, WF - 0.012, 'down', 0.45, 0.85); }
     const tdw = (tx1 - tx0 - 2 * t) / 2;
-    for (const [a, b, he] of [[tx0 + t, tx0 + t + tdw, false], [tx0 + t + tdw, tx1 - t, true]]) { const hx = he ? b - 0.002 : a + 0.002, g2 = new T.Group(); g2.add(wb(a + 0.002 - hx, b - 0.002 - hx, FL + 0.065, cb - 0.003, 0, 0.02, OAKL)); g2.position.set(hx, 0, tz); cons.add(mover(g2, { type: 'cab', hinge: [hx, 0, tz], a1: he ? -Math.PI / 2 : Math.PI / 2, label: 'tower cupboard' })); }
+    for (const [a, b, he] of [[tx0 + t, tx0 + t + tdw, false], [tx0 + t + tdw, tx1 - t, true]]) { const hx = he ? b - 0.002 : a + 0.002, g2 = new T.Group(); g2.add(wb(a + 0.002 - hx, b - 0.002 - hx, FL + 0.065, cb - 0.003, 0, 0.02, OAKL)); g2.position.set(hx, 0, tz); shel.add(mover(g2, { type: 'cab', hinge: [hx, 0, tz], a1: he ? -Math.PI / 2 : Math.PI / 2, label: 'tower cupboard' })); }
     const sy = ys.map(y => y + t);
     books(shel, 7.36, sy[3], -0.12, 6); bushy(shel, 7.05, sy[3], -0.2, 0.15, 'cream', 0.06, 0.1, 0.07);
     roundVase(shel, 7.45, sy[2], -0.2, 1.1, STONEW); books(shel, 6.9, sy[2], -0.12, 4);
     books(shel, 7.38, sy[1], -0.12, 5); bushy(shel, 7.1, sy[1], -0.2, 0.18, 'cream', 0.065, 0.11, 0.08);
     bushy(shel, 7.45, sy[0], -0.2, 0.16, 'cream', 0.065, 0.12, 0.08); roundVase(shel, 7.08, sy[0], -0.2, 0.9, STONEW);
-    const ol = G(); oliveTree(ol, 10.0, -0.7, 1.65); add('tw-olive', loose(ol), 'Olive tree, cream pot', { loose: true });
+    const ol = G(); oliveTree(ol, 9.95, -0.7, 1.65); add('tw-olive', loose(ol), 'Olive tree, cream pot', { loose: true });
     add('tw-wall', wall, 'TV wall · greige plaster, cove glow');
   } else if (style === 'walnut-white-frame') {
     const UX0 = 7.2, UX1 = 9.9, TVX = 8.55, PL = 0.1, CAB = 0.78, CTOP = 0.62;
@@ -372,8 +373,8 @@ export function buildTvWall(ctx, style) {
     // plinth + end cabinets + centre bay (open media shelf over three drawers)
     cons.add(wb(UX0 + 0.03, UX1 - 0.03, FL, FL + PL, WF - 0.4, WF, WAL));
     const cabFront = (hE) => (g2, a, b, y0, y1, fz) => { g2.add(wb(a, b, y0, y1, fz, fz + 0.018, GRV)); bar(g2, a, b, y0, y1, fz, true, hE); };
-    consoleUnit(cons, { x0: UX0, x1: UX0 + 0.62, y0: FL + PL, h: CAB, d: 0.42, body: WHITE_LAC, top: WAL, frontFn: cabFront(true), sections: [{ w: 1, type: 'door', hinge: 'w' }] });
-    consoleUnit(cons, { x0: UX1 - 0.62, x1: UX1, y0: FL + PL, h: CAB, d: 0.42, body: WHITE_LAC, top: WAL, frontFn: cabFront(false), sections: [{ w: 1, type: 'door', hinge: 'e' }] });
+    consoleUnit(cons, { x0: UX0, x1: UX0 + 0.62, y0: FL + PL, h: CAB, d: 0.42, body: WHITE_LAC, top: WAL, frontFn: cabFront(false), sections: [{ w: 1, type: 'door', hinge: 'w' }] });
+    consoleUnit(cons, { x0: UX1 - 0.62, x1: UX1, y0: FL + PL, h: CAB, d: 0.42, body: WHITE_LAC, top: WAL, frontFn: cabFront(true), sections: [{ w: 1, type: 'door', hinge: 'e' }] });
     cons.add(wb(UX0 - 0.02, UX0 + 0.64, FL + PL + CAB, FL + PL + CAB + 0.04, WF - 0.44, WF, WAL)); cons.add(wb(UX1 - 0.64, UX1 + 0.02, FL + PL + CAB, FL + PL + CAB + 0.04, WF - 0.44, WF, WAL));
     const mx0 = UX0 + 0.62, mx1 = UX1 - 0.62, dfront = (g2, a, b, y0, y1, fz) => { g2.add(wb(a, b, y0, y1, fz, fz + 0.018, GRV)); g2.add(wb((a + b) / 2 - 0.07, (a + b) / 2 + 0.07, y1 - 0.045, y1 - 0.035, fz - 0.02, fz, GOLD)); };
     const dh = 0.24; consoleUnit(cons, { x0: mx0, x1: mx1, y0: FL + PL, h: dh, d: 0.4, body: WHITE_LAC, frontFn: dfront, sections: [{ w: 1, type: 'drawer' }, { w: 1, type: 'drawer' }, { w: 1, type: 'drawer' }] });
@@ -396,7 +397,7 @@ export function buildTvWall(ctx, style) {
     shel.add(wb(UX0 + 0.08, UX0 + 0.44, 1.2, 1.225, WF - 0.2, WF - 0.022, WAL)); shel.add(wb(TVX - 0.42, TVX + 0.42, 2.05, 2.08, WF - 0.22, WF - 0.006, WAL));
     moveTV(TVX, WF - 0.01);
     // streaming home screen on the TV (generic tiles, no logos / titles)
-    const scr = new T.Mesh(new T.PlaneGeometry(1.43, 0.81), once('__tw_tv_home', () => new T.MeshBasicMaterial({ name: '__tw_tv_home', toneMapped: true, map: (() => { const c = cnv(1024, 580), x = c.getContext('2d'); const gr = x.createLinearGradient(0, 0, 1024, 300); gr.addColorStop(0, '#0d1b2a'); gr.addColorStop(0.6, '#24364d'); gr.addColorStop(1, '#5b4a3a'); x.fillStyle = gr; x.fillRect(0, 0, 1024, 580);
+    const scr = new T.Mesh(new T.PlaneGeometry(1.43, 0.81), once('__tw_tv_home', () => new T.MeshBasicMaterial({ name: '__tw_tv_home_glow', transparent: true, depthWrite: false, toneMapped: true, map: (() => { const c = cnv(1024, 580), x = c.getContext('2d'); const gr = x.createLinearGradient(0, 0, 1024, 300); gr.addColorStop(0, '#0d1b2a'); gr.addColorStop(0.6, '#24364d'); gr.addColorStop(1, '#5b4a3a'); x.fillStyle = gr; x.fillRect(0, 0, 1024, 580);
       const sun = x.createRadialGradient(780, 150, 10, 780, 150, 220); sun.addColorStop(0, 'rgba(255,200,140,0.8)'); sun.addColorStop(1, 'rgba(255,200,140,0)'); x.fillStyle = sun; x.fillRect(0, 0, 1024, 330); x.fillStyle = '#1c2633'; x.beginPath(); x.moveTo(0, 300); x.lineTo(300, 200); x.lineTo(520, 280); x.lineTo(760, 190); x.lineTo(1024, 290); x.lineTo(1024, 330); x.lineTo(0, 330); x.fill();
       x.fillStyle = 'rgba(255,255,255,0.85)'; x.fillRect(40, 70, 260, 26); x.fillRect(40, 108, 180, 12); x.fillStyle = '#0b0f14'; x.fillRect(0, 330, 1024, 250);
       ['#c9302c', '#e9e9e9', '#1d3f8f', '#2c8fd6', '#ffffff', '#6b2fb0', '#1f1f1f'].forEach((cc, i) => { x.fillStyle = cc; x.fillRect(40 + i * 136, 350, 122, 62); });
@@ -445,8 +446,8 @@ function stoneWall(T) {
   const hAt = (u, v) => { const ix = Math.min(cw - 1, Math.max(0, Math.round(u * (cw - 1)))), iy = Math.min(ch - 1, Math.max(0, Math.round((1 - v) * (ch - 1)))); return data.id[(iy * cw + ix) * 4] / 255; };
   const pg = new T.PlaneGeometry(W, H, Math.round(W / 0.015), Math.round(H / 0.015)), pp = pg.attributes.position;
   for (let i = 0; i < pp.count; i++) { const u = (pp.getX(i) + W / 2) / W, v = (pp.getY(i) + H / 2) / H; pp.setZ(i, 0.004 + 0.018 * hAt(u, v)); }
-  pg.computeVertexNormals(); const m = new T.Mesh(pg, data.mat); m.rotation.y = Math.PI; m.scale.x = -1; m.position.set((X0 + X1) / 2, FL + H / 2, WF);
-  // rotation π about y turns +z (relief) into −z; scale.x −1 keeps u running west→east as seen from the room
+  pg.computeVertexNormals(); const m = new T.Mesh(pg, data.mat); m.rotation.y = Math.PI; m.position.set((X0 + X1) / 2, FL + H / 2, WF);
+  // rotation π about y turns +z (relief) into −z (the random coursing is simply mirrored)
   g.add(m); g.add(wb(X0, X1, FL, CE, WF, 0, std('__tw_stone_base', { color: 0xcfc9bf, roughness: 0.95 })));
   return g;
 }

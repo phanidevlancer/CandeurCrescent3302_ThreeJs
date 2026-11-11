@@ -12,12 +12,27 @@ const BED_CUT = [[1.70, -0.05, -8.40], [4.065, 0.86, -5.90]];
 // 1.587 × 2.052 m; duvet top 0.742 at the centre) and stands exactly where it stood (head on the north wall, same orientation).
 // Model at scale 1: 1.988 × 2.335 m over the bedding, duvet top 0.594 above its base → sy = (0.742 − 0.056) / 0.594.
 const V1BED = { x0: 1.787, x1: 3.374, z0: -8.302, z1: -6.250 }, MODEL_TOP = 0.594, V1_TOP = 0.742, FLOOR = 0.056;
+// Wardrobe slot (owner 2026-11-11 "give this as another sliding wardrobe option for bedroom 2"). The v1 east wardrobe (measured in the
+// viewer): teak carcass x 4.155–4.758, z −8.193…−5.767, top 2.977; three ivory-plaster bypass sliders on a brass track at x 4.067–4.139,
+// fronts 0.135–2.925; carcass + track + fronts are merged into bedroom-2#1 (with the bed), rails = bedroom-2#4/#5. Ceiling 3.05 over the
+// front part, a bulkhead (fascia) down to 2.91 at x ≥ 4.54 → the new carcass stops at 2.905 and a closed oak header runs up to the
+// ceiling over the front 0.52 m. Same footprint: x 4.067 → 4.758 (0.691 deep), z −8.193 → −5.767 (2.426 wide).
+const WARD = { x0: 4.067, x1: 4.758, z0: -8.193, z1: -5.767, top: 2.905, ceil: 3.048, fascia: 4.54 }, WFLOOR = 0.056;
+const WARDROBE = [
+  { id: 'current', name: 'Ivory plaster sliders (as built)', summary: 'The existing 2.4 m east wardrobe: three ivory lime-plaster sliding fronts with a teak band and recessed bronze pulls on a brass track.', search: ['ivory sliding wardrobe teak band', 'lime plaster wardrobe doors'] },
+  { id: 'sage-gloss-slider', ref: 'references/bedroom-2/2026-11-11_sliding-wardrobe-sage-gloss.png', name: 'Sage gloss sliders + pale oak frame',
+    summary: 'Owner reference: the same 2.43 m wardrobe rebuilt floor to ceiling in pale oak (sides, top, header to the ceiling, slim pale-gold top track) on a recessed sage plinth, with two 1.2 m bypass sliders in high-gloss sage lacquer, each divided into four panels by thin oak-brass inlay lines at the same heights on both doors, and long oak-brass bar pulls on the outer edges. Inside (pale oak): left bay = two shelves of folded clothes, a shirt rail, a 5-drawer stack with blue knitwear on top and a shoe tier below; right bay = shelves with folded linen and jute baskets, a long-hang rail (dresses, coats) and a two-tier shoe shelf; warm LED under the first shelf of each bay. Not added: the reference\u2019s floor plants and stump vase (the 0.70 m path between the bed and the wardrobe must stay clear).',
+    search: ['sage green sliding wardrobe', 'sage green gloss wardrobe oak frame', 'sliding wardrobe brass inlay lines', 'two door sliding wardrobe green lacquer', 'oak wardrobe interior drawers shelves rail'] },
+];
 export default {
   id: 'option1',
   ref: 'references/bedroom-2/2026-11-10_dark-study-slat-wall.png',
   name: 'Option 1 · Dark study wall (walnut slats + blueprints)',
   summary: 'The south (desk) wall finished end to end in the owner reference\'s look: deep charcoal-green wall, a tall walnut slat panel at the west end with a long walnut shelf (plant, books, brass orb) and a hanging planter, two framed sci-fi blueprints above the monitor, a short slat panel under a small shelf (retro radio, succulent) with a column of three small prints between the desk and the door, a black industrial pipe lamp with an Edison bulb, slats continuing over the door. The desk is the owners\' black sit/stand desk model at exactly their 1600 × 700 size and place; chair and desk gear untouched; the owners\' 32-inch LG monitor on its stand. Bed: the owners\' white storage bed model. Where the open bedroom door rests (east 0.96 m, up to 2.32 m) everything is flat (3 mm slat-look veneer), real slats only above the door, so the door opens and closes fully.',
   search: ['dark green study wall wood slats', 'gaming desk setup wall shelves slats', 'blueprint posters office wall', 'industrial pipe lamp edison bulb', 'walnut slat wall desk'],
+  slots: [
+    { id: 'wardrobe', label: 'Wardrobe', default: 'current', anchor: [3.98, 2.45, (WARD.z0 + WARD.z1) / 2], variants: WARDROBE },
+  ],
   facts: [
     ['Kept', 'owners\' desk size + place 1600 × 700 (top 0.74), task lamp — unchanged'],
     ['PC', 'open-frame water-cooled showcase PC shown at 0.6 × ≈ 355 × 390 × 209 mm (Daniel Cardona, CC BY 4.0) sideways on the desk\'s east end, glass towards the chair; replaces the table lamp'],
@@ -114,6 +129,28 @@ export default {
     const ch = ctx.lib.model('ikea_markus_chair');
     if (ch) { const v1c = ctx.one('bedroom-2#3'); if (v1c) ctx.hide(v1c); ch.obj.position.y = 0.01;
       ctx.add('chair', ch, 2.61, -5.6, 0, { name: 'IKEA MARKUS office chair (model by Graham Rust)', seat: true }); }
+
+    // ---- wardrobe slot (east wall): same footprint as the v1 wardrobe, carcass to the bulkhead, header up to the ceiling
+    if (ctx.slot('wardrobe') === 'sage-gloss-slider') {
+      const v1w = ctx.one('bedroom-2#1');
+      if (v1w) {
+        // the v1 wardrobe lives in the bed's merged group: fronts / track / pulls / LED profile by material, the teak carcass by triangle box,
+        // and the three slider movers' teak bands (movers keep their own meshes)
+        ctx.suppress(v1w, /Warm ivory lime plaster|Aged brushed brass|Warm 2850K LED/);
+        ctx.suppress({ meshes: v1w.meshes.filter(m => /^33-bedroom-2-east-wardrobe/.test(m.userData.mov || '')) }, /./);
+        ctx.cutGroup(v1w, [4.05, -0.1, -8.30], [4.80, 3.1, -5.70], /Oiled teak/);
+      }
+      ['bedroom-2#4', 'bedroom-2#5'].forEach(id => { const g = ctx.one(id); if (g) ctx.hide(g); });   // v1 hanging rails
+      // rug motifs that sit fully under the carcass (the v1 rug already ran under the wardrobe) go; the v1 downlight at x 4.28 that the
+      // ceiling-high header would bury moves 0.45 m west, in front of the sliders (wardrobe wash light)
+      ['woven-geometric#28', 'woven-geometric#30'].forEach(id => { const g = ctx.one(id); if (g) ctx.hide(g); });
+      ctx.rigid(['recessed-downlight#3', 'warm-downlight#3'].map(ctx.one).filter(Boolean), { x: 0, z: 0 }, { x: -0.45, z: 0 }, 0);
+      const W = WARD.z1 - WARD.z0, D = WARD.x1 - WARD.x0;
+      const wr = ctx.lib.slidingWardrobe({ style: 'sage-gloss', W, D, top: WARD.top - WFLOOR, ceil: WARD.ceil - WFLOOR, fasZ: WARD.x1 - WARD.fascia + 0.02 });
+      wr.obj.position.y = WFLOOR;
+      // east wall: ry −π/2 → local +x runs south, local +z faces west into the room; origin = centre of the back face
+      ctx.add('wardrobe', wr, WARD.x1, (WARD.z0 + WARD.z1) / 2, -Math.PI / 2, { name: 'Sage gloss sliding wardrobe, pale oak frame (owner reference)' }); ctx.mood(wr.moods);
+    }
 
     // ---- bed
     const v1 = ctx.one('bedroom-2#1'); let bedAdded = false;
