@@ -81,6 +81,8 @@ function updateRectPool(instant = false) {
     let fx, fz, fy = EYE, only = null;
     if (mode === 'walk' || TOUR) { camera.getWorldPosition(rl.v); fx = rl.v.x; fy = rl.v.y; fz = rl.v.z; }
     else { fx = orbit.target.x; fz = orbit.target.z; fy = orbit.target.y; if (mode === 'room') only = curRoom; }
+    // tour hook (__tour.rectFocus): rank the rect-light sources as if the camera stood at rl.focus [x, y, z]
+    if (rl.focus) { fx = rl.focus[0]; fy = rl.focus[1]; fz = rl.focus[2]; }
     const here = only || roomAt(fx, fz), cand = [];
     scene.traverse(o => {
       if (!o.isRectAreaLight || o.userData.rlProxy) return;
@@ -1152,7 +1154,32 @@ function importLayout(d) {
     }
     if (store.sel.Utility && store.sel.Utility !== 'option1') store.sel.Utility = 'option1';
   }
-  store.mig = { ...(d.mig || {}), dress1110: 1, balbench1111: 1, bedrooms1111: 1, outchair1111: 1, utilsink1111: 1 };
+  // one-time (owner 2026-11-12: the master bedroom must be Option 3 = gaming wall on the Hall 1 wall + walnut balcony wall,
+  // TV wall 'Beige S-curve + study cabinet', bed 'Dreamburst tufted wingback, mushroom taupe') -> set that pick once
+  if (!(d.mig && d.mig.master1112)) {
+    const r = 'Master bedroom';
+    store.sel[r] = 'option3'; chosen[r] = true;
+    store.variant[r + '|option3'] = 'walnut-moon';
+    store.variant[r + '|option3|tvwall'] = 'beige-wave-study';
+    store.variant[r + '|option3|bed'] = 'dreamburst-taupe';
+  }
+  // one-time (owner 2026-11-12: "living area 2" = Option 1 · Real products with the DailyArt sectional + the 'Current · grey
+  // microcement + walnut console' TV wall) -> set that pick once
+  if (!(d.mig && d.mig.living1112)) {
+    const r = 'Living and dining';
+    store.sel[r] = 'option1'; chosen[r] = true;
+    store.variant[r + '|option1|sofa'] = 'sectional-dailyart';
+    store.variant[r + '|option1|tvwall'] = 'current';
+  }
+  // one-time (owner 2026-11-12): Puja = black stone shrine + Balaji2 sculpt (glossy black) + charcoal honed stone walls
+  if (!(d.mig && d.mig.puja1112)) {
+    const r = 'Puja';
+    store.sel[r] = 'option1'; chosen[r] = true;
+    store.variant[r + '|option1|interior'] = 'black-stone';
+    store.variant[r + '|option1|idol'] = 'sketchfab-black';
+    store.variant[r + '|option1|walls'] = 'charcoal';
+  }
+  store.mig = { ...(d.mig || {}), dress1110: 1, balbench1111: 1, bedrooms1111: 1, outchair1111: 1, utilsink1111: 1, master1112: 1, living1112: 1, puja1112: 1 };
   for (const r of roomNames) setRoomLayout(r, (chosen[r] && store.sel[r]) || DEFAULTS[r] || 'original', { quiet: true });
   applyVisibility(); renderLayoutUI();
 }
@@ -2665,6 +2692,8 @@ function setupTour() {
       st.on = on; st.fade = on ? 1 : 0; st.t0 = -1e9; setMood(room, on ? 'movie' : 'normal');
       scene.updateMatrixWorld(true); updateProjectors(performance.now(), 0); shadowsDirty(); return true;
     },
+    // pin the rect-light proxy ranking to a point (e.g. inside a small dark room seen from outside), null = follow the camera
+    rectFocus(p) { rl.focus = p || null; rl.t = 0; updateRectPool(true); return true; },
     projectorImage(room, i) { const p = projectorParts(room), st = projState[room]; if (!p || !st || !projTex[i]) return false; st.idx = i; st.swapT = performance.now(); p.sc.imgMat.map = projTex[i]; p.sc.imgMat.needsUpdate = true; return true; },
     // pose every mover whose id matches `re` (doors, sliders, curtains…) at t (0..1), e.g. movers('balcony-sliding', 1)
     movers(re, t) { const rx = new RegExp(re); let n = 0; for (const mv of movers.values()) if (rx.test(mv.id) && mv.t !== t) { mv.t = mv.target = t; poseMover(mv); n++; } if (n) { shadowsDirty(); animateMovers(0); } return n; },

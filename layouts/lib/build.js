@@ -1140,9 +1140,12 @@ export function makeLib(mat, getModel = () => null) {
     // downlight in the frame head (outside, as in the reference) + its glow on the door faces
     const dl = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.032, 0.006, 24), led(0xffd9a0, 3)); moods.strips.push(dl.material); dl.position.set(0, H + 0.001, 0.0); root.add(dl);
     root.add(cyl(0.04, 0.04, 0.004, BR, 0, H + 0.0, 0, 24));
+    // owner 2026-11-12: the glow lies on the door FACES, so each half rides on its leaf (a fixed plane floated across the open
+    // doorway and tinted the black stone shrine brown when seen from outside)
+    let washMat = null;
     { const cv = canvasTex(128, 256, (x, w, h) => { const gr = x.createRadialGradient(w / 2, 0, 4, w / 2, 0, h); gr.addColorStop(0, 'rgba(255,214,150,0.22)'); gr.addColorStop(1, 'rgba(255,214,150,0)'); x.fillStyle = gr; x.fillRect(0, 0, w, h); });
       const wm = new THREE.MeshBasicMaterial({ map: cv, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, name: '__puja_wash' });
-      const wp = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 1.4), wm); wp.position.set(0, H - 0.7, 0.012); root.add(wp); moods.halos.push(wm); }
+      moods.halos.push(wm); washMat = wm; }
     // materials of the leaf infills
     const reeded = new THREE.MeshStandardMaterial({ name: '__reeded_glass', transparent: true, opacity: 0.6, roughness: 0.2, metalness: 0, color: 0xf4ecdc, emissive: new THREE.Color(0x2a1e0e), emissiveIntensity: 0.5,
       map: canvasTex(256, 32, (x, w, h) => { for (let i = 0; i < w; i += 4) { const gr = x.createLinearGradient(i, 0, i + 4, 0); gr.addColorStop(0, '#d9cbb0'); gr.addColorStop(0.5, '#fbf3e2'); gr.addColorStop(1, '#bfae8e'); x.fillStyle = gr; x.fillRect(i, 0, 4, h); } }) });
@@ -1202,6 +1205,11 @@ export function makeLib(mat, getModel = () => null) {
     for (const sx of [1, -1]) {
       const L = leaf(sx), hx = -sx * hingeX;
       L.position.set(hx, 0, 0);
+      if (washMat) {
+        // this leaf's half of the 1.0 m wash (root x −0.5…0 for sx = 1, 0…0.5 for sx = −1)
+        const hm = washMat.clone(), tx = washMat.map.clone(); tx.needsUpdate = true; tx.repeat.x = 0.5; tx.offset.x = sx > 0 ? 0 : 0.5; hm.map = tx; moods.halos.push(hm);
+        const wp = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 1.4), hm); wp.position.set(sx * (hingeX - 0.25), H - 0.7, 0.012); L.add(wp);
+      }
       // inward swing: the free edge goes to −z (left leaf +90°, right leaf −90°)
       const a = swing === 'in' ? sx * Math.PI * 0.5 : -sx * Math.PI * 0.5;
       tagGroup(L, { type: 'cab', hinge: [hx, 0, swing === 'in' ? zf : zf + t], a1: a, label: 'puja door', fitted: true });

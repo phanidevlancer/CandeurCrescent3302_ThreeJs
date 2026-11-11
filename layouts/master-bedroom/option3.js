@@ -38,7 +38,7 @@ export default {
   variantLabel: 'Bed wall',
   variantAnchor: [1.9, 2.45, 4.75],            // ⇄ icon on the balcony (bed) wall
   // second switchable element: the gaming TV wall's backdrop (owner: "I might have multiple TV wall ideas")
-  slots: [BED_SLOT, { id: 'tvwall', label: 'TV wall', default: 'acoustic', anchor: [1.55, 2.35, 0.45], variants: [
+  slots: [BED_SLOT, { id: 'tvwall', label: 'TV wall', default: 'beige-wave-study', anchor: [1.55, 2.35, 0.45], variants: [
     { id: 'acoustic', name: 'Charcoal acoustic slats + hexagons', summary: 'Charcoal felt and micro-slat acoustic backdrop, LED channels at both edges, hexagon acoustic tiles; sync lights follow the game.', search: ['gaming TV wall acoustic panel', 'hexagon acoustic panel gaming wall', 'charcoal slat wall TV unit'] },
     { id: 'stone', name: 'Dark stone slab + walnut fins', summary: 'Book-matched dark veined stone slab behind the TV with walnut fins on both sides and sync-lit LED reveals.', search: ['dark marble TV wall walnut', 'stone slab TV wall LED', 'luxury TV wall gaming setup'] },
     { id: 'green-arch', ref: 'references/master-bedroom/2026-11-10_green-arch-gaming-tv-wall.png', name: 'Forest green arches + oak slats', summary: 'Owner reference (references/master-bedroom/2026-11-10_green-arch-gaming-tv-wall.png): deep forest-green panelling, a tall arch of light-oak vertical slats framing the TV with a warm LED outline, crown band, an open lit arched display niche for collectibles on the tall unit (fridge + pull-out desk still hidden below), cream/green console, matching flat arch outline on the door return.', search: ['green arch TV wall gaming', 'arched TV unit with slats', 'green wall TV unit with arched niches', 'collectibles display arch niche'] },
@@ -96,7 +96,7 @@ export default {
     // a v1 floor-level fixture sits behind the tall unit; designs without a tall unit would show it → cut it out
     if (ctx.hideStatic) ctx.hideStatic(/discreet_split_AC/i);   // v1 split AC + its floor-level pipe sleeve: option 3 plans its own AC (west wall)
     if (ctx.cutStatic) ctx.cutStatic([0, -0.3, 0.15], [0.9, 0.6, 0.9], ['ceilfix']);
-    const gw = lib.gamingWall({ tvCx: X, tvCy: 1.3, tvInch: 55, backdrop: ctx.slot('tvwall') || 'acoustic' });
+    const gw = lib.gamingWall({ tvCx: X, tvCy: 1.3, tvInch: 55, backdrop: ctx.slot('tvwall') || 'beige-wave-study' });
     ctx.add('gaming-wall', gw, 0, 0.2, 0, { name: 'Gaming media wall (TV, PS5, fridge, desk)' }); ctx.mood(gw.moods);
     // east: decorative panels hiding the walk-in (local x runs south from z 1.24)
     const pw = lib.panelWall({ length: 3.7, door: [2.27 - 1.24, 3.24 - 1.24], mirrorAt: 0.5, artAt: 2.85 });

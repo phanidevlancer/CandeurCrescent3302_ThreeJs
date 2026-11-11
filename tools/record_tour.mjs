@@ -5,6 +5,9 @@
 //                              [--stills 12.5,40,...]   render only these times (s) as JPEGs into --frames (for checking)
 //                              [--from N --to M]        render only frames N..M (resume) ; [--no-encode] [--keep]
 //                              [--swiftshader]          software GL instead of the Mac GPU (very slow)
+//                              [--style youtube]        the long YouTube-style tour (tools/tour_youtube.mjs): title card, lower thirds,
+//                                                       detail inserts, cross-dissolves, evening segment, credits, music, chapters.txt,
+//                                                       thumbnail + 720p copy → tour/home_tour_youtube.mp4 (default style: classic)
 //
 // Needs: the viewer served on http://localhost:8000 (python3 tools/serve.py 8000), Google Chrome, ffmpeg.
 // No npm packages: talks to headless Chrome over the DevTools protocol with Node's built-in WebSocket (Node >= 22).
@@ -19,7 +22,8 @@ import os from 'node:os';
 const HERE = path.dirname(new URL(import.meta.url).pathname), ROOT = path.resolve(HERE, '..');
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i < 0 ? d : (process.argv[i + 1] && !process.argv[i + 1].startsWith('--') ? process.argv[i + 1] : true); };
 const W = +arg('w', 1920), H = +arg('h', 1080), FPS = +arg('fps', 30);
-const OUT = path.resolve(ROOT, arg('out', 'tour/home_tour.mp4'));
+const STYLE = arg('style', 'classic'), YT = STYLE === 'youtube';
+const OUT = path.resolve(ROOT, arg('out', YT ? 'tour/home_tour_youtube.mp4' : 'tour/home_tour.mp4'));
 const FRAMES = path.resolve(arg('frames', path.join(os.tmpdir(), 'tour_frames')));
 const URL_BASE = arg('url', 'http://localhost:8000/');
 const CHROME = arg('chrome', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
@@ -117,7 +121,8 @@ function makePlanner(o) {
     }
     return sm;
   }
-  return { astar, free, clear, snap, los };
+  const inside = (x, z) => idx(x, z) >= 0;
+  return { astar, free, clear, snap, los, inside };
 }
 
 /* ---------------- timeline ---------------- */
@@ -130,20 +135,39 @@ const PITCH = -0.07;
 class Tour {
   constructor(planner, start) {
     this.P = planner; this.t = 0; this.shots = []; this.caps = []; this.ramps = []; this.log = [];
+    this.xfs = []; this.lts = []; this.cards = []; this.chapters = []; this.maxYawRate = 0; this.limitYaw = false;   // youtube style sets limitYaw
     this.cur = { x: start[0], z: start[1], yaw: start[2], pitch: PITCH, eye: 1.6 };
   }
+  // cross-dissolve from the frame just before now into whatever comes next
+  xf(dur = 0.7) { this.xfs.push({ t0: this.t, dur }); return this; }
+  // lower third (YouTube style): kicker = small label above the title
+  lt(title, sub = '', { kicker = '', dur = 5.5, delay = 0.5 } = {}) { this.lts.push({ t0: this.t + delay, dur, title, sub, kicker }); this.log.push([this.t + delay, title + (sub ? ' — ' + sub : '')]); return this; }
+  // full-screen card (title / end / credits) shown from now for dur seconds
+  card(kind, dur, data = {}, { fadeIn = 0.8, fadeOut = 0.8 } = {}) { this.cards.push({ t0: this.t, dur, kind, data, fadeIn, fadeOut }); return this; }
+  chapter(name) { this.chapters.push([this.t, name]); this.log.push([this.t, '## ' + name]); return this; }
   push(dur, fn) { const t0 = this.t; this.shots.push({ t0, t1: t0 + dur, fn }); this.t += dur; return this; }
   caption(title, sub, dur = 4.2) { this.caps.push({ t0: this.t, dur, title, sub }); this.log.push([this.t, title + (sub ? ' — ' + sub : '')]); return this; }
   // world-state ramps: key ∈ movers:<regex> | screen | mood | light ; value interpolated (numbers) or switched (strings)
   set(key, from, to, dur = 0, delay = 0) { this.ramps.push({ key, t0: this.t + delay, t1: this.t + delay + dur, from, to }); return this; }
-  hold(dur) { const c = { ...this.cur }; return this.push(dur, () => ({ cam: c })); }
-  turn(target, dur, { pitch = PITCH } = {}) {
+  // hold the pose; drift > 0 = a slow gimbal push-in (m/s) along the view, stopped short of obstacles
+  hold(dur, { drift = 0 } = {}) {
+    const c = { ...this.cur }; if (!drift) return this.push(dur, () => ({ cam: c }));
+    let L = drift * dur; const dx = -Math.sin(c.yaw), dz = -Math.cos(c.yaw);
+    while (L > 0.01 && !this.P.free(c.x + dx * (L + 0.25), c.z + dz * (L + 0.25), 0.2)) L *= 0.7;
+    this.cur = { ...c, x: c.x + dx * L, z: c.z + dz * L };
+    return this.push(dur, u => { const e = ease(u) * 0.6 + u * 0.4; return { cam: { ...c, x: c.x + dx * L * e, z: c.z + dz * L * e } }; });
+  }
+  // pan in place; the duration grows if needed so the peak yaw speed stays under maxRate (deg/s)
+  turn(target, dur, { pitch = PITCH, maxRate = 22, fov } = {}) {
     const c = { ...this.cur }, y1 = Array.isArray(target) ? yawTo([c.x, c.z], target) : target, dy = wrap(y1 - c.yaw), p0 = c.pitch;
-    this.cur = { ...c, yaw: c.yaw + dy, pitch };
-    return this.push(dur, u => ({ cam: { ...c, yaw: c.yaw + dy * smooth(u), pitch: p0 + (pitch - p0) * smooth(u) } }));
+    if (this.limitYaw) dur = Math.max(dur, 1.875 * Math.abs(dy) * 180 / Math.PI / maxRate);
+    const f0 = c.fov ?? 50, f1 = fov ?? f0;
+    this.cur = { ...c, yaw: c.yaw + dy, pitch, fov: f1 };
+    return this.push(dur, u => ({ cam: { ...c, yaw: c.yaw + dy * smooth(u), pitch: p0 + (pitch - p0) * smooth(u), fov: f0 + (f1 - f0) * smooth(u) } }));
   }
   // walk along an A* path (or a straight line with {direct:true}) at ~speed m/s, gaze along the path, ending on `look`
-  move(to, { look = null, speed = 0.8, direct = false, endPitch = PITCH, lookAhead = 1.3 } = {}) {
+  move(to, opts = {}) {
+    const { look = null, speed = 0.8, direct = false, endPitch = PITCH, lookAhead = 1.3, _try = 0, gaze = 'path' } = opts;
     const c = { ...this.cur };
     const poly = direct ? [[c.x, c.z], to] : this.P.astar([c.x, c.z], to);
     // resample by arc length
@@ -160,6 +184,7 @@ class Tour {
       let y = Math.hypot(q[0] - p[0], q[1] - p[1]) > 0.05 ? yawTo(p, q) : prev;
       if (endYaw !== null) { const w = smooth((s - (L - 1.6)) / 1.6); const yl = Array.isArray(look) ? yawTo(p, look) : look; y = y + wrap(yl - y) * (L < 1.6 ? smooth(t / dur) : w); }
       const w0 = smooth(t / Math.min(1.4, dur * 0.6)); y = c.yaw + wrap(y - c.yaw) * w0;
+      if (gaze === 'blend' && endYaw !== null) y = c.yaw + wrap(endYaw - c.yaw) * smooth(t / dur);   // gimbal: one smooth pan start → end
       y = prev + wrap(y - prev); yaws.push(y); prev = y;
     }
     // low-pass the gaze (0.5 s gaussian) but keep the first/last frames exact
@@ -169,13 +194,38 @@ class Tour {
     const end = at(L), p0 = c.pitch;
     this.cur = { ...c, x: end[0], z: end[1], yaw: yawAt(1), pitch: endPitch };
     for (let s = 0; s <= L; s += 0.05) { const p = at(s); if (!direct && !this.P.free(p[0], p[1], 0.18)) console.warn(`  path close to obstacle at ${p.map(v => v.toFixed(2))}`); }
-    return this.push(dur, u => { const p = at(sOf(u * dur)); return { cam: { x: p[0], z: p[1], yaw: yawAt(u), pitch: p0 + (endPitch - p0) * smooth(u), eye: c.eye } }; });
+    let mr = 0; for (let i = 1; i <= n; i++) mr = Math.max(mr, Math.abs(fix(i) - fix(i - 1)) * n / dur * 180 / Math.PI);
+    // too fast a pan for a gimbal look → walk the same path more slowly (the gaze timing scales with it)
+    if (process.env.TOUR_DEBUG) console.log(`  move @${this.t.toFixed(1)} L ${L.toFixed(2)} dur ${dur.toFixed(1)} speed ${speed.toFixed(2)} yaw ${mr.toFixed(0)}°/s`);
+    if (this.limitYaw && mr > 24 && _try < 5) { this.cur = c; return this.move(to, { ...opts, speed: speed * Math.max(0.6, 22 / mr), _try: _try + 1 }); }
+    this.maxYawRate = Math.max(this.maxYawRate, mr); if (mr > 26) console.warn(`  move @${this.t.toFixed(1)}s: yaw speed ${mr.toFixed(0)}°/s`);
+    return this.push(dur, u => { const p = at(sOf(u * dur)); return { cam: { x: p[0], z: p[1], yaw: yawAt(u), pitch: p0 + (endPitch - p0) * smooth(u), eye: c.eye, fov: c.fov } }; });
   }
   // dip to black, cut to a new pose (e.g. seated), fade back in
   cut(pose, dip = 0.45) {
     const c = { ...this.cur }; this.set('fade', 0, 1, dip); this.push(dip, () => ({ cam: c }));
     this.cur = { pitch: PITCH, eye: 1.6, ...pose }; this.set('fade', 1, 0, dip);
     const n = { ...this.cur }; return this.push(dip, () => ({ cam: n }));
+  }
+  // camera move between two look-at keyframes A, B = { p: [x, y, z], at: [x, y, z], fov } (y = height); orbit: true = plan view
+  la(dur, A, B = A, { e = smooth, orbit = false, label = '' } = {}) {
+    const lerp = (a, b, u) => a.map((v, i) => v + (b[i] - v) * u), F0 = A.fov ?? this.cur.fov ?? 50, F1 = B.fov ?? F0;
+    const poseOf = (p, at, fov) => { const dx = at[0] - p[0], dy = at[1] - p[1], dz = at[2] - p[2]; return { x: p[0], z: p[2], eye: p[1], yaw: Math.atan2(-dx, -dz), pitch: Math.atan2(dy, Math.hypot(dx, dz)), fov }; };
+    const f = u => { const k = e(u); return orbit ? { orbit: { pos: lerp(A.p, B.p, k), target: lerp(A.at, B.at, k) }, fov: F0 + (F1 - F0) * k } : { cam: poseOf(lerp(A.p, B.p, k), lerp(A.at, B.at, k), F0 + (F1 - F0) * k) }; };
+    if (!orbit) {
+      let prev = f(0).cam, worst = 1e9, mr = 0;
+      for (let i = 1; i <= 60; i++) { const c = f(i / 60).cam; mr = Math.max(mr, Math.abs(wrap(c.yaw - prev.yaw)) * 60 / dur * 180 / Math.PI); prev = c; if (c.eye > 0.3 && c.eye < 1.75 && this.P.inside(c.x, c.z)) worst = Math.min(worst, this.P.clear(c.x, c.z)); }
+      this.maxYawRate = Math.max(this.maxYawRate, mr); if (mr > 26) console.warn(`  la @${this.t.toFixed(1)}s ${label}: yaw speed ${mr.toFixed(0)}°/s`);
+      if (worst < 0.12) console.warn(`  la @${this.t.toFixed(1)}s ${label}: camera ${worst.toFixed(2)} m from an obstacle (check the still)`);
+      this.cur = { ...f(1).cam };
+    }
+    return this.push(dur, f);
+  }
+  // hard cut (no time) to a new pose; combine with xf() for a dissolve
+  cutTo(pose, { snap = true } = {}) {
+    this.cur = { pitch: PITCH, eye: 1.6, fov: this.cur.fov, ...pose };
+    if (snap && this.P.inside(pose.x, pose.z) && !this.P.free(pose.x, pose.z)) { const q = this.P.snap([pose.x, pose.z]); this.cur.x = q[0]; this.cur.z = q[1]; }
+    return this;
   }
   // vertical change of eye height in place (sit down / stand up)
   eye(to, dur) { const c = { ...this.cur }; this.cur = { ...c, eye: to }; return this.push(dur, u => ({ cam: { ...c, eye: c.eye + (to - c.eye) * smooth(u) } })); }
@@ -196,7 +246,13 @@ class Tour {
     fade = Math.max(fade, 1 - smooth(t / 1.2), smooth((t - (this.t - 1.6)) / 1.5));
     let cap = { title: '', sub: '', a: 0 };
     for (const c of this.caps) if (t >= c.t0 && t < c.t0 + c.dur) { const u = t - c.t0; cap = { title: c.title, sub: c.sub || '', a: Math.min(1, u / 0.6, (c.dur - u) / 0.7) }; }
-    return { ...st, world, fade: +fade.toFixed(4), cap };
+    let lt = null, card = null, xf = null;
+    // a lower third never runs into the next dissolve
+    for (const c of this.lts) { if (c.end === undefined) { const nx = this.xfs.find(x => x.t0 > c.t0 + 0.3); c.end = Math.min(c.t0 + c.dur, nx ? nx.t0 - 0.15 : 1e9); c.dur = c.end - c.t0; } }
+    for (const c of this.lts) if (t >= c.t0 && t < c.t0 + c.dur) { const u = t - c.t0; lt = { title: c.title, sub: c.sub, kicker: c.kicker, a: +Math.min(1, smooth(u / 0.9), smooth((c.dur - u) / 0.8)).toFixed(4), u: +u.toFixed(3) }; }
+    for (const c of this.cards) if (t >= c.t0 && t < c.t0 + c.dur) { const u = t - c.t0; card = { kind: c.kind, data: c.data, u: +u.toFixed(3), dur: c.dur, a: +Math.min(1, smooth(u / c.fadeIn), smooth((c.dur - u) / c.fadeOut)).toFixed(4) }; }
+    for (const x of this.xfs) if (t >= x.t0 && t < x.t0 + x.dur) xf = { src: Math.round(x.t0 * FPS) - 1, a: +(1 - smooth((t - x.t0) / x.dur)).toFixed(4) };
+    return { ...st, world, fade: +fade.toFixed(4), cap, lt, card, xf };
   }
 }
 
@@ -280,36 +336,75 @@ const C = await openChrome();
 try {
   await C.send('Emulation.setDeviceMetricsOverride', { width: W, height: H, deviceScaleFactor: 1, mobile: false });
   await C.send('Runtime.enable');
+  // fresh Chrome profile (openChrome) = no saved layout → every room shows its DEFAULT option / slot variants
   await C.send('Page.navigate', { url: URL_BASE + '?tour=1&mode=walk' });
   for (let i = 0; ; i++) { if (await C.ev('!!window.__ready').catch(() => false)) break; if (i > 900) throw new Error('viewer did not load'); await sleep(300); }
   console.log(`viewer ready in ${((Date.now() - t0) / 1000).toFixed(1)} s`);
-  // obstacle map with the doors / sliders / sheers in the states used while walking
-  const o = await C.ev(`(()=>{const T=window.__tour;T.movers('balcony-sliding-door',1);T.movers('living-and-dining/fixed/curtains:cs',1);const o=T.occupancy();T.movers('balcony-sliding-door',0);T.movers('living-and-dining/fixed/curtains:cs',0);return o})()`);
-  const seats = { formal: await C.ev(`window.__tour.seat('formal-hall/option1/sofa')`) };
-  if (!seats.formal) throw new Error('formal-hall sofa not found');
-  const P = makePlanner(o);
-  const tour = buildTour(P, seats);
+  let tour, YTM = null;
+  if (YT) {
+    YTM = await import('./tour_youtube.mjs');
+    tour = await YTM.buildYoutube({ C, Tour, makePlanner, FPS, W, H, yawTo, smooth, ease, PITCH });
+  } else {
+    // obstacle map with the doors / sliders / sheers in the states used while walking
+    const o = await C.ev(`(()=>{const T=window.__tour;T.movers('balcony-sliding-door',1);T.movers('living-and-dining/fixed/curtains:cs',1);const o=T.occupancy();T.movers('balcony-sliding-door',0);T.movers('living-and-dining/fixed/curtains:cs',0);return o})()`);
+    const seats = { formal: await C.ev(`window.__tour.seat('formal-hall/option1/sofa')`) };
+    if (!seats.formal) throw new Error('formal-hall sofa not found');
+    tour = buildTour(makePlanner(o), seats);
+  }
   const N = Math.round(tour.t * FPS);
-  console.log(`tour ${tour.t.toFixed(1)} s = ${N} frames @ ${FPS} fps, ${W}x${H}`);
+  const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+  console.log(`tour ${tour.t.toFixed(1)} s (${mmss(tour.t)}) = ${N} frames @ ${FPS} fps, ${W}x${H}; peak yaw speed ${tour.maxYawRate.toFixed(1)}°/s`);
   for (const [t, c] of tour.log) console.log(`  ${String(Math.floor(t / 60)).padStart(1)}:${(t % 60).toFixed(1).padStart(4, '0')}  ${c}`);
+  if (YT) {
+    const ch = tour.chapters.map(([t, n]) => `${mmss(t)} ${n}`).join('\n') + '\n';
+    if (!STILLS) { fs.writeFileSync(path.join(path.dirname(OUT), 'chapters.txt'), ch); console.log('chapters → tour/chapters.txt'); }
+  }
+  if (arg('shotlist', false)) console.log('SHOTS ' + tour.shots.filter(s => s.t1 - s.t0 > 1.5).map(s => ((s.t0 + s.t1) / 2).toFixed(1)).join(','));
   if (PLAN_ONLY) { await C.close(); process.exit(0); }
   fs.mkdirSync(FRAMES, { recursive: true });
-  const sent = {};
+  if (YTM) await C.ev(YTM.OVERLAY_JS);
+  const sent = {}; let xfKey = -1, depth = 0;
+  const fname = f => path.join(FRAMES, `f_${String(f).padStart(5, '0')}.jpg`);
+  async function grab(file) {
+    const shot = await C.send('Page.captureScreenshot', { format: 'jpeg', quality: 95 });
+    const buf = Buffer.from(shot.data, 'base64'); if (file) fs.writeFileSync(file, buf); return buf;
+  }
   async function frame(t, file) {
     const s = tour.state(t), w = s.world, cmd = [];
+    // cross-dissolve: show the last frame before the cut on top of the new shot (read back from disk, or re-rendered)
+    if (YTM) {
+      if (s.xf && s.xf.src !== xfKey && depth === 0) {
+        let buf = fs.existsSync(fname(s.xf.src)) ? fs.readFileSync(fname(s.xf.src)) : null;
+        if (!buf) { depth++; await frame(s.xf.src / FPS, null); buf = await grab(null); depth--; for (const k in sent) delete sent[k]; }
+        await C.ev(`__yt.xfSrc(${JSON.stringify('data:image/jpeg;base64,' + buf.toString('base64'))})`); xfKey = s.xf.src;
+      }
+    }
     for (const [k, v] of Object.entries(w)) {
       const val = typeof v === 'number' ? +v.toFixed(4) : v; if (sent[k] === val) continue; sent[k] = val;
       if (k.startsWith('movers:')) cmd.push(`T.movers(${JSON.stringify(k.slice(7))},${val})`);
       else if (k === 'screen') cmd.push(`T.screen('Master bedroom',${val})`);
+      else if (k.startsWith('screen:')) cmd.push(`T.screen(${JSON.stringify(k.slice(7))},${val})`);
       else if (k === 'mood') cmd.push(`T.mood('Master bedroom',${JSON.stringify(val)})`);
+      else if (k.startsWith('mood:')) cmd.push(`T.mood(${JSON.stringify(k.slice(5))},${JSON.stringify(val)})`);
+      else if (k.startsWith('projector:')) cmd.push(`await T.projector(${JSON.stringify(k.slice(10))},${val === 'on'})`);
+      else if (k.startsWith('js:')) cmd.push(String(val));
       else if (k === 'light') cmd.push(`T.light(${JSON.stringify(val)})`);
     }
+    const fov = s.cam ? s.cam.fov : s.fov;
+    if (fov && sent.fov !== +fov.toFixed(3)) { sent.fov = +fov.toFixed(3); cmd.push(`{const c=__app.cam();c.fov=${sent.fov};c.updateProjectionMatrix()}`); }
     cmd.push(s.cam ? `T.view(${JSON.stringify(s.cam)})` : `T.orbitView(${JSON.stringify(s.orbit)})`);
-    cmd.push(`T.caption(${JSON.stringify(s.cap.title)},${JSON.stringify(s.cap.sub)},${s.cap.a.toFixed(3)})`, `T.fade(${s.fade})`);
+    if (YTM) cmd.push(`__yt.apply(${JSON.stringify({ lt: s.lt, card: s.card, xf: depth ? null : s.xf, orbit: !s.cam })})`, `T.caption('','',0)`, `T.fade(${s.fade})`);
+    else cmd.push(`T.caption(${JSON.stringify(s.cap.title)},${JSON.stringify(s.cap.sub)},${s.cap.a.toFixed(3)})`, `T.fade(${s.fade})`);
     await C.ev(`(async()=>{const T=window.__tour;${cmd.join(';')};return T.render(${(t * 3).toFixed(3)})})()`);
-    const shot = await C.send('Page.captureScreenshot', { format: 'jpeg', quality: 94 });
-    fs.writeFileSync(file, Buffer.from(shot.data, 'base64'));
+    if (file) await grab(file);
   }
+  // thumbnail: hero frame from the timeline + title card, no lower third / bug / dissolve
+  async function thumbnail() {
+    await frame(YTM.THUMB_T, null);
+    await C.ev(`(async()=>{__yt.apply(${JSON.stringify({ lt: null, card: YTM.THUMB_CARD, xf: null, orbit: false })});document.getElementById('ytBug').style.opacity=0;await __tour.render(${(YTM.THUMB_T * 3).toFixed(2)});return 1})()`);
+    const f = path.join(path.dirname(OUT), 'thumbnail.jpg'); await grab(f); console.log('wrote', f);
+  }
+  if (YTM && arg('thumb', false)) { await thumbnail(); await C.close(); process.exit(0); }
   if (STILLS) {
     // stills mode: frames rendered in order up to each requested time (keeps world ramps consistent)
     const times = String(STILLS).split(',').map(Number).sort((a, b) => a - b);
@@ -317,15 +412,19 @@ try {
   } else {
     const from = +arg('from', 0), to = Math.min(N - 1, +arg('to', N - 1)); let last = Date.now();
     for (let f = from; f <= to; f++) {
-      await frame(f / FPS, path.join(FRAMES, `f_${String(f).padStart(5, '0')}.jpg`));
+      await frame(f / FPS, fname(f));
       if (f % 150 === 0) { console.log(`frame ${f}/${N} (${((Date.now() - last) / 150).toFixed(0)} ms/frame)`); last = Date.now(); }
     }
     console.log(`rendered in ${((Date.now() - t0) / 60000).toFixed(1)} min`);
+    if (YTM && to === N - 1) { for (const k in sent) delete sent[k]; await thumbnail(); }
     if (!arg('no-encode', false)) {
       fs.mkdirSync(path.dirname(OUT), { recursive: true });
-      const r = spawnSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(FRAMES, 'f_%05d.jpg'),
-        '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-r', String(FPS), '-movflags', '+faststart', OUT], { stdio: 'inherit' });
-      if (r.status) throw new Error('ffmpeg failed');
+      if (YTM) await YTM.finish({ FFMPEG, FRAMES, OUT, FPS, dur: N / FPS, tour, ROOT });
+      else {
+        const r = spawnSync(FFMPEG, ['-y', '-hide_banner', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(FRAMES, 'f_%05d.jpg'),
+          '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-r', String(FPS), '-movflags', '+faststart', OUT], { stdio: 'inherit' });
+        if (r.status) throw new Error('ffmpeg failed');
+      }
       console.log('wrote', OUT);
       if (!arg('keep', false)) fs.rmSync(FRAMES, { recursive: true, force: true });
     }

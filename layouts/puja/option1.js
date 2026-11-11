@@ -44,7 +44,7 @@ export default {
   summary: 'The puja alcove with a switchable door on its open side and a switchable interior. Use the ⇄ icons at the opening and on the altar wall.',
   search: ['pooja room door design'],
   slots: [{ id: 'door', label: 'Puja door', default: 'teak-brass-grid', anchor: [8.55, 2.35, 0.835], variants: DOORS },
-    { id: 'interior', label: 'Puja interior', default: 'original', anchor: [10.0, 2.55, 0.835], variants: INTERIORS },
+    { id: 'interior', label: 'Puja interior', default: 'black-stone', anchor: [10.0, 2.55, 0.835], variants: INTERIORS },
     { id: 'idol', label: 'Idol', default: 'sketchfab-black', variants: IDOLS },
     { id: 'walls', label: 'Puja walls (black stone shrine)', default: 'charcoal', variants: WALLS }],
   apply(ctx) {

@@ -22,7 +22,8 @@ export const ROOM_LAYOUTS = {
   Utility: ['utility/option1.js'],
 };
 export const DEFAULTS = {
-  'Master bedroom': 'option1',
+  // owner 2026-11-12: Option 3 (gaming wall on Hall 1 wall + walnut balcony wall, Beige S-curve + study cabinet, Dreamburst taupe)
+  'Master bedroom': 'option3',
   'Formal hall': 'option1',
   'Living and dining': 'option1',
   'Kitchen': 'option1',

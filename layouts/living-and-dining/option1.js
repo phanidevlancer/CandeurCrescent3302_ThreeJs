@@ -10,7 +10,8 @@ const SOFAS = [
 ];
 export default {
   id: 'option1',
-  slots: [{ id: 'sofa', label: 'Family sofa', default: 'westcott', anchor: [8.52, 1.25, -3.7], variants: SOFAS },
+  slots: [{ id: 'sofa', label: 'Family sofa', default: 'sectional-dailyart', anchor: [8.52, 1.25, -3.7], variants: SOFAS },
+    // owner 2026-11-12: defaults = DailyArt sectional + 'current' TV wall (grey microcement + walnut console)
     // owner 2026-11-11: switchable TV wall (south wall) — 'current' + five reference designs (tvwall.js)
     { id: 'tvwall', label: 'TV wall', default: 'current', anchor: TVWALL_ANCHOR, variants: TV_WALLS }],
   name: 'Option 1 · Real products',
